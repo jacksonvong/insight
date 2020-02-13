@@ -1,0 +1,84 @@
+{
+    "questUID": "string",
+    "data": {
+      "title": {
+        "text": "销量结构分析"
+      },
+      "legend": {
+        "show": true,
+        "data": [
+          "自主",
+          "合资",
+          "豪华"
+        ]
+      },
+      "xAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "201601",
+            "201602",
+            "201603",
+            "201604"
+          ]
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "value",
+          "show": true
+        },
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "series": [
+        {
+          "id": 0,
+          "name": "自主",
+          "yAxisIndex": 0,
+          "type": "bar",
+          "data": [
+            0.1,
+            0.1,
+            0.1,
+            0.1
+          ],
+          "stack": "stack0"
+        },
+        {
+          "id": 1,
+          "name": "合资",
+          "yAxisIndex": 0,
+          "type": "bar",
+          "data": [
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ],
+          "stack": "stack0"
+        },
+        {
+          "id": 2,
+          "name": "豪华",
+          "yAxisIndex": 0,
+          "type": "bar",
+          "data": [
+            0.7,
+            0.7,
+            0.7,
+            0.7
+          ],
+          "stack": "stack0"
+        }
+      ]
+    },
+    "status": {
+      "status": 0,
+      "msg2Client": "OK",
+      "msg2Dev": " successfully！"
+    }
+  }

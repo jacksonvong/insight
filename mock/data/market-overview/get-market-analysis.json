@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "data": {
+    "accSales":66586,
+    "accSalesYoy":0.12,
+    "sales":66586,
+    "salesMom":-0.114,
+    "salesYoy":0.12
+  }
+}

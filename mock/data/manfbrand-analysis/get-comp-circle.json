@@ -1,0 +1,57 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "key": 1,
+      "value": "竞争圈1",
+      "children":  [
+        {
+          "key": 6,
+          "value": "奔驰-迈巴赫(进口)"
+        },
+        {
+          "key": 8,
+          "value": "北京奔驰-奔驰"
+        },
+        {
+          "key": 16,
+          "value": "北汽幻速"
+        },
+        {
+          "key": 18,
+          "value": "北汽新能源-北京"
+        }
+      ],
+      "selected": 0,
+      "disabledChildren": [{
+        "key": 5, "value": "奥迪(进口)"
+      }]
+    },
+    {
+      "key": 2,
+      "value": "竞争圈2",
+      "children":  [
+        {
+          "key": 6,
+          "value": "奔驰-迈巴赫(进口)"
+        },
+        {
+          "key": 8,
+          "value": "北京奔驰-奔驰"
+        },
+        {
+          "key": 16,
+          "value": "北汽幻速"
+        },
+        {
+          "key": 18,
+          "value": "北汽新能源-北京"
+        }
+      ],
+      "selected": 1,
+      "disabledChildren": [{
+        "key": 5, "value": "奥迪(进口)"
+      }]
+    }
+  ]
+}

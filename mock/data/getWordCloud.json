@@ -1,0 +1,329 @@
+{
+  "data": [
+    {
+      "tooltip": {
+          "show": true
+      }, 
+      "series": [
+          {
+              "type": "wordCloud", 
+              "data": [
+                  {
+                      "name": " 没有", 
+                      "value": 30
+                  }, 
+                  {
+                      "name": " 屏幕", 
+                      "value": 24
+                  }, 
+                  {
+                      "name": " 不错", 
+                      "value": 21
+                  }, 
+                  {
+                      "name": " 可以", 
+                      "value": 19
+                  }, 
+                  {
+                      "name": " 发货", 
+                      "value": 18
+                  }, 
+                  {
+                      "name": " 这个", 
+                      "value": 18
+                  }, 
+                  {
+                      "name": " 什么", 
+                      "value": 17
+                  }, 
+                  {
+                      "name": " 一个", 
+                      "value": 12
+                  }, 
+                  {
+                      "name": " 不好", 
+                      "value": 12
+                  }, 
+                  {
+                      "name": " 质量", 
+                      "value": 11
+                  }, 
+                  {
+                      "name": " 快递", 
+                      "value": 11
+                  }, 
+                  {
+                      "name": " 问题", 
+                      "value": 10
+                  }, 
+                  {
+                      "name": " 物流", 
+                      "value": 9
+                  }, 
+                  {
+                      "name": " 几天", 
+                      "value": 9
+                  }, 
+                  {
+                      "name": " 一般", 
+                      "value": 9
+                  }, 
+                  {
+                      "name": " 就是", 
+                      "value": 9
+                  }, 
+                  {
+                      "name": " 使用", 
+                      "value": 8
+                  }, 
+                  {
+                      "name": " 怎么", 
+                      "value": 8
+                  }, 
+                  {
+                      "name": " 电池", 
+                      "value": 8
+                  }, 
+                  {
+                      "name": " 不能", 
+                      "value": 8
+                  }, 
+                  {
+                      "name": " 速度", 
+                      "value": 8
+                  }, 
+                  {
+                      "name": " 客服", 
+                      "value": 8
+                  }, 
+                  {
+                      "name": " 一星", 
+                      "value": 8
+                  }, 
+                  {
+                      "name": " 拍照", 
+                      "value": 8
+                  }, 
+                  {
+                      "name": " 摄像头", 
+                      "value": 7
+                  }, 
+                  {
+                      "name": " 外观", 
+                      "value": 7
+                  }, 
+                  {
+                      "name": " 包装", 
+                      "value": 7
+                  }, 
+                  {
+                      "name": " 到货", 
+                      "value": 7
+                  }, 
+                  {
+                      "name": " 有点", 
+                      "value": 7
+                  }, 
+                  {
+                      "name": " 抢购", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 这样", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 性价比", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 一般般", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 出现", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 以前", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 知道", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 一次", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 真的", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 收到", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 其他", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 电量", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 还是", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 不行", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 红米", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 那么", 
+                      "value": 6
+                  }, 
+                  {
+                      "name": " 挺快", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 现在", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 服务", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 充电", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 流畅", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 系统", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 非常", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 满意", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 购物", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 玩游戏", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 信号", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 不了", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 别人", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 死机", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 耗电", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 一直", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 像素", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 第一次", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 广告", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 买个", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 黑屏", 
+                      "value": 5
+                  }, 
+                  {
+                      "name": " 为什么", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 猴王", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 视频", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 体验", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 好评", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 闪屏", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 价格", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 饥饿", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 营销", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 发热", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 还行", 
+                      "value": 4
+                  }, 
+                  {
+                      "name": " 一天", 
+                      "value": 4
+                  }
+              ]
+          }
+      ]
+    }
+  ],
+  "status": 200
+}
