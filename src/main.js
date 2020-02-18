@@ -22,7 +22,7 @@ Object.keys(filters).forEach(key => {
 })
 
 promise.polyfill()
-Vue.use(IwaysUI, { size: 'mini' })
+Vue.use(IwaysUI, { size: 'small' })
 // Vue.use(ElementUI, { size: 'mini' })
 Vue.config.productionTip = false
 

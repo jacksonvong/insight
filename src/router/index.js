@@ -14,7 +14,8 @@ const Favorite = () => import('@/examples/favorite.vue')
 const Layout = () => import('@/components/layout/index.vue')
 const Login = () => import('@/page/login/login.vue')
 const Error404 = () => import('@/page/404.vue')
-const Overview = () => import('@/page/index.vue')
+const Overview = () => import('@/page/overview/index.vue')
+const Index = () => import('@/page/index.vue')
 
 Vue.use(Router)
 
@@ -39,7 +40,8 @@ export default new Router({
       path: '',
       component: Layout,
       children: [
-        { path: '/big-data/overview', name: 'Overview', component: Overview },
+        { path: '/index', name: 'Index', component: Index },
+        { path: '/insight/overview', name: 'Overview', component: Overview },
         { path: '/popover', name: 'Popover', component: Popover },
         { path: '/select', name: 'Select', component: Select },
         { path: '/datepicker', name: 'Datepicker', component: Datepicker },
@@ -48,7 +50,7 @@ export default new Router({
         { path: '/region', name: 'Region', component: Region },
         { path: '/segment', name: 'Segment', component: Segment },
         { path: '/favorite', name: 'Favorite', component: Favorite },
-        { path: '*', redirect: '/big-data/overview' }
+        { path: '*', redirect: '/insight/overview' }
       ]
     }
   ]

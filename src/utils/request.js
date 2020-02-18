@@ -201,6 +201,21 @@ service.interceptors.response.use(
     }
     if (res.hasOwnProperty('result_code')) {
       switch (res.result_code) {
+        case 100440:
+          store.dispatch('RefreshToken', getToken())
+            .then(response => {
+              // message.success('刷新Token成功')
+              if (parent === window) {
+                parent.location.reload()
+              } else {
+                location.reload()
+              }
+              console.log(response)
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          break
         case '408':
         case '504':
           wifi(res)

@@ -57,7 +57,7 @@ function filterMenus(menus, routers) {
   const data = []
   for (const i in menus) {
     const menu = menus[i]
-    if (menu.isProduct === 1 && (menu.purchaseStatus === 0 || menu.openStatus === 0)) continue
+    if (menu.isProduct === 1 && (menu.purchaseStatus === 0)) continue
     if (menu.isProduct !== 1 && menu.isMenu === 0) continue
     let children = []
     if (!!menu.children && menu.children.length > 0) {
@@ -129,6 +129,7 @@ const permission = {
       return new Promise((resolve, reject) => {
         const { menus } = data
         const accessedRouters = filterAsyncRouter(asyncRouterMap, arr2table(menus))
+        console.log(menus, accessedRouters)
         commit('SET_ROUTERS', accessedRouters)
 
         const localRouters = arr2table(constantRouterMap.concat(accessedRouters))

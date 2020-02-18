@@ -2,7 +2,7 @@ export default [
   {
     'funcId': 21,
     'funcCode': 'FUNC_21',
-    'funcName': '互联网大数据系统',
+    'funcName': '消费者360洞察体系',
     'funcIcon': null,
     'funcUrl': '/zhiku/ner_xl',
     'adtUrl': null,
@@ -17,7 +17,7 @@ export default [
       {
         'menuId': 108,
         'pid': null,
-        'title': '互联网大数据概览',
+        'title': '概览',
         'node': '0',
         'code': null,
         'icon': 'icon-che',
@@ -31,11 +31,11 @@ export default [
           {
             'menuId': 1081,
             'pid': null,
-            'title': '车型概览',
+            'title': '概览',
             'node': '0',
             'code': null,
             'icon': 'icon-che',
-            'url': '/big-data/overview',
+            'url': '/insight/overview',
             'params': '0',
             'target': '_self',
             'introText': null,

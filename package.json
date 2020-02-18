@@ -1,24 +1,12 @@
 {
-  "name": "iways-ui",
+  "name": "insight",
   "version": "1.0.0",
-  "title": "iways ui",
-  "description": "An enterprise definition UI design language and Vue-based implementation",
+  "title": "insight",
   "author": "jacksonvong <hbqprivate@163.com>",
   "private": false,
-  "main": "dist/index.js",
   "keywords": [
-    "iways",
-    "design",
-    "vue",
-    "vueComponent",
-    "component",
-    "components",
-    "ui",
-    "framework",
-    "frontend"
+    "iways"
   ],
-  "unpkg": "dist/index.js",
-  "style": "dist/theme/index.css",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -26,13 +14,14 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "jquery": "^3.3.1",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.1.0",
+    "ant-design-vue": "^1.3.10",
     "axios": "^0.18.0",
-    "vue-i18n": "^8.8.2",
+    "jquery": "^3.3.1",
     "moment": "^2.24.0",
-    "ant-design-vue": "^1.3.10"
+    "nprogress": "^0.2.0",
+    "vue-i18n": "^8.8.2",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
