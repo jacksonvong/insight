@@ -1,0 +1,1 @@
+{"questUID":"string","data":[{"key":1,"value":"纯电动"},{"key":2,"value":"插电式混合动力"},{"key":3,"value":"柴油"},{"key":4,"value":"非插电式混合动力"},{"key":5,"value":"汽油"},{"key":6,"value":"双燃料"},{"key":7,"value":"增程型电动"},{"key":8,"value":"燃料电池"},{"key":9,"value":"非插电式轻混合动力"}],"status":{"status":0,"msg2Client":"OK","msg2Dev":" successfully！"}}
