@@ -18,22 +18,32 @@
               </tr>
             </thead>
             <tbody class="ant-table-tbody">
-              <template v-for="(row, index) in data.slice(0, 10)">
-                <tr :key="index">
+              <template v-for="(row, index) in purchaseData">
+                <tr :key="'row_'+index">
                   <td v-for="column in columns" :key="column.dataIndex">
                     <template v-if="column.dataIndex=='subModel'">
-                      <a href="javascript:;" @click="handleCellClick(index, 'subModel')">{{ row[column.dataIndex] }}</a>
-                    </template>
-                    <template v-else-if="column.dataIndex=='city'">
-                      <a href="javascript:;" @click="handleCellClick(index, 'city')">{{ row[column.dataIndex] }}</a>
+                      <a href="javascript:;" @click="handleCellClick('subModel', index)">查看详情</a>
                     </template>
                     <template v-else>{{ row[column.dataIndex] }}</template>
                   </td>
                 </tr>
-                <template v-if="row.showChildren&&row.children&&row.children.length">
-                  <tr v-for="(innerRow, innerIndex) in row.children" :key="'inner_'+innerIndex">
-                    <td v-for="column in columns" :key="column.dataIndex">{{ innerRow[column.dataIndex] }}</td>
-                  </tr>
+                <template v-if="row.showChildren&&row.children_subModel&&row.children_subModel.length">
+                  <template v-for="(row2, index2) in row.children_subModel">
+                    <tr :key="'row2_subModel_'+index2" class="background-gray">
+                      <td v-for="column in columns" :key="column.dataIndex">
+                        <template v-if="['subModel', 'city'].includes(column.dataIndex)">
+                          <span v-if="row2[column.dataIndex]&&column.dataIndex=='subModel'">{{ row2[column.dataIndex] }}</span>
+                          <a v-else href="javascript:;" @click="handleCellClick('city', index, row2['subModelId'])">查看详情</a>
+                        </template>
+                        <template v-else>{{ row2[column.dataIndex] }}</template>
+                      </td>
+                    </tr>
+                    <template v-if="row2.showChildren&&row2.children&&row2.children.length">
+                      <tr v-for="(row3, index3) in row2.children" :key="'row3_'+index2+'_'+index3" class="background-gray-2">
+                        <td v-for="column in columns" :key="column.dataIndex">{{ row3[column.dataIndex] }}</td>
+                      </tr>
+                    </template>
+                  </template>
                 </template>
               </template>
             </tbody>
@@ -50,7 +60,7 @@
           :data-source="data"
           class="overview-table"
         >
-          <a slot="amount" slot-scope="text, row, index" href="javascript:;" @click="handleCellClick(index, 'amount')">{{ text }}</a>
+          <a slot="amount" slot-scope="text, row, index" href="javascript:;" @click="handleCellClick('amount', index)">{{ text }}</a>
         </a-table>
       </a-card>
     </div>
@@ -78,6 +88,7 @@
 import { Card, Table, Button, Modal } from 'ant-design-vue'
 import IwBanner from '@/components/banner/index'
 import IwSearch from '@/page/components/search'
+import { getPurchaseData, getSubModelData, getCityData } from '@/api/overview'
 
 const columns = [{
   title: '模块',
@@ -110,7 +121,7 @@ const innerColumns = [{
 }]
 
 const data = []
-for (let i = 0; i < 46; i++) {
+for (let i = 0; i < 10; i++) {
   data.push({
     module: '用户特征',
     month: '2019-01至2019-12',
@@ -153,6 +164,8 @@ export default {
         }
       ],
       tabKey: '1',
+      purchaseData: [],
+      innerPurchaseData: [],
       data,
       columns,
       selectedRowKeys: [],
@@ -168,6 +181,10 @@ export default {
       return this.selectedRowKeys.length > 0
     }
   },
+  created() {
+    console.log('created')
+    this.getData(2)
+  },
   methods: {
     changeTab(key) {
       this.tabKey = key
@@ -179,10 +196,43 @@ export default {
       console.log('selectedRowKeys changed: ', selectedRowKeys)
       this.selectedRowKeys = selectedRowKeys
     },
-    handleCellClick(index, column) {
-      if (column === 'subModel') {
-        this.$set(this.data[index], 'showChildren', !this.data[index]['showChildren'])
-        this.$set(this.data[index], 'children', innerData)
+    async handleCellClick(column, index, key) {
+      if (column === 'subModel' && key === undefined) {
+        if (!this.purchaseData[index]['children_subModel'] || !this.purchaseData[index]['children_subModel'].length) {
+          const innerData = this.getSubModelData(index, key)
+          await innerData
+          this.$set(this.purchaseData[index], 'children_subModel', this.innerPurchaseData)
+        }
+        this.$set(this.purchaseData[index], 'showChildren', !this.purchaseData[index]['showChildren'])
+      } else if (column === 'city' && key === undefined) {
+        if (!this.purchaseData[index]['children_city'] || !this.purchaseData[index]['children_city'].length) {
+          const innerData = this.getCityData(index)
+          await innerData
+          this.$set(this.purchaseData[index], 'children_city', this.innerPurchaseData)
+        }
+        this.$set(this.purchaseData[index], 'showChildren', !this.purchaseData[index]['showChildren'])
+      } else if (column === 'subModel' && key !== undefined) {
+        const i = this.purchaseData[index]['children_city'].findIndex(item => item.cityId === key)
+        if (i === -1) return
+        if (!this.purchaseData[index]['children_city'][i] ||
+          !this.purchaseData[index]['children_city'][i]['children'] ||
+          !this.purchaseData[index]['children_city'][i]['children'].length) {
+          const innerData = this.getSubModelData(index, i)
+          await innerData
+          this.$set(this.purchaseData[index]['children_city'][i], 'children', this.innerPurchaseData)
+        }
+        this.$set(this.purchaseData[index]['children_city'][i], 'showChildren', !this.purchaseData[index]['children_city'][i]['showChildren'])
+      } else if (column === 'city' && key !== undefined) {
+        const i = this.purchaseData[index]['children_subModel'].findIndex(item => item.subModelId === key)
+        if (i === -1) return
+        if (!this.purchaseData[index]['children_subModel'][i] ||
+          !this.purchaseData[index]['children_subModel'][i]['children'] ||
+          !this.purchaseData[index]['children_subModel'][i]['children'].length) {
+          const innerData = this.getCityData(index, i)
+          await innerData
+          this.$set(this.purchaseData[index]['children_subModel'][i], 'children', this.innerPurchaseData)
+        }
+        this.$set(this.purchaseData[index]['children_subModel'][i], 'showChildren', !this.purchaseData[index]['children_subModel'][i]['showChildren'])
       } else if (column === 'amount') {
         this.visible = true
       }
@@ -192,6 +242,36 @@ export default {
     },
     handleCancel() {
       this.visible = false
+    },
+    // API
+    getData() {
+      this.getPurchaseData()
+    },
+    getPurchaseData() {
+      return getPurchaseData({
+        subModel: 1
+      }).then(res => {
+        const data = res.data || []
+        this.purchaseData = data
+      })
+    },
+    getSubModelData(index, key) {
+      return getSubModelData({
+        id: index,
+        key
+      }).then(res => {
+        const data = res.data || []
+        this.innerPurchaseData = data
+      })
+    },
+    getCityData(index, key) {
+      return getCityData({
+        id: index,
+        key
+      }).then(res => {
+        const data = res.data || []
+        this.innerPurchaseData = data
+      })
     }
   }
 }
@@ -210,6 +290,12 @@ export default {
   }
   .overview-table {
     margin: 30px;
+    .background-gray {
+      background-color: #f3f3f3;
+    }
+    .background-gray-2 {
+      background-color: #f9f9f9;
+    }
   }
 }
 </style>

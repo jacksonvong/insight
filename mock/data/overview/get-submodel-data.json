@@ -1,0 +1,26 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "module": "",
+      "month": "2019-01至2019-12",
+      "subModel": "车型1",
+      "subModelId": 1,
+      "amount": 500
+    },
+    {
+      "module": "",
+      "month": "2019-01至2019-12",
+      "subModel": "车型2",
+      "subModelId": 2,
+      "amount": 1000
+    },
+    {
+      "module": "",
+      "month": "2019-01至2019-12",
+      "subModel": "车型3",
+      "subModelId": 3,
+      "amount": 1500
+    }
+  ]
+}

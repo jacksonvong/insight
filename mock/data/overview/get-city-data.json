@@ -1,0 +1,29 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "module": "",
+      "month": "2019-01至2019-12",
+      "subModel": "车型1",
+      "cityId": 1,
+      "city": "城市1",
+      "amount": 300
+    },
+    {
+      "module": "",
+      "month": "2019-01至2019-12",
+      "subModel": "车型1",
+      "cityId": 2,
+      "city": "城市2",
+      "amount": 100
+    },
+    {
+      "module": "",
+      "month": "2019-01至2019-12",
+      "subModel": "车型1",
+      "cityId": 3,
+      "city": "城市3",
+      "amount": 100
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 0
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 1
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 2
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 3
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 4
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 5
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 6
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 7
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 8
+    },
+    {
+      "module": "用户特征",
+      "month": "2019-01至2019-12",
+      "subModel": "蒙迪欧",
+      "city": "北京市",
+      "amount": 3399,
+      "showChildren": false,
+      "key": 9
+    }
+  ]
+}

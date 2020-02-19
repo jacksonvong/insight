@@ -2,6 +2,7 @@ const fs = require('fs')
 
 function fromJSONFile(filename) {
   return (req, res) => {
+    console.log(req)
     const data = fs.readFileSync(`mock/data/${filename}.json`).toString()
     const json = JSON.parse(data)
     return res.json(json)
@@ -21,6 +22,8 @@ const proxy = {
   'POST /api/framework/getBubble': fromJSONFile('getBubble'),
 
   // 整体市场分析
-  'POST /api/sales-analysis/market-overview/submodel-rank-': fromJSONFile('market-overview/get-submodel-rank')
+  'POST /api/insight/overview/get-purchase-data': fromJSONFile('overview/get-purchase-data'),
+  'POST /api/insight/overview/get-submodel-data': fromJSONFile('overview/get-submodel-data'),
+  'POST /api/insight/overview/get-city-data': fromJSONFile('overview/get-city-data')
 }
 module.exports = proxy

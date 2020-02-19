@@ -129,7 +129,6 @@ const permission = {
       return new Promise((resolve, reject) => {
         const { menus } = data
         const accessedRouters = filterAsyncRouter(asyncRouterMap, arr2table(menus))
-        console.log(menus, accessedRouters)
         commit('SET_ROUTERS', accessedRouters)
 
         const localRouters = arr2table(constantRouterMap.concat(accessedRouters))
