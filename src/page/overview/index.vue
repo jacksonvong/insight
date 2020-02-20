@@ -3,71 +3,88 @@
     <!-- 0--顶部筛选条件 -->
     <iw-banner :title="`概览`"/>
     <div class="main-content">
-      <iw-search :show-search="tabKey=='2'" :tab-list="tabList" :tab-key="tabKey" @onTabChange="changeTab" @change="changeDataForm" />
-      <a-card v-if="tabKey=='1'" :body-style="{padding: '0'}" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+      <iw-search
+        :show-search="tabKey=='2'"
+        :tab-list="tabList"
+        :tab-key="tabKey"
+        :post-disabled="selectedRowKeys.length==0"
+        styles="margin-bottom: 0; border-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;"
+        @onTabChange="changeTab"
+        @change="changeDataForm"
+        @post="openDataForm"
+      />
+      <a-card :body-style="{padding: '0'}" style="border-top-left-radius: 0; border-top-right-radius: 0;">
         <div class="overview-table_total">
-          <span>样本量合计：999999</span>
+          <span>样本量合计：{{ sampleNum }}</span>
         </div>
-        <div class="ant-table-body">
-          <table class="overview-table">
-            <thead class="ant-table-thead">
-              <tr>
-                <th v-for="column in columns" :key="column.dataIndex">
-                  <div>{{ column.title }}</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody class="ant-table-tbody">
-              <template v-for="(row, index) in purchaseData">
-                <tr :key="'row_'+index">
-                  <td v-for="column in columns" :key="column.dataIndex">
-                    <template v-if="column.dataIndex=='subModel'">
-                      <a href="javascript:;" @click="handleCellClick('subModel', index)">查看详情</a>
-                    </template>
-                    <template v-else>{{ row[column.dataIndex] }}</template>
-                  </td>
+        <div class="overview-table">
+          <div class="ant-table-body">
+            <table>
+              <thead class="ant-table-thead">
+                <tr>
+                  <th><a-checkbox v-model="checkAll" @change="handleCheckAllChage" /></th>
+                  <th v-for="column in columns" :key="column.dataIndex">
+                    <div>{{ column.title }}</div>
+                  </th>
                 </tr>
-                <template v-if="row.showChildren&&row.children_subModel&&row.children_subModel.length">
-                  <template v-for="(row2, index2) in row.children_subModel">
-                    <tr :key="'row2_subModel_'+index2" class="background-gray">
-                      <td v-for="column in columns" :key="column.dataIndex">
-                        <template v-if="['subModel', 'city'].includes(column.dataIndex)">
-                          <span v-if="row2[column.dataIndex]&&column.dataIndex=='subModel'">{{ row2[column.dataIndex] }}</span>
-                          <a v-else href="javascript:;" @click="handleCellClick('city', index, row2['subModelId'])">查看详情</a>
-                        </template>
-                        <template v-else>{{ row2[column.dataIndex] }}</template>
-                      </td>
-                    </tr>
-                    <template v-if="row2.showChildren&&row2.children&&row2.children.length">
-                      <tr v-for="(row3, index3) in row2.children" :key="'row3_'+index2+'_'+index3" class="background-gray-2">
-                        <td v-for="column in columns" :key="column.dataIndex">{{ row3[column.dataIndex] }}</td>
-                      </tr>
-                    </template>
-                  </template>
+              </thead>
+              <tbody class="ant-table-tbody">
+                <template v-for="(row, index) in sampleList">
+                  <tr :key="'row_'+index">
+                    <td><a-checkbox :checked="selectedRowKeys.includes(index)" @change="event => onChange(event, index)" /></td>
+                    <td v-for="column in columns" :key="column.dataIndex">
+                      <template v-if="['module', 'subModel', 'city'].includes(column.dataIndex)">
+                        {{ row[column.dataIndex].name }}
+                      </template>
+                      <template v-else-if="column.dataIndex=='month'">
+                        {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }} 至 {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }}
+                      </template>
+                      <template v-else-if="column.dataIndex=='sampleNum'">
+                        <a href="javascript:;" @click="handleSampleClick(row.module.name, row.ymSamples)">{{ row[column.dataIndex] }}</a>
+                      </template>
+                      <template v-else>{{ row[column.dataIndex] }}</template>
+                    </td>
+                  </tr>
                 </template>
-              </template>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </a-card>
-      <a-card v-if="tabKey=='2'" :body-style="{padding: '0'}" style="border-top-left-radius: 0; border-top-right-radius: 0;">
-        <div class="overview-table_total">
-          <span>样本量合计：999999</span>
-        </div>
-        <a-table
-          :row-selection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
-          :columns="columns"
-          :data-source="data"
-          class="overview-table"
-        >
-          <a slot="amount" slot-scope="text, row, index" href="javascript:;" @click="handleCellClick('amount', index)">{{ text }}</a>
-        </a-table>
       </a-card>
     </div>
     <div>
       <a-modal
-        :visible="visible"
+        :visible="visible.post"
         :confirm-loading="confirmLoading"
+        :title="false"
+        :closable="false"
+      >
+        <template slot="footer">
+          <a-button key="submit" type="primary" @click="postDataForm">确定</a-button>
+          <a-button key="back" @click="visible.post=false">取消</a-button>
+        </template>
+        <div class="overview-post-form">
+          <div class="post-form_row"><h3>申请购买所选的功能内容？</h3></div>
+          <div class="post-form_row">
+            <span class="search-item_label">时间: </span>
+            <span class="search-item_box">
+              <iw-date-picker
+                v-model="dataTime"
+                :clearable="false"
+                :editable="false"
+                value-format="yyyyMM"
+                type="monthrange"
+                align="right"
+                style="width: 160px;"
+              />
+            </span>
+          </div>
+        </div>
+      </a-modal>
+    </div>
+    <div>
+      <a-modal
+        :visible="visible.detail"
         :title="false"
         :closable="false"
       >
@@ -85,10 +102,11 @@
 </template>
 
 <script>
-import { Card, Table, Button, Modal } from 'ant-design-vue'
+import { Card, Table, Checkbox, Button, Modal, message } from 'ant-design-vue'
+import moment from 'moment'
 import IwBanner from '@/components/banner/index'
 import IwSearch from '@/page/components/search'
-import { getPurchaseData, getSubModelData, getCityData } from '@/api/overview'
+import { getPurchaseData, getSubModelData, getCityData, getAllFunctions, applyBuy } from '@/api/overview'
 
 const columns = [{
   title: '模块',
@@ -104,8 +122,8 @@ const columns = [{
   dataIndex: 'city'
 }, {
   title: '现有样本量',
-  dataIndex: 'amount',
-  scopedSlots: { customRender: 'amount' }
+  dataIndex: 'sampleNum',
+  scopedSlots: { customRender: 'sampleNum' }
 }]
 
 const innerColumns = [{
@@ -116,18 +134,18 @@ const innerColumns = [{
   dataIndex: 'month'
 }, {
   title: '样本量',
-  dataIndex: 'amount',
-  scopedSlots: { customRender: 'amount' }
+  dataIndex: 'sampleNum',
+  scopedSlots: { customRender: 'sampleNum' }
 }]
 
-const data = []
+const sampleList = []
 for (let i = 0; i < 10; i++) {
-  data.push({
+  sampleList.push({
     module: '用户特征',
     month: '2019-01至2019-12',
     subModel: '蒙迪欧',
     city: '北京市',
-    amount: 3399,
+    sampleNum: 3399,
     showChildren: false,
     key: i
   })
@@ -137,7 +155,7 @@ const innerData = []
 for (let i = 0; i < 3; i++) {
   innerData.push({
     month: '2019-01',
-    amount: 1111,
+    sampleNum: 1111,
     key: i
   })
 }
@@ -147,6 +165,7 @@ export default {
   components: {
     ACard: Card,
     ATable: Table,
+    ACheckbox: Checkbox,
     AButton: Button,
     AModal: Modal,
     IwBanner: IwBanner,
@@ -164,13 +183,20 @@ export default {
         }
       ],
       tabKey: '1',
+      dataForm: {},
       purchaseData: [],
       innerPurchaseData: [],
-      data,
+      sampleList,
+      sampleNum: 0,
       columns,
+      checkAll: false,
       selectedRowKeys: [],
 
-      visible: false,
+      visible: {
+        detail: false,
+        post: false
+      },
+      dataTime: undefined,
       confirmLoading: false,
       innerColumns,
       innerData
@@ -182,19 +208,55 @@ export default {
     }
   },
   created() {
-    console.log('created')
-    this.getData(2)
+    this.getData()
   },
   methods: {
+    moment() {
+      return moment(...arguments)
+    },
     changeTab(key) {
       this.tabKey = key
     },
     changeDataForm(form) {
-      console.log('form', form)
+      this.dataForm = Object.assign(this.dataForm, form)
+      this.getData()
     },
-    onSelectChange(selectedRowKeys) {
-      console.log('selectedRowKeys changed: ', selectedRowKeys)
-      this.selectedRowKeys = selectedRowKeys
+    openDataForm() {
+      this.visible.post = true
+    },
+    postDataForm() {
+      const selectedSampleList = this.sampleList.filter((item, key) => this.selectedRowKeys.includes(key))
+      const params = { startYm: this.dataTime[0], endYm: this.dataTime[1] }
+      params.modules = selectedSampleList.map(item => {
+        item = {
+          moduleId: item.module.id,
+          cityId: item.city.id,
+          subModelId: item.subModel.id
+        }
+        return item
+      })
+      this.applyBuy(params)
+      this.visible.post = false
+    },
+    handleCheckAllChage(event) {
+      const checked = event.target.checked
+      if (checked) {
+        this.selectedRowKeys = this.sampleList.map((item, key) => key)
+      } else {
+        this.selectedRowKeys = []
+      }
+    },
+    onChange(event, key) {
+      const checked = event.target.checked
+      if (checked) {
+        this.selectedRowKeys.push(key)
+      } else {
+        const index = this.selectedRowKeys.findIndex(item => item === key)
+        this.selectedRowKeys.splice(index, 1)
+      }
+      const keys = new Set(this.selectedRowKeys)
+      this.selectedRowKeys = [...keys]
+      this.checkAll = this.selectedRowKeys.length === this.sampleList.length
     },
     async handleCellClick(column, index, key) {
       if (column === 'subModel' && key === undefined) {
@@ -233,19 +295,26 @@ export default {
           this.$set(this.purchaseData[index]['children_subModel'][i], 'children', this.innerPurchaseData)
         }
         this.$set(this.purchaseData[index]['children_subModel'][i], 'showChildren', !this.purchaseData[index]['children_subModel'][i]['showChildren'])
-      } else if (column === 'amount') {
-        this.visible = true
       }
     },
+    handleSampleClick(moduleName, data) {
+      this.innerData = data.map(item => {
+        item.module = moduleName
+        item.month = moment(item.ymId, 'YYYYMM').format('YYYY-MM')
+        return item
+      })
+      this.visible.detail = true
+    },
     handleOk() {
-      this.visible = false
+      this.visible.detail = false
     },
     handleCancel() {
-      this.visible = false
+      this.visible.detail = false
     },
     // API
     getData() {
       this.getPurchaseData()
+      this.getAllFunctions()
     },
     getPurchaseData() {
       return getPurchaseData({
@@ -272,6 +341,23 @@ export default {
         const data = res.data || []
         this.innerPurchaseData = data
       })
+    },
+    getAllFunctions() {
+      return getAllFunctions(this.dataForm).then(res => {
+        const data = res.data || {}
+        this.sampleList = data.sampleList || []
+        this.sampleNum = data.sampleNum || 0
+      })
+    },
+    applyBuy(params) {
+      return applyBuy(params).then(res => {
+        const data = res.data
+        if (data) {
+          message.success('申请成功')
+        } else {
+          message.success('申请失败')
+        }
+      })
     }
   }
 }
@@ -296,6 +382,12 @@ export default {
     .background-gray-2 {
       background-color: #f9f9f9;
     }
+  }
+}
+.overview-post-form {
+  text-align: center;
+  .post-form_row {
+    margin-bottom: 20px;
   }
 }
 </style>

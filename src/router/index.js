@@ -15,6 +15,7 @@ const Layout = () => import('@/components/layout/index.vue')
 const Login = () => import('@/page/login/login.vue')
 const Error404 = () => import('@/page/404.vue')
 const Overview = () => import('@/page/overview/index.vue')
+const Board = () => import('@/page/board/index.vue')
 const Index = () => import('@/page/index.vue')
 
 Vue.use(Router)
@@ -42,6 +43,7 @@ export default new Router({
       children: [
         { path: '/index', name: 'Index', component: Index },
         { path: '/insight/overview', name: 'Overview', component: Overview },
+        { path: '/insight/board', name: 'Board', component: Board },
         { path: '/popover', name: 'Popover', component: Popover },
         { path: '/select', name: 'Select', component: Select },
         { path: '/datepicker', name: 'Datepicker', component: Datepicker },

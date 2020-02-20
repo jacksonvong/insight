@@ -1,0 +1,5 @@
+{
+    "questUID":"string",
+    "status": 200,
+    "data": true
+}

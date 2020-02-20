@@ -3,10 +3,13 @@
     :tab-list="tabList"
     :active-tab-key="tabKey"
     :head-style="{padding: 0}"
-    class="search-card ant-card-shortline"
-    style="margin-bottom: 0; border-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;"
+    :style="styles"
+    class="search-card"
     @tabChange="key => onTabChange(key)"
   >
+    <span slot="customRender" slot-scope="item">
+      <a-icon type="home"/>{{ item.tab }}
+    </span>
     <div v-if="showSearch">
       <div class="search-item">
         <span class="search-item_label">时间: </span>
@@ -16,7 +19,7 @@
             :picker-options="pickerOptions"
             :clearable="false"
             :editable="false"
-            value-format="yyyy-"
+            value-format="yyyyMM"
             type="monthrange"
             align="right"
             style="width: 160px;"
@@ -31,6 +34,8 @@
           <iw-select
             v-model="dataForm.module"
             :data="searchFormData.module"
+            multiple
+            show-check-all
             style="width: 120px;"
             class="iw-text-bold"
           />
@@ -45,6 +50,7 @@
             :data="searchFormData.region"
             :column-name="['区域', '省份', '城市']"
             :height="200"
+            multiple
             title="区域"
             placeholder="请选择"
             style="width: 120px;"
@@ -56,6 +62,8 @@
           <iw-select
             v-model="dataForm.cityLevel"
             :data="searchFormData.cityLevel"
+            multiple
+            show-check-all
             style="width: 120px;"
             class="iw-text-bold"
           />
@@ -67,6 +75,8 @@
           <iw-select
             v-model="dataForm.fuelType"
             :data="searchFormData.fuelType"
+            multiple
+            show-check-all
             placeholder="能源"
             style="width: 120px;"
             class="iw-text-bold"
@@ -76,6 +86,8 @@
           <iw-select
             v-model="dataForm.vehicleType"
             :data="searchFormData.vehicleType"
+            multiple
+            show-check-all
             placeholder="车身"
             style="width: 120px;"
             class="iw-text-bold"
@@ -85,6 +97,8 @@
           <iw-select
             v-model="dataForm.segment"
             :data="searchFormData.segment"
+            multiple
+            show-check-all
             placeholder="级别"
             style="width: 120px;"
             class="iw-text-bold"
@@ -92,8 +106,10 @@
         </span>
         <span class="search-item_box">
           <iw-select
-            v-model="dataForm.brandNatis"
-            :data="searchFormData.brandNatis"
+            v-model="dataForm.brandNati"
+            :data="searchFormData.brandNati"
+            multiple
+            show-check-all
             placeholder="车系"
             style="width: 120px;"
             class="iw-text-bold"
@@ -103,6 +119,7 @@
           <iw-manfbrand
             v-model="dataForm.brand"
             :data="searchFormData.brand"
+            multiple
             title="品牌"
             placeholder="品牌"
             style="width: 120px;"
@@ -113,14 +130,16 @@
         <span class="search-item_box">
           <iw-submodel
             v-model="dataForm.subModel"
+            :default-value="[]"
             :data="searchFormData.subModel"
             :show-letter="showLetter"
             :filters="[{key: 1, value: '细分市场'}, {key: 2, value: '品牌'}]"
             :selected-filter="selectedFilter"
             title="车型"
             placeholder="车型"
+            size="mini"
+            placement="bottomLeft"
             style="width: 120px;"
-            class="iw-text-bold"
             @filterChange="handleFilterChange"
             @change="handleSubModelChange"
           />
@@ -129,8 +148,8 @@
       <div class="search-item">
         <span class="search-item_label"/>
         <span class="search-item_box">
-          <iw-button type="primary"> &nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
-          <iw-button >申请购买</iw-button>
+          <iw-button type="primary" @click="handleFormChange"> &nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
+          <iw-button :disabled="postDisabled" @click="handleApplyBuy">申请购买</iw-button>
         </span>
       </div>
     </div>
@@ -151,17 +170,29 @@ export default {
       type: Boolean,
       default: true
     },
+    styles: {
+      type: String,
+      default: ''
+    },
     tabList: {
       type: Array,
       default() {
         return []
       }
     },
+    type: {
+      type: String,
+      default: 'line'
+    },
     tabKey: {
       type: [String, Number],
       default() {
         return undefined
       }
+    },
+    postDisabled: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -170,49 +201,32 @@ export default {
         dataTime: undefined,
         module: undefined,
         region: -1,
+        regionIds: [],
+        provinceIds: [],
+        cityIds: [],
         cityLevel: undefined,
         regionTexts: undefined,
         fuelType: undefined,
         vehicleType: undefined,
         segment: undefined,
-        brandNatis: undefined,
+        brandNati: undefined,
         brand: undefined,
         subModel: undefined
       },
       searchFormData: {
         timeRange: {},
         module: [
-          { key: 1, value: '用户需求' },
-          { key: 2, value: '竞争对比' }
         ],
         region: [],
         cityLevel: [
-          { key: 1, value: '一级' },
-          { key: 2, value: '二级' },
-          { key: 3, value: '三级' },
-          { key: 4, value: '四级' }
         ],
         fuelType: [
-          { key: 1, value: '燃油车' },
-          { key: 2, value: '纯电动车' }
         ],
         vehicleType: [
-          { key: 1, value: 'CAR' },
-          { key: 2, value: 'SUV' },
-          { key: 3, value: 'MPV' }
         ],
         segment: [
-          { key: 1, value: 'A级' },
-          { key: 2, value: 'B级' },
-          { key: 3, value: 'C级' },
-          { key: 4, value: 'D级' }
         ],
-        brandNatis: [
-          { key: 1, value: '自主' },
-          { key: 2, value: '德系' },
-          { key: 3, value: '美系' },
-          { key: 4, value: '日系' },
-          { key: 5, value: '韩系' }
+        brandNati: [
         ],
         brand: [],
         subModel: []
@@ -247,17 +261,58 @@ export default {
     onTabChange(key) {
       this.$emit('onTabChange', key)
     },
-    handleDateTimeChange() {},
+    handleFormChange() {
+      const dataForm = this.dataForm
+      this.$emit('change', {
+        brandIds: dataForm.brand,
+        brandNatiIds: dataForm.brandNati,
+        cityIds: dataForm.cityIds,
+        cityLevel: dataForm.cityLevel,
+        endYm: dataForm.dataTime[1],
+        fuelTypeIds: dataForm.fuelType,
+        modules: dataForm.module,
+        provinceIds: dataForm.provinceIds,
+        regionIds: dataForm.regionIds,
+        segmentIds: dataForm.segment,
+        startYm: dataForm.dataTime[0],
+        subModelIds: dataForm.subModel,
+        vehicleTypeIds: dataForm.vehicleType
+      })
+    },
+    handleApplyBuy() {
+      const dataForm = this.dataForm
+      this.$emit('post', dataForm)
+    },
+    handleDateTimeChange(value) {
+      console.log(value)
+    },
     handleRegionChange(value, texts) {
+      console.log(value, texts)
       this.dataForm.region = value
       this.dataForm.regionTexts = texts
+      const regionIds = []
+      const provinceIds = []
+      const cityIds = []
+      texts.forEach(item => {
+        if (item.level === 0) {
+          regionIds.push(item.key)
+        } else if (item.level === 1) {
+          provinceIds.push(item.key)
+        } else {
+          cityIds.push(item.key)
+        }
+      })
+      this.regionIds = regionIds
+      this.provinceIds = provinceIds
+      this.cityIds = cityIds
     },
     handleManfBrandChange(value) {
       console.log(value)
       this.dataForm.brand = value
     },
-    handleSubModelChange(value) {
-      this.dataForm.subModel = value
+    handleSubModelChange(value, texts) {
+      console.log(value, texts)
+      // this.dataForm.subModel = value
     },
     handleFilterChange(key) {
       this.selectedFilter = key
@@ -349,7 +404,7 @@ export default {
       return getBrandNatis()
         .then(response => {
           const data = response.data || []
-          this.searchFormData.brandNatis = data
+          this.searchFormData.brandNati = data
         })
     }
   }

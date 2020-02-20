@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getPurchaseData(params) {
   return request({
-    url: '/insight/overview/get-purchase-data',
+    url: '/consumer-insight/overview/get-purchase-data',
     method: 'post',
     data: {
       data: params
@@ -12,7 +12,7 @@ export function getPurchaseData(params) {
 
 export function getSubModelData(params) {
   return request({
-    url: '/insight/overview/get-submodel-data',
+    url: '/consumer-insight/overview/get-submodel-data',
     method: 'post',
     data: {
       data: params
@@ -22,7 +22,27 @@ export function getSubModelData(params) {
 
 export function getCityData(params) {
   return request({
-    url: '/insight/overview/get-city-data',
+    url: '/consumer-insight/overview/get-city-data',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+
+export function getAllFunctions(params) {
+  return request({
+    url: '/consumer-insight/overview/get-all-functions',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+
+export function applyBuy(params) {
+  return request({
+    url: '/consumer-insight/overview/apply-buy',
     method: 'post',
     data: {
       data: params

@@ -30,6 +30,7 @@ const proxy = {
 
   'POST /api/consumer-insight/overview/get-purchase-data': fromJSONFile('overview/get-purchase-data'),
   'POST /api/consumer-insight/overview/get-all-functions': fromJSONFile('overview/get-all-functions'),
+  'POST /api/consumer-insight/overview/apply-buy': fromJSONFile('overview/apply-buy'),
   'POST /api/consumer-insight/overview/get-submodel-data': fromJSONFile('overview/get-submodel-data'),
   'POST /api/consumer-insight/overview/get-city-data': fromJSONFile('overview/get-city-data')
 }
