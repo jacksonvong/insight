@@ -32,6 +32,12 @@ const proxy = {
   'POST /api/consumer-insight/overview/get-all-functions': fromJSONFile('overview/get-all-functions'),
   'POST /api/consumer-insight/overview/apply-buy': fromJSONFile('overview/apply-buy'),
   'POST /api/consumer-insight/overview/get-submodel-data': fromJSONFile('overview/get-submodel-data'),
-  'POST /api/consumer-insight/overview/get-city-data': fromJSONFile('overview/get-city-data')
+  'POST /api/consumer-insight/overview/get-city-data': fromJSONFile('overview/get-city-data'),
+
+  'POST /api/consumer-insight/board/get-sex': fromJSONFile('board/get-sex'),
+  'POST /api/consumer-insight/board/get-age': fromJSONFile('board/get-age'),
+  'POST /api/consumer-insight/board/get-education': fromJSONFile('board/get-education'),
+  'POST /api/consumer-insight/board/get-media': fromJSONFile('board/get-media'),
+  'POST /api/consumer-insight/board/get-reason': fromJSONFile('board/get-reason')
 }
 module.exports = proxy

@@ -1069,13 +1069,13 @@ export class Chart {
           name: item.name,
           value: item.value || 0,
           percent: item.value ? item.value / sum : 0,
-          itemStyle: { normal: { color: this.config.customColor[key] || this.config.itemStyleColor.pie[key] }}
+          itemStyle: { normal: { color: (this.config.customColor && this.config.customColor[key]) || this.config.itemStyleColor.pie[key] }}
         })
       }
     })
 
     const option = {
-      backgroundColor: '#fff',
+      backgroundColor: config.backgroundColor || '#fff',
       title: _this.option.title ? [
         {
           show: config.showTitle,
@@ -1118,8 +1118,8 @@ export class Chart {
           return title + html
         }
       },
-      color: config.customColor.length ? config.customColor : color.pie,
-      legend: {
+      color: (config.customColor && config.customColor.length) ? config.customColor : color.pie,
+      legend: this.option.legend ? {
         orient: config.legend.orient,
         top: 0,
         left: 0,
@@ -1130,43 +1130,34 @@ export class Chart {
             icon: iconFormatter({ type: 'pie' }, config)
           }
         })
-      },
+      } : { show: false },
       grid: {
         ...config.grid,
         height: 180
+      },
+      itemStyle: {
+        borderWidth: 1,
+        borderColor: '#fff'
       },
       series: [
         {
           name: '',
           type: 'pie',
-          radius: [0, 60],
-          center: ['15%', '30%'],
-          // roseType: 'radius',
-          label: {
-            normal: { show: false },
-            emphasis: { show: false }
-          },
-          lableLine: {
-            normal: { show: false },
-            emphasis: { show: false }
-          }
-        },
-        {
-          name: '',
-          type: 'pie',
-          radius: [40, 65],
-          center: ['70%', '50%'],
+          radius: ['40%', '70%'],
+          center: ['50%', '50%'],
           // roseType: 'area',
           label: {
             normal: {
               position: 'inner',
               formatter: (param, config) => {
-                return param.data.percent < 0.0495 ? '' : toPercent(param.data.percent, 1)
+                return param.data.name + '\n' + (param.data.percent < 0.0495 ? '' : toPercent(param.data.percent, 1))
               },
               textStyle: {
-                color: '#3a3a3a',
+                color: '#fff',
                 fontSize: 12
-              }
+              },
+              padding: [3, 4],
+              backgroundColor: '#999'
             }
           },
           data: seriesData
