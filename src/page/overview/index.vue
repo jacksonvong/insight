@@ -13,6 +13,42 @@
         @change="changeDataForm"
         @post="openDataForm"
       />
+      <a-card v-if="tabKey=='1'" :body-style="{padding: '0'}" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+        <div class="overview-table_total">
+          <span>样本量合计：999999</span>
+        </div>
+        <div class="ant-table-body">
+          <table class="overview-table">
+            <thead class="ant-table-thead">
+              <tr>
+                <th v-for="column in columns" :key="column.dataIndex">
+                  <div>{{ column.title }}</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="ant-table-tbody">
+              <template v-for="(row, index) in data.slice(0, 10)">
+                <tr :key="index">
+                  <td v-for="column in columns" :key="column.dataIndex">
+                    <template v-if="column.dataIndex=='subModel'">
+                      <a href="javascript:;" @click="handleCellClick(index, 'subModel')">{{ row[column.dataIndex] }}</a>
+                    </template>
+                    <template v-else-if="column.dataIndex=='city'">
+                      <a href="javascript:;" @click="handleCellClick(index, 'city')">{{ row[column.dataIndex] }}</a>
+                    </template>
+                    <template v-else>{{ row[column.dataIndex] }}</template>
+                  </td>
+                </tr>
+                <template v-if="row.showChildren&&row.children&&row.children.length">
+                  <tr v-for="(innerRow, innerIndex) in row.children" :key="'inner_'+innerIndex">
+                    <td v-for="column in columns" :key="column.dataIndex">{{ innerRow[column.dataIndex] }}</td>
+                  </tr>
+                </template>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </a-card>
       <a-card :body-style="{padding: '0'}" style="border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
         <div class="overview-table_total">
           <span>样本量合计：{{ sampleNum }}</span>
