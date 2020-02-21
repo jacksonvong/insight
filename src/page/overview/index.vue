@@ -8,12 +8,12 @@
         :tab-list="tabList"
         :tab-key="tabKey"
         :post-disabled="selectedRowKeys.length==0"
-        styles="margin-bottom: 0; border-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;"
+        styles="margin-bottom: 0; border-bottom: 0; "
         @onTabChange="changeTab"
         @change="changeDataForm"
         @post="openDataForm"
       />
-      <a-card :body-style="{padding: '0'}" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+      <a-card :body-style="{padding: '0'}" style="border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
         <div class="overview-table_total">
           <span>样本量合计：{{ sampleNum }}</span>
         </div>

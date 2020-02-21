@@ -14,8 +14,7 @@
           <iw-button>下载</iw-button>
         </custom-search>
       </a-card>
-      <a-card title="查询结果">
-      </a-card>
+      <a-card title="查询结果"/>
     </div>
   </div>
 </template>
@@ -62,10 +61,10 @@ export default {
   },
   methods: {
     onTabChange(key, type) {
-      console.log(key, type);
-      this[type] = key;
-    },
-  },
+      console.log(key, type)
+      this[type] = key
+    }
+  }
 }
 </script>
 

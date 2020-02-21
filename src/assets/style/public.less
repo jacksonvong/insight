@@ -185,6 +185,20 @@ body {
       &:hover { color: @primary-color; }
     }
   }
+  // tabs start
+  .ant-tabs.ant-tabs-card .ant-tabs-card-bar {
+    .ant-tabs-nav-container {  height: 48px;  }
+    .ant-tabs-tab {  padding: 4px 16px;  background: transparent; border: 0; }
+    .ant-tabs-tab-active { border-bottom: 2px solid #2e5aa6; padding: 4px 16px; }
+  }
+  .ant-tabs-bar {
+    margin: 0;
+    border-bottom: 0;
+  }
+  .ant-tabs-extra-content {
+    padding: 8px 20px 0 20px;
+  }
+  // tabs end
   .anticon-download {
     font-size: 18px;
     cursor: pointer;

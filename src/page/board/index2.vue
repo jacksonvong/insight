@@ -2,7 +2,7 @@
   <div class="board">
     <iw-banner :title="`看板`"/>
     <div class="main-content">
-      <a-card>
+      <a-card >
         <a-tabs v-model="activeKey" type="editable-card" @edit="onEdit">
           <a-tab-pane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">
             <search-content/>

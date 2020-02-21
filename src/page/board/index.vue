@@ -3,7 +3,12 @@
     <!-- 0--顶部筛选条件 -->
     <iw-banner :title="`看板`"/>
     <div class="main-content">
-      <iw-search :tab-list="tabList" :tab-key="tabKey" @onTabChange="changeTab" @change="changeDataForm" />
+      <iw-search
+        :tab-list="tabList"
+        :tab-key="tabKey"
+        tab-type="editable-card"
+        @onTabChange="changeTab"
+        @change="changeDataForm"/>
       <a-card title="查询结果">
         <div class="">
           <div class="iw-card-name">用户特征</div>
@@ -258,7 +263,7 @@ export default {
     }
     .iw-card-add {
       background: #FAFAFA;
-      border: 1px dotted #E6E6E6;
+      border: 1px dashed #E6E6E6;
       border-radius: 4px;
       border-radius: 4px;
       cursor: pointer;
