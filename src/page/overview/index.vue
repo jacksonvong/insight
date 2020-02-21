@@ -13,9 +13,9 @@
         @change="changeDataForm"
         @post="openDataForm"
       />
-      <a-card v-if="tabKey=='1'" :body-style="{padding: '0'}" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+      <a-card v-if="tabKey=='1'" :body-style="{padding: '0'}" style="border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
         <div class="overview-table_total">
-          <span>样本量合计：999999</span>
+          <span>样本量合计：{{ purchaseNum }}</span>
         </div>
         <div class="ant-table-body">
           <table class="overview-table">
@@ -27,29 +27,52 @@
               </tr>
             </thead>
             <tbody class="ant-table-tbody">
-              <template v-for="(row, index) in data.slice(0, 10)">
+              <template v-for="(row, index) in purchaseData">
                 <tr :key="index">
                   <td v-for="column in columns" :key="column.dataIndex">
                     <template v-if="column.dataIndex=='subModel'">
-                      <a href="javascript:;" @click="handleCellClick(index, 'subModel')">{{ row[column.dataIndex] }}</a>
+                      <a href="javascript:;" @click="handleCellClick('subModel', index)">查看详情</a>
                     </template>
                     <template v-else-if="column.dataIndex=='city'">
-                      <a href="javascript:;" @click="handleCellClick(index, 'city')">{{ row[column.dataIndex] }}</a>
+                      <a v-if="false" href="javascript:;" @click="handleCellClick('city', index)">查看详情</a>
+                    </template>
+                    <template v-else-if="['module'].includes(column.dataIndex)">
+                      {{ row[column.dataIndex].name }}
+                    </template>
+                    <template v-else-if="column.dataIndex=='month'">
+                      {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }} 至 {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }}
+                    </template>
+                    <template v-else-if="column.dataIndex=='sampleNum'">
+                      <a href="javascript:;" @click="handleSampleClick(row.module.name, row.ymSamples)">{{ row[column.dataIndex] }}</a>
                     </template>
                     <template v-else>{{ row[column.dataIndex] }}</template>
                   </td>
                 </tr>
-                <template v-if="row.showChildren&&row.children&&row.children.length">
-                  <tr v-for="(innerRow, innerIndex) in row.children" :key="'inner_'+innerIndex">
-                    <td v-for="column in columns" :key="column.dataIndex">{{ innerRow[column.dataIndex] }}</td>
-                  </tr>
+                <template v-if="row.showChildren&&row.children_subModel&&row.children_subModel.length">
+                  <template v-for="(innerRow, innerIndex) in row.children_subModel">
+                    <tr :key="'inner_'+innerIndex">
+                      <td v-for="column in columns" :key="'row1_'+column.dataIndex">
+                        <template v-if="column.dataIndex=='city'">
+                          <a href="javascript:;" @click="handleCellClick('city', index, innerRow.subModelId)">查看详情</a>
+                        </template>
+                        <template v-else>{{ innerRow[column.dataIndex] }}</template>
+                      </td>
+                    </tr>
+                    <template v-if="innerRow.showChildren&&innerRow.children&&innerRow.children.length">
+                      <tr v-for="(innerRow2, innerIndex2) in innerRow.children" :key="'inner_'+innerIndex+'_'+innerIndex2">
+                        <td v-for="column in columns" :key="'row2_'+column.dataIndex">
+                          <template>{{ innerRow2[column.dataIndex] }}</template>
+                        </td>
+                      </tr>
+                    </template>
+                  </template>
                 </template>
               </template>
             </tbody>
           </table>
         </div>
       </a-card>
-      <a-card :body-style="{padding: '0'}" style="border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
+      <a-card v-if="tabKey=='2'" :body-style="{padding: '0'}" style="border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
         <div class="overview-table_total">
           <span>样本量合计：{{ sampleNum }}</span>
         </div>
@@ -221,6 +244,7 @@ export default {
       tabKey: '1',
       dataForm: {},
       purchaseData: [],
+      purchaseNum: [],
       innerPurchaseData: [],
       sampleList,
       sampleNum: 0,
@@ -295,6 +319,7 @@ export default {
       this.checkAll = this.selectedRowKeys.length === this.sampleList.length
     },
     async handleCellClick(column, index, key) {
+      console.log(column, index, key)
       if (column === 'subModel' && key === undefined) {
         if (!this.purchaseData[index]['children_subModel'] || !this.purchaseData[index]['children_subModel'].length) {
           const innerData = this.getSubModelData(index, key)
@@ -358,6 +383,8 @@ export default {
       }).then(res => {
         const data = res.data || []
         this.purchaseData = data
+        this.purchaseData = data.sampleList || []
+        this.purchaseNum = data.sampleNum || 0
       })
     },
     getSubModelData(index, key) {

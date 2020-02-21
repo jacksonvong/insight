@@ -2,7 +2,7 @@
   <div>
     <a-card :body-style="{padding: '0'}" style="margin-bottom: 0; border-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
       <a-tabs v-model="activeKey" :type="tabType" @edit="onEdit" @change="onTabChange">
-        <a-tab-pane v-for="pane in panes" :tab="pane.tab" :key="pane.key" :closable="pane.closable"/>
+        <a-tab-pane v-for="pane in panes" :tab="pane.tab" :key="pane.key" :closable="panes.length>1"/>
       </a-tabs>
     </a-card>
     <a-card :style="'border-top-left-radius: 0; border-top-right-radius: 0;'+styles" class="search-card">
@@ -285,6 +285,7 @@ export default {
           lastIndex = i - 1
         }
       })
+      if (this.panes.length === 1) return
       const panes = this.panes.filter(pane => pane.key !== targetKey)
       if (panes.length && activeKey === targetKey) {
         if (lastIndex >= 0) {

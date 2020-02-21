@@ -134,10 +134,6 @@ export default {
         {
           key: '1',
           tab: '看板'
-        },
-        {
-          key: '2',
-          tab: '看板2'
         }
       ],
       tabKey: '1',

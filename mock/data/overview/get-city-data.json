@@ -7,7 +7,7 @@
       "subModel": "车型1",
       "cityId": 1,
       "city": "城市1",
-      "amount": 300
+      "sampleNum": 300
     },
     {
       "module": "",
@@ -15,7 +15,7 @@
       "subModel": "车型1",
       "cityId": 2,
       "city": "城市2",
-      "amount": 100
+      "sampleNum": 100
     },
     {
       "module": "",
@@ -23,7 +23,7 @@
       "subModel": "车型1",
       "cityId": 3,
       "city": "城市3",
-      "amount": 100
+      "sampleNum": 100
     }
   ]
 }

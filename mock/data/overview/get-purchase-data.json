@@ -1,20 +1,104 @@
 {
   "status": 200,
-  "data": [
-    {
-      "module": "用户特征1",
-      "month": "2019-01至2019-12",
-      "amount": 3000
-    },
-    {
-      "module": "用户特征2",
-      "month": "2019-01至2019-12",
-      "amount": 4000
-    },
-    {
-      "module": "用户特征3",
-      "month": "2019-01至2019-12",
-      "amount": 5000
-    }
-  ]
+  "data":{
+      "sampleNum":759,
+      "sampleList":[
+          {
+              "module":{
+                  "id":1,
+                  "name":"用户特征"
+              },
+              "startYm":202001,
+              "endYm":202001,
+              "subModel":{
+                  "id":3,
+                  "name":"1系两厢"
+              },
+              "city":{
+                  "id":250,
+                  "name":"苏州市"
+              },
+              "sampleNum":3000,
+              "ymSamples":[
+                  {
+                      "ymId":202001,
+                      "sampleNum":2
+                  }
+              ]
+          },
+          {
+              "module":{
+                  "id":1,
+                  "name":"用户特征"
+              },
+              "startYm":202001,
+              "endYm":202001,
+              "subModel":{
+                  "id":11,
+                  "name":"2系"
+              },
+              "city":{
+                  "id":250,
+                  "name":"苏州市"
+              },
+              "sampleNum":2000,
+              "ymSamples":[
+                  {
+                      "ymId":202001,
+                      "sampleNum":1
+                  }
+              ]
+          },
+          {
+              "module":{
+                  "id":1,
+                  "name":"用户特征"
+              },
+              "startYm":202001,
+              "endYm":202001,
+              "subModel":{
+                  "id":23,
+                  "name":"308三厢"
+              },
+              "city":{
+                  "id":259,
+                  "name":"无锡市"
+              },
+              "sampleNum":1000,
+              "ymSamples":[
+                  {
+                      "ymId":202001,
+                      "sampleNum":1
+                  }
+              ]
+          },
+          {
+              "module":{
+                  "id":1,
+                  "name":"用户特征"
+              },
+              "startYm":201912,
+              "endYm":202001,
+              "subModel":{
+                  "id":43,
+                  "name":"5系"
+              },
+              "city":{
+                  "id":250,
+                  "name":"苏州市"
+              },
+              "sampleNum":3,
+              "ymSamples":[
+                  {
+                      "ymId":201912,
+                      "sampleNum":1
+                  },
+                  {
+                      "ymId":202001,
+                      "sampleNum":2
+                  }
+              ]
+          }
+      ]
+  }
 }
