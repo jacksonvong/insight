@@ -157,6 +157,70 @@ export default [
             'funcs': null
           }
         ]
+      },
+      {
+        'menuId': 110,
+        'pid': null,
+        'title': '竞争对比',
+        'node': '0',
+        'code': null,
+        'icon': 'icon-che',
+        'params': '0',
+        'target': '_self',
+        'introText': null,
+        'introUrl': null,
+        'introImage': null,
+        'isMenu': 1,
+        'funcs': [
+          {
+            'menuId': 1101,
+            'pid': null,
+            'title': '信息触点',
+            'node': '0',
+            'code': null,
+            'icon': 'icon-che',
+            'url': '/insight/compete/info',
+            'params': '0',
+            'target': '_self',
+            'introText': null,
+            'introUrl': null,
+            'introImage': null,
+            'isMenu': 1,
+            'funcs': null
+          },
+          {
+            'menuId': 1092,
+            'pid': null,
+            'title': '竞争对手',
+            'node': '0',
+            'code': null,
+            'icon': 'icon-che',
+            'url': '/insight/compete/competitor',
+            'params': '0',
+            'target': '_self',
+            'introText': null,
+            'introUrl': null,
+            'introImage': null,
+            'isMenu': 1,
+            'funcs': null
+          },
+          {
+            'menuId': 1103,
+            'pid': null,
+            'title': '竞争优劣势',
+            'node': '0',
+            'code': null,
+            'icon': 'icon-che',
+            'url': '/insight/compete/good-and-bad',
+            'params': '0',
+            'target': '_self',
+            'introText': null,
+            'introUrl': null,
+            'introImage': null,
+            'isMenu': 1,
+            'funcs': null
+          }
+        ]
       }
     ]
   }

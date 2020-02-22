@@ -21,6 +21,10 @@ const Board2 = () => import('@/page/board/index2.vue')
 const UserBackground = () => import('@/page/user-background.vue')
 const OldCar = () => import('@/page/old-car/index.vue')
 
+const Info = () => import('@/page/compete/info.vue')
+const Competitor = () => import('@/page/compete/competitor.vue')
+const GoodAndBad = () => import('@/page/compete/goodandbad.vue')
+
 Vue.use(Router)
 
 export const constantRouterMap = [
@@ -50,6 +54,11 @@ export default new Router({
         { path: '/insight/board2', name: 'Board', component: Board2 },
         { path: '/insight/user-background', name: 'UserBackground', component: UserBackground },
         { path: '/insight/old-car', name: 'OldCar', component: OldCar },
+
+        { path: '/insight/compete/info', name: 'Information', component: Info },
+        { path: '/insight/compete/competitor', name: 'Competitor', component: Competitor },
+        { path: '/insight/compete/good-and-bad', name: 'Competition', component: GoodAndBad },
+
         { path: '*', redirect: '/insight/overview' }
       ]
     }

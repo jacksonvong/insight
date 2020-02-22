@@ -4,7 +4,7 @@
       <span class="iw-card-title--left">{{ title }}</span>
       <span class="iw-card-title--right">{{ extra }}</span>
     </div>
-    <div :class="['iw-card-content', {'iw-card-content-short': short}]">
+    <div :class="['iw-card-content', {'iw-card-content-short': short}]" :style="bodyStyle">
       <slot name="content" />
     </div>
   </div>
@@ -25,6 +25,10 @@ export default {
     short: {
       type: Boolean,
       default: false
+    },
+    bodyStyle: {
+      type: String,
+      default: ''
     }
   }
 }
@@ -58,6 +62,7 @@ export default {
       padding: 10px 15px;
       background: #EEF9FF;
       border-radius: 0 0 4px 4px;
+      overflow: auto;
       &.iw-card-content-short {
         height: 100px;
       }

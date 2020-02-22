@@ -1,7 +1,7 @@
 <template>
   <div>
-    <a-card :body-style="{padding: '0'}" style="margin-bottom: 0; border-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
-      <a-tabs v-model="activeKey" :type="tabType" @edit="onEdit" @change="onTabChange">
+    <a-card :title="title" :body-style="{padding: '0'}" style="margin-bottom: 0; border-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
+      <a-tabs v-if="panes&&panes.length" v-model="activeKey" :type="tabType" @edit="onEdit" @change="onTabChange">
         <a-tab-pane v-for="pane in panes" :tab="pane.tab" :key="pane.key" :closable="panes.length>1"/>
       </a-tabs>
     </a-card>
@@ -165,6 +165,10 @@ export default {
     ATabPane: Tabs.TabPane
   },
   props: {
+    title: {
+      type: [String, Boolean],
+      default: ''
+    },
     showSearch: {
       type: Boolean,
       default: true

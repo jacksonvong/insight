@@ -1,0 +1,53 @@
+{
+  "status": 200,
+  "data": {
+    "yAxis": {
+        "type": "category", 
+        "data": [
+            "朋友推荐", 
+            "车展活动", 
+            "4s店", 
+            "赞助冠名...", 
+            "微博广告", 
+            "微信广告",
+            "品牌官网",
+            "视频媒体广告",
+            "汽车垂直网站",
+            "门户网站",
+            "广播",
+            "楼宇、电…",
+            "户外广告",
+            "杂志",
+            "报纸",
+            "电视"
+        ]
+    }, 
+    "xAxis": {
+        "type": "value"
+    }, 
+    "series": [
+        {
+            "data": [
+                {"value": 100, "data1": 100, "data2": 100, "data3": 100, "data4": 100, "data5": 100, "data6": 3.40},
+                {"value": 90, "data1": 90, "data2": 90, "data3": 90, "data4": 90, "data5": 90, "data6": 3.90},
+                {"value": 80, "data1": 80, "data2": 80, "data3": 80, "data4": 80, "data5": 80, "data6": 3.80},
+                {"value": 80, "data1": 80, "data2": 80, "data3": 80, "data4": 80, "data5": 80, "data6": 3.80},
+                {"value": 70, "data1": 70, "data2": 70, "data3": 70, "data4": 70, "data5": 70, "data6": 3.70},
+                {"value": 70, "data1": 70, "data2": 70, "data3": 70, "data4": 70, "data5": 70, "data6": 3.70},
+                {"value": 60, "data1": 60, "data2": 60, "data3": 60, "data4": 60, "data5": 60, "data6": 3.60},
+                {"value": 60, "data1": 50, "data2": 50, "data3": 50, "data4": 50, "data5": 50, "data6": 3.50},
+                {"value": 50, "data1": 50, "data2": 50, "data3": 50, "data4": 50, "data5": 50, "data6": 3.50},
+                {"value": 50, "data1": 50, "data2": 50, "data3": 50, "data4": 50, "data5": 50, "data6": 3.50},
+                {"value": 40, "data1": 40, "data2": 40, "data3": 40, "data4": 40, "data5": 40, "data6": 3.40},
+                {"value": 40, "data1": 40, "data2": 40, "data3": 40, "data4": 40, "data5": 40, "data6": 3.40},
+                {"value": 30, "data1": 30, "data2": 30, "data3": 30, "data4": 30, "data5": 30, "data6": 3.30},
+                {"value": 30, "data1": 30, "data2": 30, "data3": 30, "data4": 30, "data5": 30, "data6": 3.30},
+                {"value": 20, "data1": 20, "data2": 20, "data3": 20, "data4": 20, "data5": 20, "data6": 3.20},
+                {"value": 9, "data1": 9, "data2": 9, "data3": 9, "data4": 9, "data5": 9, "data6": 9}
+            ], 
+            "type": "bar"
+        }
+    ]
+}
+
+}

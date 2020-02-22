@@ -1,0 +1,49 @@
+{
+  "status": 200,
+  "data": {
+    "yAxis": {
+        "type": "category", 
+        "data": [
+            "服务", 
+            "使用成本", 
+            "购车价格", 
+            "品牌", 
+            "续航、充电", 
+            "品质、口碑",
+            "配置、智能",
+            "安全性、…",
+            "操控性",
+            "动力性",
+            "舒适性",
+            "内饰",
+            "空间",
+            "外观"
+        ]
+    }, 
+    "xAxis": {
+        "type": "value"
+    }, 
+    "series": [
+        {
+            "data": [
+                {"value": 90, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 80},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 80, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 50}]},
+                {"value": 80, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 80},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 70, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 70, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 60},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 60, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 60, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 40},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 50, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 20},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 50, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 30}]},
+                {"value": 40, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 70},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 40, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 60}]},
+                {"value": 40, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 10},{"key": "key3", "name": "前脸造型", "value": 70}]},
+                {"value": 40, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 20}]},
+                {"value": 40, "data": [{"key": "key1", "name": "前脸造型", "value": 90},{"key": "key2", "name": "前脸造型", "value": 30},{"key": "key3", "name": "前脸造型", "value": 70}]}
+            ], 
+            "type": "bar"
+        }
+    ]
+}
+
+}
