@@ -42,6 +42,16 @@ const proxy = {
 
   'POST /api/consumer-insight/compete/get-info-media': fromJSONFile('compete/get-info-media'),
   'POST /api/consumer-insight/compete/get-select-reason': fromJSONFile('compete/get-select-reason'),
-  'POST /api/consumer-insight/compete/get-bubble': fromJSONFile('compete/get-bubble2')
+  'POST /api/consumer-insight/compete/get-bubble': fromJSONFile('compete/get-bubble2'),
+
+  'POST /api/consumer-insight/user-background/get-sex': fromJSONFile('user-character/user-background/get-sex'),
+  'POST /api/consumer-insight/user-background/get-family': fromJSONFile('user-character/user-background/get-family'),
+  'POST /api/consumer-insight/user-background/get-industry': fromJSONFile('user-character/user-background/get-industry'),
+  'POST /api/consumer-insight/user-background/get-position': fromJSONFile('user-character/user-background/get-position'),
+  'POST /api/consumer-insight/user-background/get-income': fromJSONFile('user-character/user-background/get-income'),
+  'POST /api/consumer-insight/user-background/get-value': fromJSONFile('user-character/user-background/get-value'),
+
+  'POST /api/consumer-insight/user-preference/get-reason': fromJSONFile('user-character/user-preference/get-reason'),
+  'POST /api/consumer-insight/user-preference/get-detail-reason': fromJSONFile('user-character/user-preference/get-detail-reason'),
 }
 module.exports = proxy

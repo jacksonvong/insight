@@ -17,9 +17,11 @@ const Error404 = () => import('@/page/404.vue')
 const Overview = () => import('@/page/overview/index.vue')
 const Index = () => import('@/page/index.vue')
 const Board = () => import('@/page/board/index.vue')
-const Board2 = () => import('@/page/board/index2.vue')
-const UserBackground = () => import('@/page/user-background.vue')
-const OldCar = () => import('@/page/old-car/index.vue')
+// const Board2 = () => import('@/page/board/index2.vue')
+const UserBackground = () => import('@/page/user-character/user-background.vue')
+const UserPreference = () => import('@/page/user-character/user-preference.vue')
+const BuyBehavior = () => import('@/page/user-character/buy-behavior.vue')
+const OldCar = () => import('@/page/user-character/old-car/index.vue')
 
 const Info = () => import('@/page/compete/info.vue')
 const Competitor = () => import('@/page/compete/competitor.vue')
@@ -51,9 +53,11 @@ export default new Router({
         { path: '/index', name: 'Index', component: Index },
         { path: '/insight/overview', name: 'Overview', component: Overview },
         { path: '/insight/board', name: 'Board', component: Board },
-        { path: '/insight/board2', name: 'Board', component: Board2 },
+        // { path: '/insight/board2', name: 'Board', component: Board2 },
         { path: '/insight/user-background', name: 'UserBackground', component: UserBackground },
         { path: '/insight/old-car', name: 'OldCar', component: OldCar },
+        { path: '/insight/user-preference', name: 'UserPreference', component: UserPreference },
+        { path: '/insight/buy-behavior', name: 'BuyBehavior', component: BuyBehavior },
 
         { path: '/insight/compete/info', name: 'Information', component: Info },
         { path: '/insight/compete/competitor', name: 'Competitor', component: Competitor },

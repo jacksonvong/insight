@@ -121,6 +121,9 @@
       <span class="search-item_box">
         <!--          <iw-button type="primary"> &nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>-->
         <!--          <iw-button >申请购买</iw-button>-->
+        <iw-button type="primary" @click="onSearchData"> &nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
+        <iw-button @click="onSearchData"> &nbsp;&nbsp;&nbsp;&nbsp;对比分析&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
+        <iw-button>下载</iw-button>
         <slot/>
       </span>
     </div>

@@ -11,7 +11,7 @@
       }"
       class="body"
     >
-      <slot/>
+      <slot></slot>
     </div>
     <div v-if="canShowUp" class="expand-bar" @click="isExpand = !isExpand">
       <span v-if="!isExpand">展开 + </span>
@@ -45,7 +45,7 @@ export default {
     limitHeight: {
       type: String,
       default() {
-        return '254px'
+        return 'auto'
       }
     }
   },
@@ -67,6 +67,7 @@ export default {
   .result-unit {
     border-radius: 4px;
     background: #eef9ff;
+    margin: 0 20px 20px 0;
 
     .header {
       border-radius: 4px 4px 0 0;

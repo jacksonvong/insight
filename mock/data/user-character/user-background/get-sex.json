@@ -1,0 +1,20 @@
+{
+  "status": 200,
+  "data": {
+        "series": [
+            {
+                "type": "pie", 
+                "data": [
+                    {
+                        "value": 60, 
+                        "name": "男"
+                    }, 
+                    {
+                        "value": 40, 
+                        "name": "女"
+                    }
+                ]
+            }
+        ]
+    }
+}
