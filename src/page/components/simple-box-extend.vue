@@ -19,6 +19,7 @@
 <script>
 export default {
   name: 'SimpleBoxExtend',
+  desc: '在SimpleBox的基础上，添加了标题',
   props: {
     data: {
       type: Object,

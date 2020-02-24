@@ -32,6 +32,13 @@
             </div>
           </div>
         </div>
+        <div class="iw-card-container">
+          <result-unit title="置换升级路径图">
+            <div style="width: 800px;height: 450px">
+              <update-path/>
+            </div>
+          </result-unit>
+        </div>
       </a-card>
       <a-card v-else title="查询结果">
         <div class="iw-card-container">
@@ -46,9 +53,17 @@
           <iw-card title="二手车评估方法" extra="">
             <iw-simple-box slot="content" :data="barData"/>
           </iw-card>
-          <iw-card title="二手车出售渠道" extra="">
-            <iw-simple-box slot="content" :data="barData"/>
-          </iw-card>
+          <iw-card-extend width="600px" title="二手车出售渠道" extra="">
+            <div slot="content">
+              <div class="iw-card-container">
+                <iw-simple-box :data="barData" style="width: calc(50% - 10px);margin-right: 10px"/>
+                <div class="reason-box" style="width: calc(50% - 10px);margin-left: 10px">
+                  <div class="reason-label">原因</div>
+                  <iw-simple-box :data="barData" />
+                </div>
+              </div>
+            </div>
+          </iw-card-extend>
         </div>
       </a-card>
     </div>
@@ -67,10 +82,12 @@ import IwChart from '@/components/charts'
 import IwCard from '@/page/components/card'
 import IwCardExtend from '@/page/components/card-extend'
 import IwSimpleBox from '@/page/components/simple-box'
+import IwSimpleBoxExtend from '@/page/components/simple-box-extend'
 import ResultUnit from '@/page/components/ResultUnit'
 import Top10Box from '@/page/components/top10-box'
 import { getTop10, getMileage, getUsedCar, getDealMethods, getBar } from '@/api/old-car'
 import { Chart } from '@/utils/echarts'
+import UpdatePath from '@/page/user-character/old-car/update-path.vue'
 
 export default {
   name: 'OldCar',
@@ -93,7 +110,9 @@ export default {
     ResultUnit,
     Top10Box,
     IwCard,
-    IwCardExtend
+    IwCardExtend,
+    IwSimpleBoxExtend,
+    UpdatePath
   },
   data() {
     return {
@@ -163,9 +182,26 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .iw-card-container {
     display: flex;
     align-items: flex-start;
+  }
+
+  .reason-box {
+    position: relative;
+    background: #DDF3FF;
+    border-radius: 2px;
+    padding: 30px 10px;
+    .reason-label {
+      position: absolute;
+      padding: 1px 6px;
+      border-radius: 2px 0 0 0;
+      background: #467BF9;
+      font-size: 12px;
+      color: white;
+      top:0;
+      left: 0;
+    }
   }
 </style>

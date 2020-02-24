@@ -1,5 +1,5 @@
 <template>
-  <div :class="['iw-card', {'iw-card-short': short}]">
+  <div :class="['iw-card', {'iw-card-short': short}]" :style="{ width : width}">
     <div class="iw-card-title">
       <span class="iw-card-title--left">{{ title }}</span>
       <span class="iw-card-title--right">{{ extra }}</span>
@@ -25,6 +25,10 @@ export default {
     short: {
       type: Boolean,
       default: false
+    },
+    width: {
+      type: String,
+      default: 'auto'
     }
   }
 }
@@ -32,7 +36,7 @@ export default {
 
 <style lang="less" scoped>
 .iw-card {
-    width: 254px;
+    min-width: 254px;
     margin: 0 20px 20px 0;
     &.iw-card-short {
       height: 100px;
