@@ -11,7 +11,7 @@
       }"
       class="body"
     >
-      <slot></slot>
+      <slot/>
     </div>
     <div v-if="canShowUp" class="expand-bar" @click="isExpand = !isExpand">
       <span v-if="!isExpand">展开 + </span>
@@ -78,7 +78,7 @@ export default {
       .left {
         float: left;
         height: 28px;
-        font-weight: bold;
+        /*font-weight: bold;*/
         font-size: 14px;
         color: white;
         padding-left: 8px;

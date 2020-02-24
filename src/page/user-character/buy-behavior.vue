@@ -50,8 +50,8 @@ import IwCardExtend from '@/page/components/card-extend'
 import IwSimpleBox from '@/page/components/simple-box'
 import IwSimpleBoxExtend from '@/page/components/simple-box-extend'
 import ResultUnit from '@/page/components/ResultUnit'
-import { getSex, getAge, getEducation } from '@/api/board'
-import { getFamily, getIndustry, getPosition, getIncome, getValue } from '@/api/user-background'
+import { getSex } from '@/api/board'
+// import { getFamily, getIndustry, getPosition, getIncome, getValue } from '@/api/user-background'
 import { getReason, getDetailReason } from '@/api/user-preference'
 import { Chart } from '@/utils/echarts'
 export default {
@@ -125,7 +125,7 @@ export default {
           backgroundColor: 'transparent'
         }).getChart()
       })
-    },
+    }
   }
 }
 </script>

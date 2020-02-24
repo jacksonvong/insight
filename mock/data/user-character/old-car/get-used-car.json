@@ -1,0 +1,53 @@
+{
+  "status": 200,
+  "data": {
+    "color": [
+      "#467BF9"
+    ],
+    "tooltip": {
+      "trigger": "axis",
+      "axisPointer": {
+        "type": "shadow"
+      }
+    },
+    "xAxis": [
+      {
+        "type": "category",
+        "data": [
+          "5以上",
+          "5-10",
+          "10-15",
+          "15-20",
+          "20以上"
+        ],
+        "axisTick": {
+          "alignWithLabel": true
+        },
+        "axisLabel": {
+          "interval": 0,
+          "rotate": 40
+        }
+      }
+    ],
+    "yAxis": [
+      {
+        "show": false,
+        "type": "value"
+      }
+    ],
+    "series": [
+      {
+        "name": "均价",
+        "type": "bar",
+        "barWidth": "60%",
+        "data": [
+          10,
+          52,
+          200,
+          334,
+          390
+        ]
+      }
+    ]
+  }
+}

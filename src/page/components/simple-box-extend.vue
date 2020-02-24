@@ -1,6 +1,6 @@
 <template>
   <div v-if="data.data" class="iw-charts-box-extend">
-    <div v-for="( item, index ) in data.data" class="bar-unit">
+    <div v-for="( item, index ) in data.data" :key="index" class="bar-unit">
       <div class="text-part">
         <div class="title">{{ data.title[index] }}</div>
         <div class="desc">{{ data.desc[index] }}</div>

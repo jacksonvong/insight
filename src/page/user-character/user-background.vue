@@ -79,10 +79,10 @@ export default {
     IwBanner: IwBanner,
     IwSearch,
     IwCard,
+    IwCardExtend,
     IwChart,
     IwSimpleBox,
     IwSimpleBoxExtend,
-    IwCardExtend,
     CustomSearch: CustomSearch,
     ResultUnit
   },

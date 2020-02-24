@@ -1,0 +1,20 @@
+{
+  "status": 200,
+  "data": {
+        "series": [
+            {
+                "type": "pie",
+                "data": [
+                    {
+                        "value": 35,
+                        "name": "转售"
+                    },
+                    {
+                        "value": 65,
+                        "name": "置换"
+                    }
+                ]
+            }
+        ]
+    }
+}
