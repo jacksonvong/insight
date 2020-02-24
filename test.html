@@ -1,0 +1,83 @@
+<script>
+function judgeDivisor(m, n) {
+  var num = {}
+  var i = 0
+  var x = parseInt(m / n)
+  m = m % n
+  var result = ''
+  while (m != 0 && !(m in num)) {
+    num[m] = i++
+    result += parseInt(m * 10 / n)
+    m = m * 10 % n
+  }
+  return m == 0
+}
+const data = [
+  [10.0, 11.49],
+  [8.0, 6.95],
+  [13.0, 7.58],
+  [9.0, 8.81],
+  [11.0, 8.33],
+  [14.0, 9.96],
+  [6.0, 7.24],
+  [4.0, 4.26],
+  [12.0, 10.00],
+  [7.0, 4.82],
+  [5.0, -1.68]
+]
+var xMin = Math.min(...data.map(item => item[0]), 0)
+var xMax = Math.max(...data.map(item => item[0]))
+var yMin = Math.min(...data.map(item => item[1]), 0)
+var yMax = Math.max(...data.map(item => item[1]))
+console.log([xMin, xMax], [yMin, yMax], data)
+const weishu_num = 1 // 1： 个位数， 10： 十位数，0.1：小数点一位
+const floor_num = 0
+const ceil_num = 1
+yMin = Math.floor(yMin) // 取整
+yMax = Math.ceil(yMax) // 取整
+var yDiff
+console.log(yDiff, yMin, yMax)
+const split_arr = [5, 6, 7]
+const step_arr = [5, 3, 2]
+var split_num
+while (!split_num) {
+  yDiff = Math.abs(yMax - yMin)
+  for (const num of step_arr) {
+    const s = yDiff / num
+    const t = yMax / num
+    if (parseInt(yDiff / num) === s) {
+      console.log('s', yDiff, num, s, yMax, yMin)
+      if (split_arr.includes(s) && parseInt(yMax / num) === t) {
+        split_num = s
+        break
+      }
+    }
+  }
+  if (!split_num) {
+    let yMaxCounter = true
+    console.log('yMax', yMax, yMin)
+    for (const n of step_arr) {
+      const t = yMax / n
+      if (parseInt(yMax / n) === t) {
+        console.log('aaa', yMax, n, t, split_arr.includes(t))
+        if (split_arr.includes(t) && split_arr[split_arr.length - 1] !== t) {
+          yMaxCounter = false
+          const r = yMin / n
+          console.log('rrrr', r, yMin, n)
+          if (parseInt(yMin / n) === r && split_arr[split_arr.length - 1] !== r) {
+            break
+          } else {
+            yMin = yMin - 1
+            break
+          }
+        }
+      }
+    }
+    if (yMaxCounter) {
+      yMax = yMax + 1
+    }
+  }
+}
+var step_num = yDiff / split_num
+console.log(split_num, step_num, yMin, yMax)
+</script>

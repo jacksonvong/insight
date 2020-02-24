@@ -182,19 +182,10 @@ export class Chart {
    */
   getScatterChart() {
     const _this = this
-    let maxValue = 0
-    let minValue = 0
     const config = this.config
-    const dimension = config.dimension || 2
-    const labelIndex = config.labelIndex || 3
-    _this.option.series.forEach(group => {
-      group.data.forEach(item => {
-        maxValue = Math.max(maxValue, item instanceof Array ? Number(item[dimension]) : item)
-        minValue = Math.min(minValue, item instanceof Array ? Number(item[dimension]) : item)
-      })
-    })
+    const labelIndex = config.labelIndex || 2
     const option = {
-      backgroundColor: '#ffffff',
+      backgroundColor: config.backgroundColor || '#ffffff',
       color: config.customColor || config.itemStyleColor.pie,
       tooltip: {
         color: config.tooltipColor,
@@ -243,113 +234,91 @@ export class Chart {
         } : {})
       ],
       grid: {
-        top: 120,
-        left: 30,
+        top: 60,
+        left: 80,
         right: 30,
-        bottom: 70,
+        bottom: 60,
         ...config.grid
       },
       xAxis: {
         show: true,
+        scale: true,
+        name: '购买卡罗拉的原因',
+        nameLocation: 'center',
+        nameGap: 35,
+        nameTextStyle: {
+          fontSize: 14,
+          color: '#181C28'
+        },
         axisLabel: {
-          show: false
+          show: true,
+          color: '#181C28',
+          formatter: (value, index) => {
+            return toPercent(value)
+          }
         },
         axisLine: {
           lineStyle: {
-            color: '#dfdfdf'
+            color: '#6FC2EF'
           }
         },
-        splitLine: {
+        axisTick: {
           show: false
         },
-        max: params => {
-          const absMaxValue = Math.max(Math.abs(params.min), Math.abs(params.max)) || 1 // 防止0时，左边系不渲染成4个象限
-          return params.max !== -Infinity ? absMaxValue * 1.5 : 1
-        },
-        min: params => {
-          const absMaxValue = Math.max(Math.abs(params.min), Math.abs(params.max)) || 1 // 防止0时，左边系不渲染成4个象限
-          return params.min !== Infinity ? absMaxValue * 1.5 * -1 : -1
+        splitLine: {
+          show: false,
+          lineStyle: {
+            color: '#6FC2EF'
+          }
         }
       },
       yAxis: {
         show: true,
+        scale: true,
+        name: '放弃对象的原因',
+        nameLocation: 'middle',
+        nameGap: 45,
+        nameTextStyle: {
+          fontSize: 14,
+          color: '#181C28'
+        },
         axisLabel: {
-          show: false
+          show: true,
+          interval: 0,
+          color: '#181C28',
+          formatter: (value, index) => {
+            return toPercent(value)
+          }
         },
         axisLine: {
           lineStyle: {
-            color: '#dfdfdf'
+            color: '#6FC2EF'
           }
         },
-        splitLine: {
+        axisTick: {
           show: false
         },
-        max: params => {
-          const absMaxValue = Math.max(Math.abs(params.min), Math.abs(params.max)) || 1 // 防止0时，左边系不渲染成4个象限
-          return params.max !== -Infinity ? absMaxValue * 1.5 : 1
-        },
-        min: params => {
-          const absMaxValue = Math.max(Math.abs(params.min), Math.abs(params.max)) || 1 // 防止0时，左边系不渲染成4个象限
-          return params.min !== Infinity ? absMaxValue * 1.5 * -1 : -1
-        }
-      },
-      visualMap: {
-        min: 0,
-        max: maxValue,
-        orient: 'horizontal',
-        right: 20,
-        top: 20,
-        dimension: dimension,
-        itemWidth: 20,
-        itemHeight: 200,
-        calculable: true,
-        precision: 0.1,
-        text: ['大', '小'],
-        textGap: 30,
-        backgroundColor: '#fff',
-        padding: [15, 20, 15, 20],
-        borderRadius: '50%',
-        inRange: {
-          symbolSize: [40, 80]
-        },
-        outOfRange: {
-          symbolSize: [10, 70],
-          color: ['transparent']
-        },
-        target: {
-          outOfRange: {
-            color: [
-              'transparent'
-            ],
-            symbolSize: [
-              0,
-              0
-            ]
-          }
-        },
-        controller: {
-          inRange: {
-            color: ['#CBDDFC', '#3972D5']
-          },
-          outOfRange: {
-            color: ['#eee']
+        splitLine: {
+          show: false,
+          lineStyle: {
+            color: '#6FC2EF'
           }
         }
       },
       series: _this.option.series.map(item => {
         item.symbol = 'path://M512 512m-204.8 0a204.8 204.8 0 1 0 409.6 0 204.8 204.8 0 1 0-409.6 0Z'
-        item.symbolSize = value => {
-          return value[dimension] * config.maxSymbolSize / maxValue
-        }
+        item.symbolSize = 16
         item.label = {
           normal: {
             color: '#000',
             show: true,
+            position: 'outside',
             formatter: function(param) {
               return param.data[labelIndex]
             }
           }
         }
+        item.markLine = config.markLine || item.markLine
         return item
       })
     }
