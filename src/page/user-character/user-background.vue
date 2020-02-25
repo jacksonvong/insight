@@ -41,6 +41,14 @@
             <iw-simple-box slot="content" :data="positionData" />
           </iw-card-extend>
         </div>
+        <div class="iw-card-container">
+          <result-unit title="工作行业" style="width: 520px">
+            <table-path/>
+          </result-unit>
+          <result-unit title="学历" extra="" style="width: 300px; " >
+            <iw-chart :options="sexData" :style="{ width: '100%',height: '500px' }"/>
+          </result-unit>
+        </div>
       </a-card>
     </div>
   </div>
@@ -62,6 +70,7 @@ import ResultUnit from '@/page/components/ResultUnit'
 import { getSex, getAge, getEducation } from '@/api/board'
 import { getFamily, getIndustry, getPosition, getIncome, getValue } from '@/api/user-background'
 import { Chart } from '@/utils/echarts'
+import TablePath from '@/page/components/table-path'
 
 export default {
   name: 'UserBackground',
@@ -84,7 +93,8 @@ export default {
     IwSimpleBox,
     IwSimpleBoxExtend,
     CustomSearch: CustomSearch,
-    ResultUnit
+    ResultUnit,
+    TablePath
   },
   data() {
     return {

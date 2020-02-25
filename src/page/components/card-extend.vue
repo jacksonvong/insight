@@ -1,5 +1,5 @@
 <template>
-  <div :class="['iw-card', {'iw-card-short': short}]" :style="{ width : width}">
+  <div :class="['iw-card', {'iw-card-short': short}]" :style="{ width: width, height: height}">
     <div class="iw-card-title">
       <span class="iw-card-title--left">{{ title }}</span>
       <span class="iw-card-title--right">{{ extra }}</span>
@@ -27,6 +27,10 @@ export default {
       default: false
     },
     width: {
+      type: String,
+      default: 'auto'
+    },
+    height: {
       type: String,
       default: 'auto'
     }
