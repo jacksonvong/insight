@@ -1,0 +1,48 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": {
+        "show": true,
+        "data": [
+          "全款购买",
+          "贷款购买",
+          "融资租赁"
+        ]
+      },
+      "xAxis": null,
+      "yAxis": null,
+      "series": [
+        {
+          "name": "支付方式",
+          "type": "pie",
+          "data": [
+            {
+              "value": null,
+              "name": "全款购买",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "贷款购买",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "融资租赁",
+              "sampleSize": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

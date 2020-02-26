@@ -1,0 +1,48 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": {
+        "show": true,
+        "data": [
+          "自费购买的延保",
+          "赠送的延保",
+          "没有办理延保"
+        ]
+      },
+      "xAxis": null,
+      "yAxis": null,
+      "series": [
+        {
+          "name": "延保产品",
+          "type": "pie",
+          "data": [
+            {
+              "value": null,
+              "name": "自费购买的延保",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "赠送的延保",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "没有办理延保",
+              "sampleSize": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

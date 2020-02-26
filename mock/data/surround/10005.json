@@ -1,0 +1,48 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": {
+        "show": true,
+        "data": [
+          "按月等额还款",
+          "按月等额还款+尾款",
+          "不需月供，仅到期还尾款"
+        ]
+      },
+      "xAxis": null,
+      "yAxis": null,
+      "series": [
+        {
+          "name": "还款方式",
+          "type": "pie",
+          "data": [
+            {
+              "value": null,
+              "name": "按月等额还款",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "按月等额还款+尾款",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "不需月供，仅到期还尾款",
+              "sampleSize": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

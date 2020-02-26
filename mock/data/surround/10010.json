@@ -1,0 +1,63 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": null,
+      "xAxis": [
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "交通事故责任强制保险",
+            "第三者责任险",
+            "无过责任险",
+            "车辆损失险",
+            "自燃损失险",
+            "车身划痕险",
+            "玻璃单独破碎险",
+            "不计免赔特约险",
+            "涉水险",
+            "全车盗抢险",
+            "车上人员责任险-驾驶员",
+            "车上人员责任险-乘客",
+            "其它"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "type": "bar",
+          "data": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}
