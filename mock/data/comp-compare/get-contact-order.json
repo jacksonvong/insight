@@ -1,0 +1,151 @@
+{
+  "questUID": "string",
+  "data": {
+    "id": 10063,
+    "name": "信息渠道接触顺序",
+    "totalSampleSize": 0,
+    "answerOrders": [
+      {
+        "id": 17,
+        "name": "网约车/租赁车",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 16,
+        "name": "朋友推荐",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 15,
+        "name": "车展活动",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 14,
+        "name": "4S店",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 13,
+        "name": "赞助冠名活动",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 12,
+        "name": "微博广告",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 11,
+        "name": "微信广告",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 10,
+        "name": "品牌官网",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 9,
+        "name": "视频媒体广告",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 8,
+        "name": "汽车垂直网站/APP广告/软文/论坛评论/口碑",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 7,
+        "name": "门户网站/APP广告/软文/论坛评论/口碑",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 6,
+        "name": "广播",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 5,
+        "name": "楼宇、电梯广告",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 4,
+        "name": "户外广告（车站灯箱、机场灯箱）",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 3,
+        "name": "杂志",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 2,
+        "name": "报纸",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      },
+      {
+        "id": 1,
+        "name": "电视",
+        "sortOneRate": null,
+        "sortTwoRate": null,
+        "sortThreeRate": null,
+        "sortFourRate": null
+      }
+    ]
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}
