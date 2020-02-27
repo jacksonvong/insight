@@ -1,0 +1,71 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": null,
+      "xAxis": [
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "电视",
+            "报纸",
+            "杂志",
+            "户外广告（车站灯箱、机场灯箱）",
+            "楼宇、电梯广告",
+            "广播",
+            "门户网站/APP广告/软文/论坛评论/口碑",
+            "汽车垂直网站/APP广告/软文/论坛评论/口碑",
+            "视频媒体广告",
+            "品牌官网",
+            "微信广告",
+            "微博广告",
+            "赞助冠名活动",
+            "4S店",
+            "车展活动",
+            "朋友推荐",
+            "网约车/租赁车"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "type": "bar",
+          "data": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}
