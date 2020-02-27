@@ -185,6 +185,29 @@ body {
       &:hover { color: @primary-color; }
     }
   }
+
+  .iw-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    .iw-card {
+      margin: 0 20px 20px 0;
+    }
+  }
+  .iw-row {
+    // margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .iw-col {
+    // padding-right: 20px;
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+  .iw-col8 { flex: 0 0 33%; }
+  .iw-col12 { flex: 0 0 50%;
+   }
   // tabs start
   .ant-tabs.ant-tabs-card .ant-tabs-card-bar {
     .ant-tabs-nav-container {  height: 48px;  }

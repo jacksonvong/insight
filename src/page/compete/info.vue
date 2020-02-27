@@ -7,21 +7,17 @@
         @change="changeDataForm"
       />
       <a-card title="查询结果">
-        <div class="iw-card-container">
-          <div class="iw-card-container iw-card-col2">
+        <div class="iw-card-container iw-row">
+          <div class="iw-card-container  iw-col iw-col2">
             <iw-card title="信息接触媒体" style="width: 100%;" body-style="height: 500px;">
-              <iw-table-box slot="content" :data="infoMediaData" />
+              <iw-table-box :data="infoData.data" :table-data="orderData" />
             </iw-card>
           </div>
-          <div class="iw-card-container iw-card-col2">
-            <iw-card title="门户网站">
-              <iw-chart slot="content" :options="sexData" />
-            </iw-card>
-            <iw-card title="汽车垂直网站">
-              <iw-simple-box slot="content" :data="ageData" />
-            </iw-card>
-            <iw-card title="视频媒体">
-              <iw-simple-box slot="content" :data="educationData" />
+          <div class="iw-card-container iw-col iw-col2">
+            <iw-card v-for="(item, key) in otherData" :key="key" :title="item.title">
+              <iw-chart v-if="item.data&&item.key==='websit'" :options="item.data" />
+              <iw-simple-box v-else-if="item.data" :data="item.data" />
+              <iw-empty v-else :status="item.status" style="height: 180px;" />
             </iw-card>
           </div>
         </div>
@@ -37,10 +33,10 @@ import IwSearch from '@/page/components/search'
 import IwCard from '@/page/components/card'
 import IwSimpleBox from '@/page/components/simple-box'
 import IwTableBox from '@/page/components/complex-table-box'
-import { getInfoMedia } from '@/api/compete'
-import { getSex, getAge, getEducation } from '@/api/board'
+import { getContactOrder } from '@/api/compete'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
+import { getEchartOption } from '@/api/common'
 
 export default {
   name: 'Info',
@@ -55,10 +51,20 @@ export default {
   },
   data() {
     return {
-      infoMediaData: {},
       sexData: {},
       ageData: {},
-      educationData: {}
+      educationData: {},
+
+      dataForm: {},
+      orderData: { status: 0, data: {}},
+      infoData: { key: 10063, title: '信息接触媒体', status: 0, data: {}},
+      mediaData: { key: 10064, title: '促购力最大的信息渠道', status: 0, data: {}},
+      otherData: { // 三个图
+        websit: { key: 10065, title: '门户网站', status: 0, data: {}},
+        car: { key: 10066, title: '汽车垂直网站/APP', status: 0, data: {}},
+        video: { key: 10067, title: '视频媒体', status: 0, data: {}}
+      },
+      pieKeys: ['websit']
     }
   },
   created() {
@@ -68,39 +74,56 @@ export default {
     changeDataForm(form) {
       console.log(form)
     },
+
     // API
     getData() {
-      this.getInfoMedia()
-      this.getSex()
-      this.getAge()
-      this.getEducation()
+      this.getContactOrder()
+      this.getEchartOption(Object.assign({}, this.dataForm, { key: this.infoData.key }), 'info')
+      this.getEchartOption(Object.assign({}, this.dataForm, { key: this.mediaData.key }), 'media')
+      for (const keyword in this.otherData) {
+        const item = this.otherData[keyword]
+        const params = Object.assign({}, this.dataForm, { key: item.key })
+        this.getEchartOption(params, 'other', keyword)
+      }
     },
-    getInfoMedia(params) {
-      return getInfoMedia(params).then(res => {
-        const data = res.data || {}
-        this.infoMediaData = data
+    getContactOrder(params) {
+      return new Promise((resolve, reject) => {
+        getContactOrder(params).then(res => {
+          const data = res.data || {}
+          this.orderData.data = data
+          this.$set(this.orderData, 'status', 200)
+          resolve(res)
+        }).catch(res => {
+          this.$set(this.orderData, 'status', 500)
+          reject(res)
+        })
       })
     },
-    getSex(params) {
-      return getSex(params).then(res => {
-        const data = res.data || {}
-        console.log(data)
-        this.sexData = new Chart('pie', data, {
-          customColor: ['#467BF9', '#21D1D9'],
-          backgroundColor: 'transparent'
-        }).getChart()
-      })
-    },
-    getAge(params) {
-      return getAge(params).then(res => {
-        const data = res.data || {}
-        this.ageData = data
-      })
-    },
-    getEducation(params) {
-      return getEducation(params).then(res => {
-        const data = res.data || {}
-        this.educationData = data
+    getEchartOption(params, group, keyword) {
+      const obj = keyword ? this[group + 'Data'][keyword] : this[group + 'Data']
+      return new Promise((resolve, reject) => {
+        getEchartOption(params).then(res => {
+          const data = res.data || {}
+          this.$set(obj, 'data',
+            (this.pieKeys.includes(keyword))
+              ? new Chart('pie', data.option, {
+                customColor: ['#467BF9', '#21D1D9'],
+                backgroundColor: 'transparent',
+                legend: { show: false }
+              }).getChart()
+              : new Chart('bar', data.option, {
+                backgroundColor: 'transparent',
+                dataZoom: { show: false },
+                legend: { show: false },
+                showTooltip: false
+              }).getChart()
+          )
+          this.$set(obj, 'status', 200)
+          resolve(res)
+        }).catch(res => {
+          this.$set(obj, 'status', 500)
+          reject(res)
+        })
       })
     }
   }
@@ -112,8 +135,13 @@ export default {
   .iw-card-container {
     display: flex;
     flex-wrap: wrap;
-    &.iw-card-col2 {
+    &.iw-col2 {
       flex: 0 0 50%;
+      &:last-child {
+        .iw-card {
+          margin: 0 20px 20px 0;
+        }
+      }
     }
   }
 }

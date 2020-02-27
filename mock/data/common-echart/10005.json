@@ -8,31 +8,31 @@
       "legend": {
         "show": true,
         "data": [
-          "全款购买",
-          "贷款购买",
-          "融资租赁"
+          "按月等额还款",
+          "按月等额还款+尾款",
+          "不需月供，仅到期还尾款"
         ]
       },
       "xAxis": null,
       "yAxis": null,
       "series": [
         {
-          "name": "支付方式",
+          "name": "还款方式",
           "type": "pie",
           "data": [
             {
-              "value": null,
-              "name": "全款购买",
+              "value": 60,
+              "name": "按月等额还款",
               "sampleSize": null
             },
             {
-              "value": null,
-              "name": "贷款购买",
+              "value": 80,
+              "name": "按月等额还款+尾款",
               "sampleSize": null
             },
             {
-              "value": null,
-              "name": "融资租赁",
+              "value": 100,
+              "name": "不需月供，仅到期还尾款",
               "sampleSize": null
             }
           ]

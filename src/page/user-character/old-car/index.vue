@@ -11,23 +11,23 @@
       <a-card v-if="tabKey === '1'" title="查询结果">
         <div class="iw-card-container">
           <iw-card-extend title="升级品牌来源" extra="TOP10">
-            <top10-box slot="content" :data="top10Data"/>
+            <top10-box :data="top10Data"/>
           </iw-card-extend>
           <div>
             <div class="iw-card-container">
               <iw-card title="行驶里程" extra="万公里">
-                <iw-chart slot="content" :options="mileage"/>
+                <iw-chart :options="mileage" style="height: 180px;" />
               </iw-card>
               <iw-card title="二手车置换价格" extra="%">
-                <iw-chart slot="content" :options="usedCarData"/>
+                <iw-chart :options="usedCarData" style="height: 180px;" />
               </iw-card>
             </div>
             <div class="iw-card-container">
               <iw-card title="处理方法" extra="">
-                <iw-chart slot="content" :options="dealMethodsData"/>
+                <iw-chart :options="dealMethodsData" style="height: 180px;" />
               </iw-card>
               <iw-card title="二手车转卖价格" extra="%">
-                <iw-chart slot="content" :options="usedCarData"/>
+                <iw-chart :options="usedCarData" style="height: 180px;" />
               </iw-card>
             </div>
           </div>
@@ -43,18 +43,18 @@
       <a-card v-else title="查询结果">
         <div class="iw-card-container">
           <iw-card title="置换前了解信息渠道" extra="">
-            <iw-simple-box slot="content" :data="barData"/>
+            <iw-simple-box :data="barData"/>
           </iw-card>
           <iw-card title="置换渠道选择原因" extra="">
-            <iw-simple-box slot="content" :data="barData"/>
+            <iw-simple-box :data="barData"/>
           </iw-card>
         </div>
         <div class="iw-card-container">
           <iw-card title="二手车评估方法" extra="">
-            <iw-simple-box slot="content" :data="barData"/>
+            <iw-simple-box :data="barData"/>
           </iw-card>
           <iw-card-extend width="600px" title="二手车出售渠道" extra="">
-            <div slot="content">
+            <div>
               <div class="iw-card-container">
                 <iw-simple-box :data="barData" style="width: calc(50% - 10px);margin-right: 10px"/>
                 <div class="reason-box" style="width: calc(50% - 10px);margin-left: 10px">
@@ -182,10 +182,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .iw-card-container {
     display: flex;
     align-items: flex-start;
+    .iw-card {
+      margin: 0 20px 20px 0;
+    }
   }
 
   .reason-box {

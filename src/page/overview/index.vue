@@ -17,59 +17,64 @@
         <div class="overview-table_total">
           <span>样本量合计：{{ purchaseNum }}</span>
         </div>
-        <div class="ant-table-body">
-          <table class="overview-table">
-            <thead class="ant-table-thead">
-              <tr>
-                <th v-for="column in columns" :key="column.dataIndex">
-                  <div>{{ column.title }}</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody class="ant-table-tbody">
-              <template v-for="(row, index) in purchaseData">
-                <tr :key="index">
-                  <td v-for="column in columns" :key="column.dataIndex">
-                    <template v-if="column.dataIndex=='subModel'">
-                      <a href="javascript:;" @click="handleCellClick('subModel', index)">查看详情</a>
-                    </template>
-                    <template v-else-if="column.dataIndex=='city'">
-                      <a v-if="false" href="javascript:;" @click="handleCellClick('city', index)">查看详情</a>
-                    </template>
-                    <template v-else-if="['module'].includes(column.dataIndex)">
-                      {{ row[column.dataIndex].name }}
-                    </template>
-                    <template v-else-if="column.dataIndex=='month'">
-                      {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }} 至 {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }}
-                    </template>
-                    <template v-else-if="column.dataIndex=='sampleNum'">
-                      <a href="javascript:;" @click="handleSampleClick(row.module.name, row.ymSamples)">{{ row[column.dataIndex] }}</a>
-                    </template>
-                    <template v-else>{{ row[column.dataIndex] }}</template>
-                  </td>
+        <div class="overview-table">
+          <div class="ant-table-body">
+            <table>
+              <thead class="ant-table-thead">
+                <tr>
+                  <th v-for="column in columns" :key="column.dataIndex">
+                    <div>{{ column.title }}</div>
+                  </th>
                 </tr>
-                <template v-if="row.showChildren&&row.children_subModel&&row.children_subModel.length">
-                  <template v-for="(innerRow, innerIndex) in row.children_subModel">
-                    <tr :key="'inner_'+innerIndex">
-                      <td v-for="column in columns" :key="'row1_'+column.dataIndex">
-                        <template v-if="column.dataIndex=='city'">
-                          <a href="javascript:;" @click="handleCellClick('city', index, innerRow.subModelId)">查看详情</a>
+              </thead>
+              <tbody class="ant-table-tbody">
+                <template v-if="purchaseData.length">
+                  <template v-for="(row, index) in purchaseData">
+                    <tr :key="index">
+                      <td v-for="column in columns" :key="column.dataIndex">
+                        <template v-if="column.dataIndex=='subModel'">
+                          <a href="javascript:;" @click="handleCellClick('subModel', index)">查看详情</a>
                         </template>
-                        <template v-else>{{ innerRow[column.dataIndex] }}</template>
+                        <template v-else-if="column.dataIndex=='city'">
+                          <a v-if="false" href="javascript:;" @click="handleCellClick('city', index)">查看详情</a>
+                        </template>
+                        <template v-else-if="['module'].includes(column.dataIndex)">
+                          {{ row[column.dataIndex].name }}
+                        </template>
+                        <template v-else-if="column.dataIndex=='month'">
+                          {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }} 至 {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }}
+                        </template>
+                        <template v-else-if="column.dataIndex=='sampleNum'">
+                          <a href="javascript:;" @click="handleSampleClick(row.module.name, row.ymSamples)">{{ row[column.dataIndex] }}</a>
+                        </template>
+                        <template v-else>{{ row[column.dataIndex] }}</template>
                       </td>
                     </tr>
-                    <template v-if="innerRow.showChildren&&innerRow.children&&innerRow.children.length">
-                      <tr v-for="(innerRow2, innerIndex2) in innerRow.children" :key="'inner_'+innerIndex+'_'+innerIndex2">
-                        <td v-for="column in columns" :key="'row2_'+column.dataIndex">
-                          <template>{{ innerRow2[column.dataIndex] }}</template>
-                        </td>
-                      </tr>
+                    <template v-if="row.showChildren&&row.children_subModel&&row.children_subModel.length">
+                      <template v-for="(innerRow, innerIndex) in row.children_subModel">
+                        <tr :key="'inner_'+innerIndex">
+                          <td v-for="column in columns" :key="'row1_'+column.dataIndex">
+                            <template v-if="column.dataIndex=='city'">
+                              <a href="javascript:;" @click="handleCellClick('city', index, innerRow.subModelId)">查看详情</a>
+                            </template>
+                            <template v-else>{{ innerRow[column.dataIndex] }}</template>
+                          </td>
+                        </tr>
+                        <template v-if="innerRow.showChildren&&innerRow.children&&innerRow.children.length">
+                          <tr v-for="(innerRow2, innerIndex2) in innerRow.children" :key="'inner_'+innerIndex+'_'+innerIndex2">
+                            <td v-for="column in columns" :key="'row2_'+column.dataIndex">
+                              <template>{{ innerRow2[column.dataIndex] }}</template>
+                            </td>
+                          </tr>
+                        </template>
+                      </template>
                     </template>
                   </template>
                 </template>
-              </template>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+            <iw-empty v-if="purchaseData.length==0" :status="status.purchase" style="height: 300px;" />
+          </div>
         </div>
       </a-card>
       <a-card v-if="tabKey=='2'" :body-style="{padding: '0'}" style="border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
@@ -87,7 +92,7 @@
                   </th>
                 </tr>
               </thead>
-              <tbody class="ant-table-tbody">
+              <tbody v-if="sampleList.length" class="ant-table-tbody">
                 <template v-for="(row, index) in sampleList">
                   <tr :key="'row_'+index">
                     <td><a-checkbox :checked="selectedRowKeys.includes(index)" @change="event => onChange(event, index)" /></td>
@@ -107,6 +112,7 @@
                 </template>
               </tbody>
             </table>
+            <iw-empty v-if="sampleList.length==0" :status="status.sample" style="height: 300px;" />
           </div>
         </div>
       </a-card>
@@ -197,28 +203,6 @@ const innerColumns = [{
   scopedSlots: { customRender: 'sampleNum' }
 }]
 
-const sampleList = []
-for (let i = 0; i < 10; i++) {
-  sampleList.push({
-    module: '用户特征',
-    month: '2019-01至2019-12',
-    subModel: '蒙迪欧',
-    city: '北京市',
-    sampleNum: 3399,
-    showChildren: false,
-    key: i
-  })
-}
-
-const innerData = []
-for (let i = 0; i < 3; i++) {
-  innerData.push({
-    month: '2019-01',
-    sampleNum: 1111,
-    key: i
-  })
-}
-
 export default {
   name: 'Overview',
   components: {
@@ -243,10 +227,14 @@ export default {
       ],
       tabKey: '1',
       dataForm: {},
+      status: {
+        purchase: 200,
+        sample: 200
+      },
       purchaseData: [],
       purchaseNum: [],
       innerPurchaseData: [],
-      sampleList,
+      sampleList: [],
       sampleNum: 0,
       columns,
       checkAll: false,
@@ -259,7 +247,7 @@ export default {
       dataTime: undefined,
       confirmLoading: false,
       innerColumns,
-      innerData
+      innerData: []
     }
   },
   computed: {
@@ -285,6 +273,10 @@ export default {
       this.visible.post = true
     },
     postDataForm() {
+      if (!this.dataTime || !this.dataTime[0] || !this.dataTime[1]) {
+        message.error('选择时间')
+        return
+      }
       const selectedSampleList = this.sampleList.filter((item, key) => this.selectedRowKeys.includes(key))
       const params = { startYm: this.dataTime[0], endYm: this.dataTime[1] }
       params.modules = selectedSampleList.map(item => {
@@ -410,15 +402,20 @@ export default {
         const data = res.data || {}
         this.sampleList = data.sampleList || []
         this.sampleNum = data.sampleNum || 0
+        this.status.sample = 200
+      }).catch(res => {
+        this.status.sample = 500
       })
     },
     applyBuy(params) {
       return applyBuy(params).then(res => {
         const data = res.data
         if (data) {
+          this.selectedRowKeys = []
+          this.dataTime = []
           message.success('申请成功')
         } else {
-          message.success('申请失败')
+          message.error('申请失败')
         }
       })
     }

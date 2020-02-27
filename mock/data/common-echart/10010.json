@@ -37,19 +37,19 @@
         {
           "type": "bar",
           "data": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
+            100,
+            90,
+            10,
+            10,
+            10,
+            10,
+            20,
+            20,
+            20,
+            20,
+            30,
+            30,
+            30
           ]
         }
       ]

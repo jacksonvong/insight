@@ -14,13 +14,13 @@
           <div class="iw-card-name">用户特征</div>
           <div class="iw-card-container">
             <iw-card title="性别" extra="男性：60%">
-              <iw-chart slot="content" :options="sexData" />
+              <iw-chart :options="sexData" />
             </iw-card>
             <iw-card title="年龄" extra="平均年龄：43">
-              <iw-simple-box slot="content" :data="ageData" />
+              <iw-simple-box :data="ageData" />
             </iw-card>
             <iw-card title="学历" extra="本科：35%">
-              <iw-simple-box slot="content" :data="educationData" />
+              <iw-simple-box :data="educationData" />
             </iw-card>
             <div class="iw-card iw-card-add" @click="addPlain(1, checkedList1)">
               <div class="iw-card-add_wrap">
@@ -34,10 +34,10 @@
           <div class="iw-card-name">竞争对比</div>
           <div class="iw-card-container">
             <iw-card title="信息接触媒体">
-              <iw-simple-box slot="content" :data="mediaData" />
+              <iw-simple-box :data="mediaData" />
             </iw-card>
             <iw-card title="战胜原因[666]">
-              <iw-simple-box slot="content" :data="reasonData" />
+              <iw-simple-box :data="reasonData" />
             </iw-card>
             <div class="iw-card iw-card-add" @click="addPlain(2, checkedList2)">
               <div class="iw-card-add_wrap">
@@ -51,17 +51,17 @@
           <div class="iw-card-name">销售体验评价</div>
           <div class="iw-card-container">
             <iw-card short title="销售体验评价">
-              <div slot="content">
+              <div>
                 <div class="iw-card-wrap"><div class="iw-card-center">30%</div></div>
               </div>
             </iw-card>
             <iw-card short title="人员满意度[666]">
-              <div slot="content">
+              <div>
                 <div class="iw-card-wrap"><div class="iw-card-center">30%</div></div>
               </div>
             </iw-card>
             <iw-card short title="设施满意度[666]">
-              <div slot="content">
+              <div>
                 <div class="iw-card-wrap"><div class="iw-card-center">30%</div></div>
               </div>
             </iw-card>

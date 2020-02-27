@@ -8,27 +8,27 @@
       <a-card title="查询结果">
         <div class="iw-card-container">
           <iw-card title="性别" extra="男性：60%">
-            <iw-chart slot="content" :options="sexData" />
+            <iw-chart :options="sexData" />
           </iw-card>
           <iw-card title="年龄" extra="平均年龄：43">
-            <iw-simple-box slot="content" :data="ageData" />
+            <iw-simple-box :data="ageData" />
           </iw-card>
           <iw-card title="学历" extra="本科：35%">
-            <iw-simple-box slot="content" :data="educationData" />
+            <iw-simple-box :data="educationData" />
           </iw-card>
           <iw-card title="家庭" extra="">
-            <iw-simple-box slot="content" :data="familyData" />
+            <iw-simple-box :data="familyData" />
           </iw-card>
         </div>
         <div class="iw-card-container">
           <iw-card title="工作行业" extra="">
-            <iw-simple-box slot="content" :data="industryData" />
+            <iw-simple-box :data="industryData" />
           </iw-card>
           <iw-card title="工作职位" extra="">
-            <iw-simple-box slot="content" :data="positionData" />
+            <iw-simple-box :data="positionData" />
           </iw-card>
           <iw-card title="家庭年收入" extra="">
-            <iw-simple-box slot="content" :data="incomeData" />
+            <iw-simple-box :data="incomeData" />
           </iw-card>
         </div>
         <div class="iw-card-container">
@@ -36,9 +36,9 @@
             <iw-simple-box-extend :data="valueData" />
           </result-unit>
           <iw-card-extend title="家庭车库">
-            <iw-simple-box slot="content" :data="positionData" />
-            <div slot="content" style="margin: 16px -15px;border-top: 2px solid #D4EEFC" />
-            <iw-simple-box slot="content" :data="positionData" />
+            <iw-simple-box :data="positionData" />
+            <div style="margin: 16px -15px;border-top: 2px solid #D4EEFC" />
+            <iw-simple-box :data="positionData" />
           </iw-card-extend>
         </div>
         <div class="iw-card-container">
@@ -178,9 +178,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
   .iw-card-container {
     display: flex;
     align-items: flex-start;
+    .iw-card {
+      margin: 0 20px 20px 0;
+    }
   }
 </style>

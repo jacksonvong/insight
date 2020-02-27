@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function getContactOrder(params) {
+export function getEchartOption(params) {
   return request({
-    url: '/consumer-insight/comp-compare/get-contact-order',
+    url: '/consumer-insight/common-echart/get-echart-option',
     method: 'post',
     data: {
       data: params

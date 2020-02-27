@@ -1,15 +1,15 @@
 <template>
   <div v-if="data.series" class="iw-charts-box">
-    <div class="iw-charts-left">
-      <div v-for="item in data.yAxis.data" :key="item" class="iw-charts-name">{{ item }}</div>
+    <div :style="'width: ' + (!isNaN(labelWidth) ? (labelWidth + 'px') : 'auto')" class="iw-charts-left">
+      <div v-for="(item, key) in yAxisData" :key="key" class="iw-charts-name">{{ item }}</div>
     </div>
     <div class="iw-charts-center">
-      <div v-for="item in data.series[0].data" :key="item" class="iw-charts-bar-wrap">
+      <div v-for="(item, key) in data.series[0].data" :key="key" class="iw-charts-bar-wrap">
         <span :style="{width: item + '%'}" class="iw-charts-bar" />
       </div>
     </div>
-    <div class="iw-charts-right">
-      <div v-for="item in data.series[0].data" :key="item" class="iw-charts-bar-number">{{ item + '%' }}</div>
+    <div v-if="showNumber" class="iw-charts-right">
+      <div v-for="(item, key) in data.series[0].data" :key="key" class="iw-charts-bar-number">{{ (item&&item.value?item.value:item)+ '%' }}</div>
     </div>
   </div>
 </template>
@@ -23,10 +23,27 @@ export default {
       default() {
         return []
       }
+    },
+    labelWidth: {
+      type: [Number, String],
+      default: ''
+    },
+    showNumber: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    yAxisData() {
+      if (!this.data.yAxis) return []
+      const data = this.data.yAxis instanceof Array ? this.data.yAxis[0].data : this.data.yAxis.data
+      return data
     }
   },
   created() {
     console.log(this.data)
+  },
+  methods: {
   }
 }
 </script>
@@ -34,7 +51,9 @@ export default {
 <style lang="less" scope>
 .iw-charts-box {
   display: flex;
+  width: 100%;
   .iw-charts-left {
+    flex: 0 0 auto;
     width: 70px;
     .iw-charts-name {
       font-family: PingFangSC-Regular;
@@ -49,7 +68,7 @@ export default {
     }
   }
   .iw-charts-right {
-    width: 40px;
+    flex: 0 0 auto;
     text-align: right;
     .iw-charts-bar-number {
       font-family: PingFangSC-Regular;
@@ -64,7 +83,7 @@ export default {
     }
   }
   .iw-charts-center {
-    width: calc(100% - 110px);
+    flex: 1 1 auto;
     .iw-charts-bar-wrap {
       height: 20px;
       padding: 6px 0;

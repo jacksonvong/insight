@@ -8,31 +8,31 @@
       "legend": {
         "show": true,
         "data": [
-          "汽车金融公司 - 新车按揭贷款",
-          "商业银行（非信用卡） - 新车按揭贷款",
-          "信用卡分期付款"
+          "全款购买",
+          "贷款购买",
+          "融资租赁"
         ]
       },
       "xAxis": null,
       "yAxis": null,
       "series": [
         {
-          "name": "贷款途径",
+          "name": "支付方式",
           "type": "pie",
           "data": [
             {
-              "value": null,
-              "name": "汽车金融公司 - 新车按揭贷款",
+              "value": 100,
+              "name": "全款购买",
               "sampleSize": null
             },
             {
-              "value": null,
-              "name": "商业银行（非信用卡） - 新车按揭贷款",
+              "value": 100,
+              "name": "贷款购买",
               "sampleSize": null
             },
             {
-              "value": null,
-              "name": "信用卡分期付款",
+              "value": 100,
+              "name": "融资租赁",
               "sampleSize": null
             }
           ]

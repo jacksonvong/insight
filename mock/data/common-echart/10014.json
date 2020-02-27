@@ -20,12 +20,12 @@
           "type": "pie",
           "data": [
             {
-              "value": null,
+              "value": 56,
               "name": "是",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 46,
               "name": "否",
               "sampleSize": null
             }

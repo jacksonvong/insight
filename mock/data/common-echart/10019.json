@@ -33,15 +33,15 @@
         {
           "type": "bar",
           "data": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
+            80,
+            40,
+            20,
+            20,
+            10,
+            50,
+            50,
+            60,
+            60
           ]
         }
       ]

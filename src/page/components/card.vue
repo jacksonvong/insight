@@ -5,7 +5,7 @@
       <span class="iw-card-title--right">{{ extra }}</span>
     </div>
     <div :class="['iw-card-content', {'iw-card-content-short': short}]" :style="bodyStyle">
-      <slot name="content" />
+      <slot />
     </div>
   </div>
 </template>
@@ -37,8 +37,6 @@ export default {
 <style lang="less" scoped>
 .iw-card {
     width: 254px;
-    height: 254px;
-    margin: 0 20px 20px 0;
     &.iw-card-short {
       height: 100px;
     }
@@ -62,7 +60,7 @@ export default {
       padding: 10px 15px;
       background: #EEF9FF;
       border-radius: 0 0 4px 4px;
-      overflow: auto;
+      overflow: hidden;
       &.iw-card-content-short {
         height: 100px;
       }

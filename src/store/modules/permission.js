@@ -1,6 +1,6 @@
 import { arr2table, copyObject } from '@/utils/helper'
 import { getMenus } from '@/api/login'
-import { checkApiHealth } from '@/utils/mixin'
+// import { checkApiHealth } from '@/utils/mixin'
 import { asyncRouterMap, constantRouterMap } from '@/router'
 
 /**
@@ -99,7 +99,7 @@ const permission = {
     GetMenus({ commit, state }) {
       return new Promise((resolve, reject) => {
         async function func() {
-          await checkApiHealth()
+          // await checkApiHealth()
           // 访问模块列表
           getMenus(state.token)
             .then(response => {

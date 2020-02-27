@@ -8,26 +8,26 @@
       <a-card title="查询结果">
         <div class="iw-card-container">
           <iw-card-extend title="购车动机" extra="">
-            <iw-simple-box slot="content" :data="reasonData" />
+            <iw-simple-box :data="reasonData" />
           </iw-card-extend>
           <iw-card-extend title="购车用途" extra="">
-            <iw-simple-box slot="content" :data="reasonData" />
+            <iw-simple-box :data="reasonData" />
           </iw-card-extend>
           <div>
             <div class="iw-card-container">
               <iw-card-extend title="购车准备" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
               <iw-card-extend title="购车预算" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
             </div>
             <div class="iw-card-container">
               <iw-card title="购车形态" extra="" >
-                <iw-chart slot="content" :options="sexData" />
+                <iw-chart :options="sexData" />
               </iw-card>
               <iw-card-extend title="购车时长" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
             </div>
           </div>

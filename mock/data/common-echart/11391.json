@@ -21,17 +21,17 @@
           "type": "pie",
           "data": [
             {
-              "value": null,
+              "value": 80,
               "name": "自费购买的延保",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 40,
               "name": "赠送的延保",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 60,
               "name": "没有办理延保",
               "sampleSize": null
             }

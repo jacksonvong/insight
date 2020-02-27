@@ -8,31 +8,31 @@
       "legend": {
         "show": true,
         "data": [
-          "按月等额还款",
-          "按月等额还款+尾款",
-          "不需月供，仅到期还尾款"
+          "汽车金融公司 - 新车按揭贷款",
+          "商业银行（非信用卡） - 新车按揭贷款",
+          "信用卡分期付款"
         ]
       },
       "xAxis": null,
       "yAxis": null,
       "series": [
         {
-          "name": "还款方式",
+          "name": "贷款途径",
           "type": "pie",
           "data": [
             {
-              "value": null,
-              "name": "按月等额还款",
+              "value": 150,
+              "name": "汽车金融公司 - 新车按揭贷款",
               "sampleSize": null
             },
             {
-              "value": null,
-              "name": "按月等额还款+尾款",
+              "value": 100,
+              "name": "商业银行（非信用卡） - 新车按揭贷款",
               "sampleSize": null
             },
             {
-              "value": null,
-              "name": "不需月供，仅到期还尾款",
+              "value": 50,
+              "name": "信用卡分期付款",
               "sampleSize": null
             }
           ]

@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function checkHealth() { // 检查接口是否健康
   return request({
-    url: '/reward-tool/health',
+    url: '/iways-front/health',
     method: 'get'
   })
 }

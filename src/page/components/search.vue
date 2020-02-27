@@ -310,13 +310,13 @@ export default {
         brandNatiIds: dataForm.brandNati,
         cityIds: dataForm.cityIds,
         cityLevel: dataForm.cityLevel,
-        endYm: dataForm.dataTime[1],
+        endYm: dataForm.dataTime ? dataForm.dataTime[1] : 0,
         fuelTypeIds: dataForm.fuelType,
         modules: dataForm.module,
         provinceIds: dataForm.provinceIds,
         regionIds: dataForm.regionIds,
         segmentIds: dataForm.segment,
-        startYm: dataForm.dataTime[0],
+        startYm: dataForm.dataTime ? dataForm.dataTime[0] : 0,
         subModelIds: dataForm.subModel,
         vehicleTypeIds: dataForm.vehicleType
       })

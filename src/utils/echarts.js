@@ -851,7 +851,7 @@ export class Chart {
     const _this = this
     const config = this.config
     const option = {
-      backgroundColor: '#fff',
+      backgroundColor: config.backgroundColor || '#fff',
       title: _this.option.title ? [
         {
           show: config.showTitle,
@@ -884,8 +884,8 @@ export class Chart {
           }
         }
       },
-      color: config.customColor.length ? config.customColor : color.bar[Math.min(_this.option.legend.data.length, 12) - 1],
-      legend: {
+      color: (config.customColor && config.customColor.length) ? config.customColor : color.bar[Math.min(_this.option.series[0].data.length, 12) - 1],
+      legend: _this.option.legend && config.legend === false ? {
         orient: 'horizontal',
         bottom: '5%',
         ...config.legend,
@@ -896,7 +896,7 @@ export class Chart {
             icon: config.legendIcon.bar
           }
         })
-      },
+      } : { show: false },
       grid: {
         top: 10,
         bottom: 110,
@@ -931,7 +931,7 @@ export class Chart {
           },
           show: !!_this.option.xAxis[0],
           type: _this.option.xAxis[0].type || config.xAxisType,
-          data: _this.option.xAxis[0] ? _this.option.xAxis[0].data.map(item => { return item || '' }) : []
+          data: (_this.option.xAxis[0] && _this.option.xAxis[0].data) ? _this.option.xAxis[0].data.map(item => { return item || '' }) : []
         } : {}
         // this.option.xAxis && this.option.xAxis[1] ? {
         //   show: !!this.option.xAxis[1],
@@ -1030,10 +1030,10 @@ export class Chart {
     const data = this.option.series[0]['data']
     const seriesData = []
     const sum = _.reduce(data, (sum, item) => {
-      return sum + item.value
+      return !item ? sum : (sum + item.value)
     }, 0)
     data.map((item, key) => {
-      if (item.value) {
+      if (item && item.value) {
         seriesData.push({
           name: item.name,
           value: item.value || 0,
@@ -1058,6 +1058,7 @@ export class Chart {
         }
       ] : config.text.title,
       tooltip: {
+        show: config.showTooltip,
         trigger: 'item',
         color: config.tooltipColor,
         backgroundColor: config.tooltipBackgroundColor,
@@ -1088,7 +1089,7 @@ export class Chart {
         }
       },
       color: (config.customColor && config.customColor.length) ? config.customColor : color.pie,
-      legend: this.option.legend ? {
+      legend: this.option.legend && config.legend.show !== false ? {
         orient: config.legend.orient,
         top: 0,
         left: 0,
@@ -1101,8 +1102,7 @@ export class Chart {
         })
       } : { show: false },
       grid: {
-        ...config.grid,
-        height: 180
+        ...config.grid
       },
       itemStyle: {
         borderWidth: 1,
@@ -1112,7 +1112,7 @@ export class Chart {
         {
           name: '',
           type: 'pie',
-          radius: ['40%', '70%'],
+          radius: ['40%', '80%'],
           center: ['50%', '50%'],
           // roseType: 'area',
           label: {

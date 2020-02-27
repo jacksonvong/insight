@@ -10,58 +10,86 @@
         @change="changeDataForm"
       />
       <a-card v-if="tabKey==1" title="查询结果">
-        <div class="iw-card-container">
-          <div class="iw-card-container iw-card-col2">
+        <div class="iw-card-container iw-row">
+          <div class="iw-card-container iw-col12">
             <iw-card title="选择原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
-              <iw-table-box slot="content" :data="selectReasonData" />
+              <iw-table-box :data="selectReasonData" />
             </iw-card>
           </div>
-          <div class="iw-card-container iw-card-col2">
+          <div class="iw-card-container iw-col12">
             <iw-card title="放弃原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
-              <iw-table-box slot="content" :data="selectReasonData" />
+              <iw-table-box :data="selectReasonData" />
+            </iw-card>
+          </div>
+        </div>
+        <div class="iw-card-container iw-row">
+          <iw-card title="选择原因和放弃原因分析" style="width: 100%; height: 100%;" body-style="height: 540px;">
+            <div v-if="chartVb.series" style="height: 100%; position: relative;">
+              <iw-chart :options="chartVb" chart-id="chart-b" style="height: 510px;" />
+              <span class="chart-title-tips left-top">劣势点</span>
+              <span class="chart-title-tips right-top"> 争议点</span>
+              <span class="chart-title-tips left-bottom">低关注</span>
+              <span class="chart-title-tips right-bottom">优势点</span>
+            </div>
+          </iw-card>
+        </div>
+      </a-card>
+      <a-card v-if="tabKey==2" title="查询结果">
+        <div class="iw-card-container">
+          <div class="iw-card-container iw-col6">
+            <iw-card title="主要竞争对手(TOP10)" style="height: 100%;" body-style="height: 100%">
+              <iw-top10-box :data="top10Data"/>
+            </iw-card>
+          </div>
+          <div class="iw-card-container iw-card-col9">
+            <iw-card title="购买对象的原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
+              <iw-table-box :data="selectReasonData" />
+            </iw-card>
+          </div>
+          <div class="iw-card-container iw-card-col9">
+            <iw-card title="放弃[卡罗拉]的原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
+              <iw-table-box :data="selectReasonData" />
             </iw-card>
           </div>
         </div>
         <div class="iw-card-container">
           <iw-card title="选择原因和放弃原因分析" style="width: 100%; height: 100%;" body-style="height: 540px;">
-            <div v-if="chartVb.series" slot="content" style="height: 100%; position: relative;">
-              <iw-charts :options="chartVb" chart-id="chart-b" style="height: 510px;" />
-              <span class="chart-title-tips left-top">
-                劣势点
-                <a-tooltip v-if="false" placement="rightTop">
-                  <template slot="title">
-                    <span>销量同比下降，份额环比上升，是整体大环境需求减少带来的销售下滑，跟竞品比较仍相对有优势</span>
-                  </template>
-                  <i>?</i>
-                </a-tooltip>
-              </span>
-              <span class="chart-title-tips right-top">
-                争议点
-                <a-tooltip v-if="false" placement="rightTop">
-                  <template slot="title">
-                    <span>销量同比、份额环比双增长，销售形势良好</span>
-                  </template>
-                  <i>?</i>
-                </a-tooltip>
-              </span>
-              <span class="chart-title-tips left-bottom">
-                低关注
-                <a-tooltip v-if="false" placement="rightTop">
-                  <template slot="title">
-                    <span>销量同比、份额环比双下滑，说明该品牌销售情况较差，销量下滑，市场份额被竞品蚕食，销售受阻</span>
-                  </template>
-                  <i>?</i>
-                </a-tooltip>
-              </span>
-              <span class="chart-title-tips right-bottom">
-                优势点
-                <a-tooltip v-if="false" placement="rightTop">
-                  <template slot="title">
-                    <span>销量同比上升，份额环比下降，虽销量增长，但增速未能跟上整体市场步伐，竞争力下降，跟竞品相比处于劣势</span>
-                  </template>
-                  <i>?</i>
-                </a-tooltip>
-              </span>
+            <div v-if="chartVb.series" style="height: 100%; position: relative;">
+              <iw-chart :options="chartVb" chart-id="chart-b" style="height: 510px;" />
+              <span class="chart-title-tips left-top">劣势点</span>
+              <span class="chart-title-tips right-top"> 争议点</span>
+              <span class="chart-title-tips left-bottom">低关注</span>
+              <span class="chart-title-tips right-bottom">优势点</span>
+            </div>
+          </iw-card>
+        </div>
+      </a-card>
+      <a-card v-if="tabKey==3" title="查询结果">
+        <div class="iw-card-container">
+          <div class="iw-card-container iw-col6">
+            <iw-card title="主要竞争对手(TOP10)" style="height: 100%;" body-style="height: 100%">
+              <iw-top10-box :data="top10Data"/>
+            </iw-card>
+          </div>
+          <div class="iw-card-container iw-card-col9">
+            <iw-card title="购买对象的原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
+              <iw-table-box :data="selectReasonData" />
+            </iw-card>
+          </div>
+          <div class="iw-card-container iw-card-col9">
+            <iw-card title="放弃[卡罗拉]的原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
+              <iw-table-box :data="selectReasonData" />
+            </iw-card>
+          </div>
+        </div>
+        <div class="iw-card-container">
+          <iw-card title="选择原因和放弃原因分析" style="width: 100%; height: 100%;" body-style="height: 540px;">
+            <div v-if="chartVb.series" style="height: 100%; position: relative;">
+              <iw-chart :options="chartVb" chart-id="chart-b" style="height: 510px;" />
+              <span class="chart-title-tips left-top">劣势点</span>
+              <span class="chart-title-tips right-top"> 争议点</span>
+              <span class="chart-title-tips left-bottom">低关注</span>
+              <span class="chart-title-tips right-bottom">优势点</span>
             </div>
           </iw-card>
         </div>
@@ -77,9 +105,11 @@ import IwSearch from '@/page/components/search'
 import IwCard from '@/page/components/card'
 import IwSimpleBox from '@/page/components/simple-box'
 import IwTableBox from '@/page/components/simple-table-box'
-import { getSelectReason, getBubble } from '@/api/compete'
-import IwCharts from '@/components/charts'
+import Top10Box from '@/page/components/top10-box'
+import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
+import { getSelectReason, getBubble } from '@/api/compete'
+import { getTop10 } from '@/api/old-car'
 
 export default {
   name: 'Info',
@@ -91,7 +121,8 @@ export default {
     IwCard,
     IwSimpleBox,
     IwTableBox,
-    IwCharts
+    IwTop10Box: Top10Box,
+    IwChart
   },
   data() {
     return {
@@ -102,7 +133,9 @@ export default {
       ],
       tabKey: '1',
       selectReasonData: {},
-      chartVb: {}
+      chartVb: {},
+
+      top10Data: []
     }
   },
   created() {
@@ -111,6 +144,9 @@ export default {
   methods: {
     changeTab(key) {
       this.tabKey = key
+      if (key === '2') {
+        this.getTop10()
+      }
     },
     changeDataForm(form) {
       console.log(form)
@@ -191,6 +227,13 @@ export default {
             reject(response)
           })
       })
+    },
+
+    getTop10(params) {
+      return getTop10(params).then(res => {
+        const data = res.data || {}
+        this.top10Data = data.top10
+      })
     }
   }
 }
@@ -202,8 +245,14 @@ export default {
   .iw-card-container {
     display: flex;
     flex-wrap: wrap;
-    &.iw-card-col2 {
+    &.iw-col12 {
       flex: 0 0 50%;
+    }
+    &.iw-col6 {
+      flex: 0 0 25%;
+    }
+    &.iw-card-col9 {
+      flex: 0 0 37.5%;
     }
   }
   .chart-title-tips {
@@ -217,16 +266,6 @@ export default {
     &.right-top { top: 68px; right: 38px; }
     &.left-bottom { bottom: 77px; left: 88px; }
     &.right-bottom { bottom: 77px;  right: 38px; }
-    i {
-      .border-radius(50%);
-      .font-adjust(12px, 14px, #fff);
-      color: #fff;
-      background-color: #dfdfdf;
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      cursor: pointer;
-    }
   }
 }
 </style>

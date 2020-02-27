@@ -2,8 +2,14 @@ const fs = require('fs')
 
 function fromJSONFile(filename) {
   return (req, res) => {
-    console.log(req)
-    const data = fs.readFileSync(`mock/data/${filename}.json`).toString()
+    let data
+    if (filename === 'surround/10001') {
+      const key = req.body.data.key
+      const path = filename.replace('10001', key)
+      data = fs.readFileSync(`mock/data/${path}.json`).toString()
+    } else {
+      data = fs.readFileSync(`mock/data/${filename}.json`).toString()
+    }
     const json = JSON.parse(data)
     return res.json(json)
   }
@@ -33,14 +39,14 @@ const proxy = {
   'POST /api/consumer-insight/overview/apply-buy': fromJSONFile('overview/apply-buy'),
   'POST /api/consumer-insight/overview/get-submodel-data': fromJSONFile('overview/get-submodel-data'),
   'POST /api/consumer-insight/overview/get-city-data': fromJSONFile('overview/get-city-data'),
-
+  // 看板
   'POST /api/consumer-insight/board/get-sex': fromJSONFile('board/get-sex'),
   'POST /api/consumer-insight/board/get-age': fromJSONFile('board/get-age'),
   'POST /api/consumer-insight/board/get-education': fromJSONFile('board/get-education'),
   'POST /api/consumer-insight/board/get-media': fromJSONFile('board/get-media'),
   'POST /api/consumer-insight/board/get-reason': fromJSONFile('board/get-reason'),
-
-  'POST /api/consumer-insight/compete/get-info-media': fromJSONFile('compete/get-info-media'),
+  // 竞争对手
+  'POST /api/consumer-insight/comp-compare/get-contact-order': fromJSONFile('comp-compare/get-contact-order'),
   'POST /api/consumer-insight/compete/get-select-reason': fromJSONFile('compete/get-select-reason'),
   'POST /api/consumer-insight/compete/get-bubble': fromJSONFile('compete/get-bubble2'),
 
@@ -60,5 +66,7 @@ const proxy = {
   'POST /api/consumer-insight/old-car/get-deal-methods': fromJSONFile('user-character/old-car/get-deal-methods'),
 
   'POST /api/consumer-insight/old-car/get-bar': fromJSONFile('user-character/old-car/get-bar'),
+  // 周边产品需求
+  'POST /api/consumer-insight/common-echart/get-echart-option': fromJSONFile('common-echart/10001')
 }
 module.exports = proxy

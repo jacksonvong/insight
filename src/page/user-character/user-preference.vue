@@ -8,39 +8,39 @@
       <a-card title="查询结果">
         <div class="iw-card-container">
           <iw-card-extend title="购车考虑因素" extra="">
-            <iw-simple-box slot="content" :data="reasonData" />
+            <iw-simple-box :data="reasonData" />
           </iw-card-extend>
           <div>
             <div class="iw-card-container">
               <iw-card-extend title="外观" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
               <iw-card-extend title="动力性" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
             </div>
             <div class="iw-card-container">
               <iw-card-extend title="空间" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
               <iw-card-extend title="操控性" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
             </div>
             <div class="iw-card-container">
               <iw-card-extend title="内饰" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
               <iw-card-extend title="安全性" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
             </div>
             <div class="iw-card-container">
               <iw-card-extend title="舒适型" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
               <iw-card-extend title="配置" extra="">
-                <iw-simple-box slot="content" :data="detailReasonData" />
+                <iw-simple-box :data="detailReasonData" />
               </iw-card-extend>
             </div>
           </div>
