@@ -2,20 +2,26 @@ import request from '@/utils/request'
 
 export function getReason(params) {
   return request({
-    url: '/consumer-insight/user-preference/get-reason',
+    url: '/consumer-insight/common-echart/get-echart-option',
     method: 'post',
     data: {
-      data: params
+      data: {
+        key: '10094',
+        ...params
+      }
     }
   })
 }
 
-export function getDetailReason(params) {
+export function getDetailReason(params, key) {
   return request({
-    url: '/consumer-insight/user-preference/get-detail-reason',
+    url: '/consumer-insight/common-echart/get-echart-option',
     method: 'post',
     data: {
-      data: params
+      data: {
+        key: key,
+        ...params
+      }
     }
   })
 }

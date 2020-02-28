@@ -1,22 +1,24 @@
 <template>
-  <div v-if="data.data" class="iw-charts-box-extend">
-    <div v-for="( item, index ) in data.data" :key="index" class="bar-unit">
+  <div v-if="data.series" class="iw-charts-box-extend">
+    <div v-for="( item, index ) in data.yAxis[0].data" :key="index" class="bar-unit">
       <div class="text-part">
-        <div class="title">{{ data.title[index] }}</div>
-        <div class="desc">{{ data.desc[index] }}</div>
+        <div class="title">{{ item.split('：')[0] }}</div>
+        <div class="desc">{{ item.split('：')[1] }}</div>
         <!--<div class="desc"></div>-->
       </div>
       <div class="bar-part">
         <span class="bar-item-wrap">
-          <span :style="{ width : item + '%' }" class="bar-item"/>
+          <span :style="{ width : toPercent(data.series[0].data[index].value) }" class="bar-item"/>
         </span>
-        <span style="width: 40px" class="bar-item-text"> {{ item }}% </span>
+        <span style="width: 40px" class="bar-item-text"> {{ toPercent(data.series[0].data[index].value) }} </span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { toPercent } from '@/utils/filters'
+
 export default {
   name: 'SimpleBoxExtend',
   desc: '在SimpleBox的基础上，添加了标题',
@@ -30,6 +32,11 @@ export default {
   },
   created() {
     console.log(this.data)
+  },
+  methods: {
+    toPercent() {
+      return toPercent(...arguments)
+    }
   }
 }
 </script>
