@@ -27,6 +27,13 @@ const Info = () => import('@/page/compete/info.vue')
 const Competitor = () => import('@/page/compete/competitor.vue')
 const GoodAndBad = () => import('@/page/compete/goodandbad.vue')
 
+const Summary = () => import('@/page/comment/summary.vue')
+const Personal = () => import('@/page/comment/personal.vue')
+const Facility = () => import('@/page/comment/facility.vue')
+const Trial = () => import('@/page/comment/trial.vue')
+const Deal = () => import('@/page/comment/deal.vue')
+const Pickup = () => import('@/page/comment/pickup.vue')
+
 const Finance = () => import('@/page/surround/finance.vue')
 const Accessory = () => import('@/page/surround/accessory.vue')
 
@@ -65,6 +72,13 @@ export default new Router({
         { path: '/insight/compete/info', name: 'Information', component: Info },
         { path: '/insight/compete/competitor', name: 'Competitor', component: Competitor },
         { path: '/insight/compete/good-and-bad', name: 'Competition', component: GoodAndBad },
+
+        { path: '/insight/comment/summary', name: 'Summary', component: Summary },
+        { path: '/insight/comment/personal', name: 'Personal', component: Personal },
+        { path: '/insight/comment/facility', name: 'Facility', component: Facility },
+        { path: '/insight/comment/trial', name: 'Trial', component: Trial },
+        { path: '/insight/comment/deal', name: 'Deal', component: Deal },
+        { path: '/insight/comment/pickup', name: 'Pickup', component: Pickup },
 
         { path: '/insight/surround/finance', name: 'Finance', component: Finance },
         { path: '/insight/surround/accessory', name: 'Accessory', component: Accessory },
