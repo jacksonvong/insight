@@ -1,0 +1,48 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": null,
+      "xAxis": [
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "销售顾问没有主动邀请试乘试驾",
+            "销售顾问在试驾过程中的解说不清楚",
+            "试驾时间不够充足",
+            "试驾路况单一，不足以体验车辆性能",
+            "试驾车的车况不好"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "type": "bar",
+          "data": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}
+}

@@ -1,0 +1,47 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": null,
+      "xAxis": [
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "最后成交价格难达成",
+            "对购车书面文件解释不清楚",
+            " 贷款服务周期太长",
+            "服务店未能按时完成贷款流程",
+            "办理贷款手续工作人员不够诚信"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "type": "bar",
+          "data": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

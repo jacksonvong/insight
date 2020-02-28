@@ -1,0 +1,45 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": null,
+      "xAxis": [
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "赠送额外配置/附件",
+            "免费延长保修期",
+            "两者都有",
+            "两者都没有"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "type": "bar",
+          "data": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

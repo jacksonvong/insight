@@ -1,0 +1,43 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": null,
+      "xAxis": [
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "在我购车的过程中一直伴随",
+            "没有一直跟随，但当我有问题时会马上来解答",
+            "销售人员很忙，我多次要求时才来解答"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "type": "bar",
+          "data": [
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

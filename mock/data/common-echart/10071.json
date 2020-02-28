@@ -1,0 +1,48 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": {
+        "show": true,
+        "data": [
+          "不会推荐",
+          "不确定",
+          "会推荐"
+        ]
+      },
+      "xAxis": null,
+      "yAxis": null,
+      "series": [
+        {
+          "name": "推荐意愿",
+          "type": "pie",
+          "data": [
+            {
+              "value": null,
+              "name": "不会推荐",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "不确定",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "会推荐",
+              "sampleSize": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

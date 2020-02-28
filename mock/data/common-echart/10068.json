@@ -1,0 +1,42 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": {
+        "show": true,
+        "data": [
+          "是",
+          "否"
+        ]
+      },
+      "xAxis": null,
+      "yAxis": null,
+      "series": [
+        {
+          "name": "是否去过其它店",
+          "type": "pie",
+          "data": [
+            {
+              "value": null,
+              "name": "是",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "否",
+              "sampleSize": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}
