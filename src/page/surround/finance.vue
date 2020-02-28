@@ -2,9 +2,7 @@
   <div class="finance">
     <iw-banner title="金融保险延保产品"/>
     <div class="main-content">
-      <a-card>
-        <iw-search @change="changeSearchForm" />
-      </a-card>
+      <iw-search @change="changeSearchForm" />
       <a-card title="查询结果">
         <div class="iw-card-container">
           <div class="iw-card-container iw-col12">
@@ -74,7 +72,7 @@ import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
 
 export default {
-  name: 'UserBackground',
+  name: 'Finance',
   components: {
     ACard: Card,
     IwBanner,

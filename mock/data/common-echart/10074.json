@@ -27,9 +27,9 @@
         {
           "type": "bar",
           "data": [
-            null,
-            null,
-            null
+            800,
+            400,
+            200
           ]
         }
       ]

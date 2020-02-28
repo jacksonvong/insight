@@ -21,17 +21,17 @@
           "type": "pie",
           "data": [
             {
-              "value": null,
+              "value": 60,
               "name": "不满意",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 50,
               "name": "一般",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 45,
               "name": "满意",
               "sampleSize": null
             }

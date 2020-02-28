@@ -31,13 +31,13 @@
         {
           "type": "bar",
           "data": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
+            80,
+            80,
+            60,
+            60,
+            40,
+            30,
+            10
           ]
         }
       ]

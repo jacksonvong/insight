@@ -21,17 +21,17 @@
           "type": "pie",
           "data": [
             {
-              "value": null,
+              "value": 80,
               "name": "不满意",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 20,
               "name": "一般",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 40,
               "name": "满意",
               "sampleSize": null
             }
@@ -45,4 +45,4 @@
     "msg2Client": "OK",
     "msg2Dev": " successfully！"
   }
-}w
+}

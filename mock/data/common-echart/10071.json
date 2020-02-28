@@ -21,17 +21,17 @@
           "type": "pie",
           "data": [
             {
-              "value": null,
+              "value": 80,
               "name": "不会推荐",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 70,
               "name": "不确定",
               "sampleSize": null
             },
             {
-              "value": null,
+              "value": 40,
               "name": "会推荐",
               "sampleSize": null
             }

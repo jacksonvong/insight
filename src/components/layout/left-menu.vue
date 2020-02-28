@@ -136,7 +136,7 @@ export default {
   overflow: hidden;
   @include box-shadow(1px, 1px, 8px, rgba(153, 153, 153, 0.14)!important);
 }
-.leftmenu{width: 99%!important;border: 0;}
+.leftmenu{width: 100%!important;border: 0;}
 .leftmenu .ant-menu-inline{border: 0;}
 .leftmenu .ant-menu-submenu-title{background: #EAF3FC;margin: 0!important;color: #2E5AA6;}
 .leftmenu .ant-menu-item{margin: 0!important;}

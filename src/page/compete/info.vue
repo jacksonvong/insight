@@ -16,7 +16,7 @@
           <div class="iw-card-container iw-col iw-col2">
             <iw-card v-for="(item, key) in otherData" :key="key" :title="item.title">
               <iw-chart v-if="item.data&&item.key==='websit'" :options="item.data" />
-              <iw-simple-box v-else-if="item.data" :data="item.data" />
+              <iw-simple-box v-else-if="item.data" :data="item.data" is-percent />
               <iw-empty v-else :status="item.status" style="height: 180px;" />
             </iw-card>
           </div>

@@ -110,7 +110,7 @@ export default {
 <style lang="scss">
 .main-panel {margin-top: 64px;}
 .conten-entry { position: relative; }
-.leftmenu-expand .main-panel{padding-left: 200px;}
+.leftmenu-expand .main-panel{padding-left: 201px;}
 .in-frame {
   .main-panel {
     margin-top: 0px;

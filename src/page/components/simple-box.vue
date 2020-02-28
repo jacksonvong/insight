@@ -4,18 +4,18 @@
       <div v-for="(item, key) in yAxisData" :key="key" class="iw-charts-name">{{ item }}</div>
     </div>
     <div class="iw-charts-center">
-      <div v-for="(item, key) in data.series[0].data" :key="key" :title="(item&&item.value?item.value:item) | toPercent" class="iw-charts-bar-wrap" >
-        <span :style="{width: toPercent(item&&item.value?item.value:item)}" class="iw-charts-bar" />
+      <div v-for="(item, key) in seriesData" :key="key" :title="item.value" class="iw-charts-bar-wrap" >
+        <span :style="{width: item.width}" class="iw-charts-bar" />
       </div>
     </div>
     <div v-if="showNumber" class="iw-charts-right">
-      <div v-for="(item, key) in data.series[0].data" :key="key" class="iw-charts-bar-number">{{ (item&&item.value?item.value:item) | toPercent }}</div>
+      <div v-for="(item, key) in seriesData" :key="key" class="iw-charts-bar-number">{{ item.value }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import { toPercent } from '@/utils/filters'
+import { toPercent, toThousand } from '@/utils/filters'
 export default {
   name: 'SimpleBox',
   props: {
@@ -29,6 +29,10 @@ export default {
       type: [Number, String],
       default: ''
     },
+    isPercent: {
+      type: Boolean,
+      default: false
+    },
     showNumber: {
       type: Boolean,
       default: true
@@ -39,6 +43,27 @@ export default {
       if (!this.data.yAxis) return []
       const data = this.data.yAxis instanceof Array ? this.data.yAxis[0].data : this.data.yAxis.data
       return data
+    },
+    seriesData() {
+      if (!this.data.series) return []
+      const data = this.data.series instanceof Array ? this.data.series[0].data : this.data.series.data
+      const maxValue = this.maxValue
+      return data.map(item => {
+        const value = (item && item.value) ? item.value : item
+        const i = {
+          ...item,
+          value: this.isPercent ? toPercent(value) : toThousand(value),
+          width: this.isPercent ? toPercent(value) : toPercent(maxValue && value ? value / maxValue : 0)
+        }
+        return i
+      })
+    },
+    maxValue() {
+      const data = this.data.series instanceof Array ? this.data.series[0].data : this.data.series.data
+      return Math.max(...data.map(item => {
+        const value = (item && item.value) ? item.value : item
+        return value
+      }))
     }
   },
   created() {
@@ -47,6 +72,9 @@ export default {
   methods: {
     toPercent() {
       return toPercent(...arguments)
+    },
+    toThousand() {
+      return toThousand(...arguments)
     }
   }
 }

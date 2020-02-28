@@ -269,7 +269,7 @@ export default [
             'funcs': null
           },
           {
-            'menuId': 1132,
+            'menuId': 1133,
             'pid': null,
             'title': '设施评价',
             'node': '0',
@@ -285,7 +285,7 @@ export default [
             'funcs': null
           },
           {
-            'menuId': 1132,
+            'menuId': 1134,
             'pid': null,
             'title': '试乘试驾评价',
             'node': '0',
@@ -301,7 +301,7 @@ export default [
             'funcs': null
           },
           {
-            'menuId': 1132,
+            'menuId': 1135,
             'pid': null,
             'title': '交易评价',
             'node': '0',
@@ -317,7 +317,7 @@ export default [
             'funcs': null
           },
           {
-            'menuId': 1132,
+            'menuId': 1136,
             'pid': null,
             'title': '交车评价',
             'node': '0',
