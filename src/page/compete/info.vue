@@ -10,7 +10,7 @@
         <div class="iw-card-container iw-row">
           <div class="iw-card-container  iw-col iw-col2">
             <iw-card title="信息接触媒体" style="width: 100%;" body-style="height: 500px;">
-              <iw-table-box :data="infoData.data" :table-data="orderData" />
+              <iw-table-box :data="infoData.data" :table-data="orderData.data" />
             </iw-card>
           </div>
           <div class="iw-card-container iw-col iw-col2">
@@ -56,15 +56,15 @@ export default {
       educationData: {},
 
       dataForm: {},
-      orderData: { status: 0, data: {}},
-      infoData: { key: 10063, title: '信息接触媒体', status: 0, data: {}},
+      infoData: { key: 10062, title: '信息接触媒体', status: 0, data: {}},
+      orderData: { key: 10063, title: '信息接触媒体', status: 0, data: {}},
       mediaData: { key: 10064, title: '促购力最大的信息渠道', status: 0, data: {}},
       otherData: { // 三个图
         websit: { key: 10065, title: '门户网站', status: 0, data: {}},
         car: { key: 10066, title: '汽车垂直网站/APP', status: 0, data: {}},
         video: { key: 10067, title: '视频媒体', status: 0, data: {}}
       },
-      pieKeys: ['websit']
+      pieKeys: []
     }
   },
   created() {
@@ -73,11 +73,12 @@ export default {
   methods: {
     changeDataForm(form) {
       console.log(form)
+      this.getData()
     },
 
     // API
     getData() {
-      this.getContactOrder()
+      this.getContactOrder(Object.assign({}, this.dataForm, { key: this.orderData.key }), 'order')
       this.getEchartOption(Object.assign({}, this.dataForm, { key: this.infoData.key }), 'info')
       this.getEchartOption(Object.assign({}, this.dataForm, { key: this.mediaData.key }), 'media')
       for (const keyword in this.otherData) {

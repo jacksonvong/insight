@@ -4,17 +4,18 @@
       <div v-for="(item, key) in yAxisData" :key="key" class="iw-charts-name">{{ item }}</div>
     </div>
     <div class="iw-charts-center">
-      <div v-for="(item, key) in data.series[0].data" :key="key" class="iw-charts-bar-wrap">
-        <span :style="{width: item + '%'}" class="iw-charts-bar" />
+      <div v-for="(item, key) in data.series[0].data" :key="key" :title="(item&&item.value?item.value:item) | toPercent" class="iw-charts-bar-wrap" >
+        <span :style="{width: toPercent(item&&item.value?item.value:item)}" class="iw-charts-bar" />
       </div>
     </div>
     <div v-if="showNumber" class="iw-charts-right">
-      <div v-for="(item, key) in data.series[0].data" :key="key" class="iw-charts-bar-number">{{ (item&&item.value?item.value:item)+ '%' }}</div>
+      <div v-for="(item, key) in data.series[0].data" :key="key" class="iw-charts-bar-number">{{ (item&&item.value?item.value:item) | toPercent }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import { toPercent } from '@/utils/filters'
 export default {
   name: 'SimpleBox',
   props: {
@@ -44,6 +45,9 @@ export default {
     console.log(this.data)
   },
   methods: {
+    toPercent() {
+      return toPercent(...arguments)
+    }
   }
 }
 </script>
@@ -57,6 +61,7 @@ export default {
     width: 70px;
     .iw-charts-name {
       font-family: PingFangSC-Regular;
+      text-align: right;
       height: 20px;
       line-height: 20px;
       margin-right: 8px;
@@ -69,9 +74,10 @@ export default {
   }
   .iw-charts-right {
     flex: 0 0 auto;
-    text-align: right;
+    width: 46px;
     .iw-charts-bar-number {
       font-family: PingFangSC-Regular;
+      text-align: center;
       height: 20px;
       line-height: 20px;
       margin-left: 4px;
@@ -98,6 +104,7 @@ export default {
         border-radius: 2px;
         height: 8px;
         max-width: 100%;
+        width: 0%;
       }
     }
   }

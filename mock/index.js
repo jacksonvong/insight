@@ -3,7 +3,7 @@ const fs = require('fs')
 function fromJSONFile(filename) {
   return (req, res) => {
     let data
-    if (filename === 'surround/10001') {
+    if (filename === 'common-echart/10001') {
       const key = req.body.data.key
       const path = filename.replace('10001', key)
       data = fs.readFileSync(`mock/data/${path}.json`).toString()

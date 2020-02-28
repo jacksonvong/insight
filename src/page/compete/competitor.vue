@@ -49,7 +49,7 @@ import IwCard from '@/page/components/card'
 import IwCardInner from '@/page/components/card-inner'
 import IwSimpleBox from '@/page/components/simple-box'
 import IwTableBox from '@/page/components/complex-table-box'
-import { getInfoMedia, getBubble } from '@/api/compete'
+import { getBubble } from '@/api/compete'
 import { getAge } from '@/api/board'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
@@ -68,11 +68,18 @@ export default {
   },
   data() {
     return {
-      infoMediaData: {},
       sexData: {},
       ageData: {},
       educationData: {},
-      chartVb: {}
+      chartVb: {},
+
+      compareData: { // 各阶段对比车型
+        websit: { key: 10040, title: '考虑', status: 0, data: {}},
+        car: { key: 10041, title: '到点', status: 0, data: {}},
+        video: { key: 10042, title: '最终对比', status: 0, data: {}}
+      },
+      finanlData: { key: 10042, title: '最终对比的车型', status: 0, data: {}},
+      crossData: { key: 10042, title: '竞争对手交叉分析', status: 0, data: {}}
     }
   },
   created() {
@@ -84,15 +91,8 @@ export default {
     },
     // API
     getData() {
-      this.getInfoMedia()
       this.getAge()
       this.getBubble()
-    },
-    getInfoMedia(params) {
-      return getInfoMedia(params).then(res => {
-        const data = res.data || {}
-        this.infoMediaData = data
-      })
     },
     getAge(params) {
       return getAge(params).then(res => {

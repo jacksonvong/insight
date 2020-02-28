@@ -13,7 +13,7 @@
             <span>4</span>
           </div>
         </div>
-        <div class="iw-table-container iw-table-col3">
+        <div v-if="false" class="iw-table-container iw-table-col3">
           <div class="iw-table-column">购买影响</div>
           <div class="iw-table-column-sub">
             <span>TOP2</span>
@@ -24,25 +24,25 @@
     </div>
     <div class="iw-table-box">
       <div class="iw-table-left">
-        <div v-for="item in data.answerOrders" :key="item" class="iw-table-name">{{ item.name }}</div>
+        <div v-for="item in data.yAxis[0].data" :key="item" class="iw-table-name">{{ item }}</div>
       </div>
       <div class="iw-table-center">
-        <div v-for="(item, key) in data.answerOrders" :key="key" class="iw-table-bar-wrap">
-          <span :style="{width: item.sortOneRate + '%'}" class="iw-table-bar" />
+        <div v-for="(item, key) in data.series[0].data" :key="key" :title="(item&&item.value?item.value:item) | toPercent" class="iw-table-bar-wrap">
+          <span :style="{width: toPercent(item&&item.value?item.value:item)}" class="iw-table-bar" />
         </div>
       </div>
       <div class="iw-table-right">
         <div class="iw-table-container">
-          <div v-for="(item, key) in data.answerOrders" :key="key" class="iw-table-row">
-            <div class="iw-table-number">{{ item.sortOneRate + '%' }}</div>
-            <div class="iw-table-number">{{ item.sortTwoRate + '%' }}</div>
-            <div class="iw-table-number">{{ item.sortThreeRate + '%' }}</div>
-            <div class="iw-table-number">{{ item.sortFourRate + '%' }}</div>
+          <div v-for="(item, key) in tableData.answerOrders" :key="key" class="iw-table-row">
+            <div class="iw-table-number">{{ item.sortOneRate | toPercent }}</div>
+            <div class="iw-table-number">{{ item.sortTwoRate | toPercent }}</div>
+            <div class="iw-table-number">{{ item.sortThreeRate | toPercent }}</div>
+            <div class="iw-table-number">{{ item.sortFourRate | toPercent }}</div>
           </div>
         </div>
         <div v-if="false" class="iw-table-container iw-table-col3">
-          <div v-for="(item, key) in answerOrders" :key="key" class="iw-table-row">
-            <div class="iw-table-number">{{ item.data5 + '%' }}</div>
+          <div v-for="(item, key) in tableData.answerOrders" :key="key" class="iw-table-row">
+            <div class="iw-table-number">{{ item.data5 | toPercent }}</div>
             <div class="iw-table-number">{{ item.data6 }}</div>
           </div>
         </div>
@@ -52,10 +52,17 @@
 </template>
 
 <script>
+import { toPercent } from '@/utils/filters'
 export default {
-  name: 'SimpleBox',
+  name: 'ComplexTableBox',
   props: {
     data: {
+      type: Object,
+      default() {
+        return []
+      }
+    },
+    tableData: {
       type: Object,
       default() {
         return []
@@ -64,6 +71,11 @@ export default {
   },
   created() {
     console.log(this.data)
+  },
+  methods: {
+    toPercent() {
+      return toPercent(...arguments)
+    }
   }
 }
 </script>
@@ -77,13 +89,14 @@ export default {
       border-bottom: 1px solid #D4EEFC;
     }
     .iw-table-left {
-      flex: 0 0 14%;
-      max-width: 70px;
+      flex: 0 0 auto;
+      width: 140px;
       .iw-table-name {
         font-family: PingFangSC-Regular;
         height: 20px;
         line-height: 20px;
         margin-right: 8px;
+        text-align: right;
         font-size: 12px;
         color: #181C28;
         white-space: nowrap;
@@ -92,11 +105,12 @@ export default {
       }
     }
     .iw-table-right {
-      flex: 0 0 60%;
-      text-align: right;
+      flex: 0 0 auto;
+      width: 240px;
       display: flex;
       .iw-table-number {
         font-family: PingFangSC-Regular;
+        text-align: center;
         height: 20px;
         line-height: 20px;
         font-size: 12px;
@@ -107,7 +121,7 @@ export default {
       }
     }
     .iw-table-center {
-      flex: 0 0 26%;
+      flex: 1 1 auto;
       .iw-table-bar-wrap {
         height: 20px;
         padding: 6px 0;
@@ -122,6 +136,7 @@ export default {
           border-radius: 2px;
           height: 8px;
           max-width: 100%;
+          width: 0%;
         }
       }
     }
@@ -153,6 +168,10 @@ export default {
       }
       .iw-table-row {
         display: flex;
+        &:hover {
+          background: #d7d7d7;
+          cursor: pointer;
+        }
         .iw-table-number {
           flex: 0 0 25%;
         }

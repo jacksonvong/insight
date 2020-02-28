@@ -8,15 +8,15 @@
       {
         "id": 17,
         "name": "网约车/租赁车",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.08,
+        "sortTwoRate": 0.03,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 16,
         "name": "朋友推荐",
-        "sortOneRate": null,
+        "sortOneRate": 0.5,
         "sortTwoRate": null,
         "sortThreeRate": null,
         "sortFourRate": null
@@ -24,34 +24,34 @@
       {
         "id": 15,
         "name": "车展活动",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 14,
         "name": "4S店",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 13,
         "name": "赞助冠名活动",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 12,
         "name": "微博广告",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 11,
@@ -64,10 +64,10 @@
       {
         "id": 10,
         "name": "品牌官网",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 9,
@@ -80,18 +80,18 @@
       {
         "id": 8,
         "name": "汽车垂直网站/APP广告/软文/论坛评论/口碑",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 7,
         "name": "门户网站/APP广告/软文/论坛评论/口碑",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 6,
@@ -104,42 +104,42 @@
       {
         "id": 5,
         "name": "楼宇、电梯广告",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 4,
         "name": "户外广告（车站灯箱、机场灯箱）",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 3,
         "name": "杂志",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 2,
         "name": "报纸",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       },
       {
         "id": 1,
         "name": "电视",
-        "sortOneRate": null,
-        "sortTwoRate": null,
-        "sortThreeRate": null,
-        "sortFourRate": null
+        "sortOneRate": 0.8,
+        "sortTwoRate": 0.3,
+        "sortThreeRate": 0.02,
+        "sortFourRate": 0.01
       }
     ]
   },

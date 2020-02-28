@@ -10,3 +10,22 @@ export function getContactOrder(params) {
   })
 }
 
+export function getSelectReason(params) {
+  return request({
+    url: '/consumer-insight/compete/get-select-reason',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+
+export function getBubble(params) {
+  return request({
+    url: '/consumer-insight/compete/get-bubble',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
