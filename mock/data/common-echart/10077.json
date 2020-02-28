@@ -1,43 +1,39 @@
 {
   "questUID": "string",
   "data": {
-    "sampleNum": 0,
+    "sampleNum": null,
     "avgNum": null,
     "option": {
       "title": null,
-      "legend": null,
-      "xAxis": [
-        {
-          "type": "value",
-          "show": true
-        }
-      ],
-      "yAxis": [
-        {
-          "type": "category",
-          "show": true,
-          "data": [
-            "是否已经有车",
-            "车身类型偏好",
-            "谁将是主要驾驶人",
-            "购车预算",
-            "平时乘坐人数",
-            "对车辆配置的要求",
-            "没有询问过我购车的需求"
-          ]
-        }
-      ],
+      "legend": {
+        "show": true,
+        "data": [
+          "不满意",
+          "一般",
+          "满意"
+        ]
+      },
+      "xAxis": null,
+      "yAxis": null,
       "series": [
         {
-          "type": "bar",
+          "type": "pie",
           "data": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
+            {
+              "value": null,
+              "name": "不满意",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "一般",
+              "sampleSize": null
+            },
+            {
+              "value": null,
+              "name": "满意",
+              "sampleSize": null
+            }
           ]
         }
       ]
