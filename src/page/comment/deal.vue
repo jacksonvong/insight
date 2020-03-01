@@ -1,5 +1,5 @@
 <template>
-  <div class="comment-trial">
+  <div class="comment-deal">
     <iw-banner title="试乘试驾评价"/>
     <div class="main-content">
       <iw-search
@@ -7,8 +7,8 @@
       />
       <a-card title="查询结果">
         <div class="iw-card-container iw-row">
-          <div v-for="(item, keyword) in trialData" :key="keyword" class="iw-card-container iw-col12">
-            <iw-card :title="item.title" style="width: 100%; height: 100%;">
+          <div class="iw-card-container iw-col12">
+            <iw-card v-for="(item, keyword) in leftData" :key="keyword" :title="item.title" style="width: 100%;">
               <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 180px;" />
               </template>
@@ -16,6 +16,23 @@
                 <iw-simple-box :data="item.data" :show-number="false" :label-width="200" style="padding-top: 10px;" />
               </template>
               <iw-empty v-else :status="item.status" style="height:200px;" />
+            </iw-card>
+          </div>
+          <div class="iw-card-container iw-col12">
+            <iw-card v-for="(item, keyword) in rightData" :key="keyword" :title="item.title" style="width: 100%;">
+              <div v-if=" item.children" class="iw-card-container">
+                <div v-for="(item2, keyword2) in item.children" :key="item2.key" class="iw-card-container iw-col12">
+                  <iw-card-inner :title="item2.title" >
+                    <template v-if="item2.data&&pieKeys.includes(keyword2)">
+                      <iw-chart :options="item2.data" style="height: 180px;" />
+                    </template>
+                    <template v-else-if="item2.data">
+                      <iw-simple-box :data="item2.data" :show-number="false" :label-width="150" style="padding-top: 10px;" />
+                    </template>
+                    <iw-empty v-else :status="item2.status" style="height:200px;" />
+                  </iw-card-inner>
+                </div>
+              </div>
             </iw-card>
           </div>
         </div>
@@ -28,6 +45,7 @@
 import { Card } from 'ant-design-vue'
 import IwBanner from '@/components/banner/index'
 import IwCard from '@/page/components/card'
+import IwCardInner from '@/page/components/card-inner'
 import IwSearch from '@/page/components/search'
 import IwSimpleBox from '@/page/components/simple-box'
 import { getEchartOption } from '@/api/common'
@@ -40,6 +58,7 @@ export default {
     ACard: Card,
     IwBanner,
     IwCard,
+    IwCardInner,
     IwSearch,
     IwChart,
     IwSimpleBox
@@ -47,11 +66,26 @@ export default {
   data() {
     return {
       dataForm: {},
-      pieKeys: ['a'],
-      trialData: {
-        a: { key: 10080, title: '试乘试驾满意度', status: 0, data: {}},
-        b: { key: 10079, title: '试乘试驾情况', status: 0, data: {}},
-        c: { key: 10081, title: '不满意的原因', status: 0, data: {}}
+      pieKeys: ['c1', 'd1'],
+      leftData: {
+        a: { key: 10082, title: '交易过程满意度', status: 0, data: {}},
+        b: { key: 10083, title: '不满意的原因', status: 0, data: {}}
+      },
+      rightData: {
+        c: {
+          title: '对赠送内容评价',
+          children: {
+            c1: { key: 10085, title: '是否遵守承诺', status: 0, data: {}},
+            c2: { key: 10084, title: '是否遵守承诺', status: 0, data: {}}
+          }
+        },
+        d: {
+          title: '对金融贷款评价',
+          children: {
+            d1: { key: 10086, title: '金融贷款满意度', status: 0, data: {}},
+            d2: { key: 10087, title: '不满意的原因', status: 0, data: {}}
+          }
+        }
       }
     }
   },
@@ -65,13 +99,31 @@ export default {
     },
     // API
     getData() {
-      for (const keyword in this.trialData) {
-        const item = this.trialData[keyword]
+      for (const keyword in this.leftData) {
+        const item = this.leftData[keyword]
         const params = Object.assign({}, this.dataForm, { key: item.key })
-        this.getEchartOption(params, 'trial', keyword)
+        this.getEchartOption(params, 'left', keyword)
+      }
+      for (const keyword in this.rightData) {
+        const item = this.rightData[keyword]
+        if (item.children) {
+          for (const keyword2 in item.children) {
+            const child = item.children[keyword2]
+            const params = Object.assign({}, this.dataForm, { key: child.key })
+            this.getEchartOption(params, 'right', keyword, keyword2)
+          }
+        }
       }
     },
-    getEchartOption(params, group, keyword) {
+    getEchartOption(params, group, keyword, keyword2) {
+      let obj = {}
+      if (keyword && keyword2) {
+        obj = this[group + 'Data'][keyword]['children'][keyword2]
+      } else if (keyword) {
+        obj = this[group + 'Data'][keyword]
+      } else {
+        obj = this[group + 'Data']
+      }
       return new Promise((resolve, reject) => {
         getEchartOption(params).then(res => {
           const data = res.data || {}
@@ -88,14 +140,14 @@ export default {
                 legend: { show: false },
                 showTooltip: false
               }).getChart()
-            this.$set(this[group + 'Data'][keyword], 'data', option)
+            this.$set(obj, 'data', option)
           } else {
-            this.$set(this[group + 'Data'][keyword], 'data', data.option)
+            this.$set(obj, 'data', data.option)
           }
-          this.$set(this[group + 'Data'][keyword], 'status', 200)
+          this.$set(obj, 'status', 200)
           resolve(res)
         }).catch(res => {
-          this.$set(this[group + 'Data'][keyword], 'status', 500)
+          this.$set(obj, 'status', 500)
           reject(res)
         })
       })
@@ -105,18 +157,21 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.comment-trial {
+.comment-deal {
   .iw-card-container {
     display: flex;
     flex-wrap: wrap;
+    &.iw-col8 {
+      &:first-child { .iw-card-inner { padding-left: 0;}}
+      &:last-child { .iw-card-inner { padding-right: 0;}}
+    }
     &.iw-col12 {
-      flex: 0 0 50%;
-    }
-    &.iw-col6 {
-      flex: 0 0 25%;
-    }
-    &.iw-card-col9 {
-      flex: 0 0 37.5%;
+      &:first-child {
+        .iw-card-inner { padding: 0; }
+      }
+      &:last-child {
+        .iw-card-inner { padding-right: 0; }
+      }
     }
   }
 }

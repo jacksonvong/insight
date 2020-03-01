@@ -29,11 +29,11 @@
         {
           "type": "bar",
           "data": [
-            null,
-            null,
-            null,
-            null,
-            null
+            800,
+            700,
+            300,
+            400,
+            200
           ]
         }
       ]

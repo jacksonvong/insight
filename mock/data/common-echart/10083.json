@@ -30,12 +30,12 @@
         {
           "type": "bar",
           "data": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
+            456,
+            252,
+            675,
+            488,
+            388,
+            287
           ]
         }
       ]
