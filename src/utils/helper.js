@@ -31,6 +31,29 @@ export function arr2table(_array_tree, son = 'children', leaf = false, level = 0
   return tree
 }
 
+export function menusFormatter(menus = []) {
+  const data = []
+  if (menus instanceof Array) {
+    for (const i in menus) {
+      const menu = menus[i]
+      const _menu = {}
+      let children = []
+      for (const f in menu) {
+        if (!['menuTreeNodes', 'funcs'].includes(f)) {
+          _menu[f] = menu[f]
+        } else {
+          children = menu[f]
+        }
+      }
+      if (children && children.length) {
+        _menu['children'] = menusFormatter(children)
+      }
+      data.push(_menu)
+    }
+  }
+  return data
+}
+
 export function pathFormatter(path, url) {
   const str = '\/sgm|\/setva|\/setvb|\/setvc|\/setvd|\/setve|\/setvf|\/setvg|\/setvh|\/detail|\/list|\/\\d+'
   return path.replace(new RegExp('(' + str + ')', 'g'), '')

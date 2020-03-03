@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     changeDataForm(form) {
-      console.log(form)
+      this.getData()
     },
     // API
     getData() {

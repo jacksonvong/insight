@@ -1119,7 +1119,7 @@ export class Chart {
             normal: {
               position: 'inner',
               formatter: (param, config) => {
-                return param.data.name + '\n' + (param.data.percent < 0.0495 ? '' : toPercent(param.data.percent, 1))
+                return param.data.name + '\n' + (/* param.data.percent < 0.0495 ? '' : */toPercent(param.data.percent, 1))
               },
               textStyle: {
                 color: '#fff',

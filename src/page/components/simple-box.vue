@@ -1,7 +1,7 @@
 <template>
   <div v-if="data.series" class="iw-charts-box">
     <div :style="'width: ' + (!isNaN(labelWidth) ? (labelWidth + 'px') : 'auto')" class="iw-charts-left">
-      <div v-for="(item, key) in yAxisData" :key="key" class="iw-charts-name">{{ item }}</div>
+      <div v-for="(item, key) in yAxisData" :key="key" :title="item" class="iw-charts-name">{{ item }}</div>
     </div>
     <div class="iw-charts-center">
       <div v-for="(item, key) in seriesData" :key="key" :title="item.value" class="iw-charts-bar-wrap" >
@@ -49,7 +49,7 @@ export default {
       const data = this.data.series instanceof Array ? this.data.series[0].data : this.data.series.data
       const maxValue = this.maxValue
       return data.map(item => {
-        const value = (item && item.value) ? item.value : item
+        const value = item.hasOwnProperty('value') ? item.value : item
         const i = {
           ...item,
           value: this.isPercent ? toPercent(value) : toThousand(value),
@@ -67,7 +67,6 @@ export default {
     }
   },
   created() {
-    console.log(this.data)
   },
   methods: {
     toPercent() {

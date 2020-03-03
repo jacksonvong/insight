@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/insight/',
     proxyTable: {
       '/api': {
-        target: 'https://i.way-s.cn',
+        target: 'http://i.ways.cn',
         changeOrigin: true
       }
     },

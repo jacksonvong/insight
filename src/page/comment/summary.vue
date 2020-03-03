@@ -1,31 +1,31 @@
 <template>
   <div class="comment-summary">
-    <iw-banner title="评价总体"/>
+    <iw-banner/>
     <div class="main-content">
       <iw-search
         @change="changeSearchForm"
       />
       <a-card title="查询结果">
-        <div class="iw-card-container iw-row">
-          <div v-for="(item, keyword) in summaryData" :key="keyword" class="iw-card-container iw-col12">
-            <iw-card :title="item.title" style="width: 100%; height: 100%;">
+        <a-row :gutter="20" class="iw-card-container iw-row">
+          <a-col v-for="(item, keyword) in summaryData" :span="12" :key="keyword" class="iw-card-container">
+            <iw-card :title="item.title" style="width: 100%;">
               <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 180px;" />
               </template>
               <template v-else-if="item.data.series&&item.data.series.length">
-                <iw-simple-box :data="item.data" :show-number="false" :label-width="200" style="padding-top: 10px;" />
+                <iw-simple-box :data="item.data" :show-number="false" :label-width="200" is-percent style="padding-top: 10px;" />
               </template>
               <iw-empty v-else :status="item.status" style="height:200px;" />
             </iw-card>
-          </div>
-        </div>
+          </a-col>
+        </a-row>
       </a-card>
     </div>
   </div>
 </template>
 
 <script>
-import { Card } from 'ant-design-vue'
+import { Card, Row, Col } from 'ant-design-vue'
 import IwBanner from '@/components/banner/index'
 import IwCard from '@/page/components/card'
 import IwSearch from '@/page/components/search'
@@ -38,6 +38,8 @@ export default {
   name: 'Summary',
   components: {
     ACard: Card,
+    ARow: Row,
+    ACol: Col,
     IwBanner,
     IwCard,
     IwSearch,
@@ -73,7 +75,6 @@ export default {
       }
     },
     getEchartOption(params, group, keyword) {
-      console.log(keyword)
       return new Promise((resolve, reject) => {
         getEchartOption(params).then(res => {
           const data = res.data || {}
@@ -91,7 +92,6 @@ export default {
                 showTooltip: false
               }).getChart()
           )
-          console.log(this[group + 'Data'][keyword])
           this.$set(this[group + 'Data'][keyword], 'status', 200)
           resolve(res)
         }).catch(res => {
@@ -105,19 +105,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.comment-summary {
-  .iw-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    &.iw-col12 {
-      flex: 0 0 50%;
-    }
-    &.iw-col6 {
-      flex: 0 0 25%;
-    }
-    &.iw-card-col9 {
-      flex: 0 0 37.5%;
-    }
-  }
-}
 </style>

@@ -8,16 +8,21 @@
       />
       <a-card title="查询结果">
         <div class="iw-card-container iw-row">
-          <div class="iw-card-container  iw-col iw-col2">
+          <div class="iw-card-container  iw-col iw-col12">
             <iw-card title="信息接触媒体" style="width: 100%;" body-style="height: 500px;">
               <iw-table-box :data="infoData.data" :table-data="orderData.data" />
             </iw-card>
           </div>
-          <div class="iw-card-container iw-col iw-col2">
+          <div class="iw-card-container iw-col iw-col12">
             <iw-card v-for="(item, key) in otherData" :key="key" :title="item.title">
               <iw-chart v-if="item.data&&item.key==='websit'" :options="item.data" />
               <iw-simple-box v-else-if="item.data" :data="item.data" is-percent />
               <iw-empty v-else :status="item.status" style="height: 180px;" />
+            </iw-card>
+          </div>
+          <div class="iw-card-container  iw-col iw-col8">
+            <iw-card title="促购力最大的信息渠道" style="width: 100%;" body-style="height: 100%;">
+              <iw-simple-box :data="purchaseData.data" :label-width="140" is-percent />
             </iw-card>
           </div>
         </div>
@@ -58,7 +63,7 @@ export default {
       dataForm: {},
       infoData: { key: 10062, title: '信息接触媒体', status: 0, data: {}},
       orderData: { key: 10063, title: '信息接触媒体', status: 0, data: {}},
-      mediaData: { key: 10064, title: '促购力最大的信息渠道', status: 0, data: {}},
+      purchaseData: { key: 10064, title: '促购力最大的信息渠道', status: 0, data: {}},
       otherData: { // 三个图
         websit: { key: 10065, title: '门户网站', status: 0, data: {}},
         car: { key: 10066, title: '汽车垂直网站/APP', status: 0, data: {}},
@@ -80,7 +85,7 @@ export default {
     getData() {
       this.getContactOrder(Object.assign({}, this.dataForm, { key: this.orderData.key }), 'order')
       this.getEchartOption(Object.assign({}, this.dataForm, { key: this.infoData.key }), 'info')
-      this.getEchartOption(Object.assign({}, this.dataForm, { key: this.mediaData.key }), 'media')
+      this.getEchartOption(Object.assign({}, this.dataForm, { key: this.purchaseData.key }), 'purchase')
       for (const keyword in this.otherData) {
         const item = this.otherData[keyword]
         const params = Object.assign({}, this.dataForm, { key: item.key })
@@ -136,13 +141,16 @@ export default {
   .iw-card-container {
     display: flex;
     flex-wrap: wrap;
-    &.iw-col2 {
+    &.iw-col12 {
       flex: 0 0 50%;
       &:last-child {
         .iw-card {
           margin: 0 20px 20px 0;
         }
       }
+    }
+    &.iw-col8 {
+      flex: 0 0 33.33%;
     }
   }
 }

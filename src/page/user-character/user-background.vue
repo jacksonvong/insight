@@ -4,8 +4,9 @@
     <div class="main-content">
       <iw-search
         @change="changeDataForm"
+        @download="onDownload"
       />
-      <a-card title="查询结果">
+      <a-card title="查询结果" class="downloadPart">
         <div class="iw-card-container">
           <iw-card title="性别" extra="男性：60%">
             <iw-chart :options="sexData" />
@@ -70,6 +71,7 @@ import ResultUnit from '@/page/components/ResultUnit'
 import { getSex, getAge, getEducation, getFamily, getIndustry, getPosition, getIncome, getValue, getHomeCarNumber, getDetailCar } from '@/api/user-background'
 import { Chart } from '@/utils/echarts'
 import TablePath from '@/page/components/table-path'
+import { downloadMixin } from '@/utils/mixin'
 
 export default {
   name: 'UserBackground',
@@ -95,6 +97,7 @@ export default {
     ResultUnit,
     TablePath
   },
+  mixins: [downloadMixin],
   data() {
     return {
       sexData: {},

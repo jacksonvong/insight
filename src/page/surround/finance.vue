@@ -4,8 +4,8 @@
     <div class="main-content">
       <iw-search @change="changeSearchForm" />
       <a-card title="查询结果">
-        <div class="iw-card-container">
-          <div class="iw-card-container iw-col12">
+        <a-row :gutter="20" class="iw-card-container">
+          <a-col :span="12" class="iw-card-container">
             <iw-card title="金融产品" style="width: 100%;" body-style="height: 500px;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in financeData" :key="item.key" class="iw-card-container iw-col8">
@@ -14,15 +14,15 @@
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
                     <template v-else-if="item.data">
-                      <iw-simple-box :data="item.data" :show-number="false" :label-width="70" style="padding-top: 10px; height: 200px;" />
+                      <iw-simple-box :data="item.data" :show-number="false" :label-width="70" is-percent style="padding-top: 10px; height: 200px;" />
                     </template>
                     <iw-empty v-else :status="item.status" style="height:200px;" />
                   </iw-card-inner>
                 </div>
               </div>
             </iw-card>
-          </div>
-          <div class="iw-card-container iw-col12">
+          </a-col>
+          <a-col :span="12" class="iw-card-container">
             <iw-card title="保险产品" style="width: 100%; height: auto;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in insuranceData" :key="item.key" class="iw-card-container iw-col8">
@@ -31,7 +31,7 @@
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
                     <template v-else-if="item.data">
-                      <iw-simple-box :data="item.data" :show-number="false" :label-width="100" style="padding-top: 10px;" />
+                      <iw-simple-box :data="item.data" :show-number="false" :label-width="100" is-percent style="padding-top: 10px;" />
                     </template>
                     <iw-empty v-else :status="item.status" style="height:200px;" />
                   </iw-card-inner>
@@ -46,22 +46,22 @@
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
                     <template v-else-if="item.data">
-                      <iw-simple-box :data="item.data" :show-number="false" :label-width="100" style="padding-top: 10px;" />
+                      <iw-simple-box :data="item.data" :show-number="false" :label-width="100" is-percent style="padding-top: 10px;" />
                     </template>
                     <iw-empty v-else :status="item.status" style="height:200px;" />
                   </iw-card-inner>
                 </div>
               </div>
             </iw-card>
-          </div>
-        </div>
+          </a-col>
+        </a-row>
       </a-card>
     </div>
   </div>
 </template>
 
 <script>
-import { Card } from 'ant-design-vue'
+import { Card, Row, Col } from 'ant-design-vue'
 import IwBanner from '@/components/banner/index'
 import IwCard from '@/page/components/card'
 import IwCardInner from '@/page/components/card-inner'
@@ -75,6 +75,8 @@ export default {
   name: 'Finance',
   components: {
     ACard: Card,
+    ARow: Row,
+    ACol: Col,
     IwBanner,
     IwCard,
     IwChart,
@@ -163,22 +165,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.finance {
-  .iw-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    &.iw-col8 {
-      &:first-child { .iw-card-inner { padding-left: 0;}}
-      &:last-child { .iw-card-inner { padding-right: 0;}}
-    }
-    &.iw-col12 {
-      &:first-child {
-        .iw-card-inner { padding: 0; }
-      }
-      &:last-child {
-        // padding-left: 18px
-      }
-    }
-  }
-}
 </style>

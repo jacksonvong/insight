@@ -6,43 +6,47 @@
         @change="changeSearchForm"
       />
       <a-card title="查询结果">
-        <div class="iw-card-container iw-row">
-          <div class="iw-card-container iw-col12">
-            <iw-card v-for="(item, keyword) in leftData" :key="keyword" :title="item.title" style="width: 100%;">
-              <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
-                <iw-chart :options="item.data" style="height: 180px;" />
-              </template>
-              <template v-else-if="item.data.series&&item.data.series.length">
-                <iw-simple-box :data="item.data" :show-number="false" :label-width="200" style="padding-top: 10px;" />
-              </template>
-              <iw-empty v-else :status="item.status" style="height:200px;" />
-            </iw-card>
-          </div>
-          <div class="iw-card-container iw-col12">
-            <iw-card v-for="(item, keyword) in rightData" :key="keyword" :title="item.title" style="width: 100%;">
-              <div v-if=" item.children" class="iw-card-container">
-                <div v-for="(item2, keyword2) in item.children" :key="item2.key" class="iw-card-container iw-col12">
-                  <iw-card-inner :title="item2.title" >
-                    <template v-if="item2.data&&pieKeys.includes(keyword2)">
-                      <iw-chart :options="item2.data" style="height: 180px;" />
-                    </template>
-                    <template v-else-if="item2.data">
-                      <iw-simple-box :data="item2.data" :show-number="false" :label-width="150" style="padding-top: 10px;" />
-                    </template>
-                    <iw-empty v-else :status="item2.status" style="height:200px;" />
-                  </iw-card-inner>
-                </div>
-              </div>
-            </iw-card>
-          </div>
-        </div>
+        <a-row :gutter="20" class="iw-card-container iw-row">
+          <a-col :span="12">
+            <div v-for="(item, keyword) in leftData" :key="keyword" class="iw-card-container">
+              <iw-card :title="item.title" style="width: 100%;">
+                <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
+                  <iw-chart :options="item.data" style="height: 180px;" />
+                </template>
+                <template v-else-if="item.data.series&&item.data.series.length">
+                  <iw-simple-box :data="item.data" :show-number="false" :label-width="200" style="padding-top: 10px;" />
+                </template>
+                <iw-empty v-else :status="item.status" style="height:200px;" />
+              </iw-card>
+            </div>
+          </a-col>
+          <a-col :span="12">
+            <div v-for="(item, keyword) in rightData" :key="keyword" class="iw-card-container">
+              <iw-card :title="item.title" style="width: 100%;">
+                <a-row v-if=" item.children" class="iw-card-container">
+                  <a-col v-for="(item2, keyword2) in item.children" :span="12" :key="item2.key" class="iw-card-container">
+                    <iw-card-inner :title="item2.title" >
+                      <template v-if="item2.data&&pieKeys.includes(keyword2)">
+                        <iw-chart :options="item2.data" style="height: 180px;" />
+                      </template>
+                      <template v-else-if="item2.data">
+                        <iw-simple-box :data="item2.data" :show-number="false" :label-width="150" style="padding-top: 10px;" />
+                      </template>
+                      <iw-empty v-else :status="item2.status" style="height:200px;" />
+                    </iw-card-inner>
+                  </a-col>
+                </a-row>
+              </iw-card>
+            </div>
+          </a-col>
+        </a-row>
       </a-card>
     </div>
   </div>
 </template>
 
 <script>
-import { Card } from 'ant-design-vue'
+import { Card, Row, Col } from 'ant-design-vue'
 import IwBanner from '@/components/banner/index'
 import IwCard from '@/page/components/card'
 import IwCardInner from '@/page/components/card-inner'
@@ -56,6 +60,8 @@ export default {
   name: 'Deal',
   components: {
     ACard: Card,
+    ARow: Row,
+    ACol: Col,
     IwBanner,
     IwCard,
     IwCardInner,
@@ -66,7 +72,7 @@ export default {
   data() {
     return {
       dataForm: {},
-      pieKeys: ['c1', 'd1'],
+      pieKeys: ['a', 'c1', 'd1'],
       leftData: {
         a: { key: 10082, title: '交易过程满意度', status: 0, data: {}},
         b: { key: 10083, title: '不满意的原因', status: 0, data: {}}
@@ -128,7 +134,7 @@ export default {
         getEchartOption(params).then(res => {
           const data = res.data || {}
           if (data.option.series && data.option.series.length) {
-            const option = (this.pieKeys.includes(keyword))
+            const option = (this.pieKeys.includes(keyword) || this.pieKeys.includes(keyword2))
               ? new Chart('pie', data.option, {
                 customColor: ['#467BF9', '#21D1D9'],
                 backgroundColor: 'transparent'

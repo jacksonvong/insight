@@ -4,18 +4,18 @@
     <svg ref="curve-part-svg" class="curve-part-svg" aria-hidden="true">
       <line
         v-for="( item, index ) in data"
-        :key="index"
+        :key="index + '_' + Date.now() + Math.random()"
         :x1="0"
         :y1="index * 24 + 6"
         :x2="currBoxWidth"
         :y2="index * 24 + 6"
         :style="lineStyle"/>
       <template v-for="( item, index ) in (data.length - 1)">
-        <path :key="index" :d="getCurveD(item,index,data)" :style="curveStyle"/>
+        <path :key="index + '_' + Date.now() + Math.random()" :d="getCurveD(item,index,data)" :style="curveStyle"/>
       </template>
       <circle
         v-for="( item, index ) in data"
-        :key="index"
+        :key="index + '_' + Date.now() + Math.random()"
         :cx="getPointPos(item,index).x"
         :cy="getPointPos(item,index).y"
         :style="pointStyle"

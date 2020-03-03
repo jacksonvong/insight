@@ -4,6 +4,7 @@ import { checkHealth, sendMail } from '@/api/index'
 import { getUser } from '@/utils/auth'
 import moment from 'moment'
 import $ from 'jquery'
+import html2canvas from 'html2canvas'
 
 export function checkApiHealth() {
   return new Promise((resolve, reject) => {
@@ -75,4 +76,17 @@ export function checkApiHealth() {
       reject(error)
     })
   })
+}
+
+export const downloadMixin = {
+  methods: {
+    onDownload(selector, options) {
+      html2canvas(document.querySelector(selector || '.downloadPart > .ant-card-body')).then(function(canvas) {
+        const link = document.createElement('a')
+        link.download = `${Date.now()}.png`
+        link.href = canvas.toDataURL('image/png')
+        link.click()
+      })
+    }
+  }
 }

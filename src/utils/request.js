@@ -144,6 +144,7 @@ service.interceptors.request.use(
     }
     config.params = config.params || {}
     config.params.t = (new Date()).valueOf()
+    config.params.language = store.state.app.language
     return config
   },
   error => {

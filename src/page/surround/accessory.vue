@@ -2,9 +2,7 @@
   <div class="accessory">
     <iw-banner title="精品附件"/>
     <div class="main-content">
-      <a-card>
-        <iw-search @change="changeSearchForm" />
-      </a-card>
+      <iw-search @change="changeSearchForm" />
       <a-card title="查询结果">
         <div class="iw-card-container">
           <iw-card v-for="(item, keyword) in accessoryData" :key="item.key" :title="item.title" body-style="height: auto;">
@@ -13,7 +11,7 @@
                 <iw-chart :options="item.data" style="height: 180px;" />
               </template>
               <template v-else-if="item.data">
-                <iw-simple-box :data="item.data" :show-number="false" :label-width="100" style="height: 180px;" />
+                <iw-simple-box :data="item.data" :show-number="false" :label-width="100" is-percent style="height: 180px;" />
               </template>
               <iw-empty v-else :status="item.status" style="height: 180px;" />
             </div>
@@ -111,4 +109,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.accessory {
+  .iw-card {
+    margin: 0 10px 20px 10px;
+  }
+}
 </style>

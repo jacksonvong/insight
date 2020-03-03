@@ -7,8 +7,9 @@
         :tab-key="tabKey"
         @onTabChange="changeTab"
         @change="changeDataForm"
+        @download="onDownload"
       />
-      <a-card v-if="tabKey === '1'" title="查询结果">
+      <a-card v-if="tabKey === '1'" title="查询结果" class="downloadPart">
         <div class="iw-card-container">
           <iw-card-extend title="升级品牌来源" extra="TOP10">
             <top10-box :data="top10Data"/>
@@ -40,26 +41,26 @@
           </result-unit>
         </div>
       </a-card>
-      <a-card v-else title="查询结果">
+      <a-card v-else title="查询结果" class="downloadPart">
         <div class="iw-card-container">
           <iw-card title="置换前了解信息渠道" extra="">
-            <iw-simple-box :data="barData"/>
+            <iw-simple-box :data="infoData"/>
           </iw-card>
           <iw-card title="置换渠道选择原因" extra="">
-            <iw-simple-box :data="barData"/>
+            <iw-simple-box :data="chooseData"/>
           </iw-card>
         </div>
         <div class="iw-card-container">
           <iw-card title="二手车评估方法" extra="">
-            <iw-simple-box :data="barData"/>
+            <iw-simple-box :data="usedCarReasonData"/>
           </iw-card>
           <iw-card-extend width="600px" title="二手车出售渠道" extra="">
             <div>
               <div class="iw-card-container">
-                <iw-simple-box :data="barData" style="width: calc(50% - 10px);margin-right: 10px"/>
+                <iw-simple-box :data="saleChannelData" style="width: calc(50% - 10px);margin-right: 10px"/>
                 <div class="reason-box" style="width: calc(50% - 10px);margin-left: 10px">
                   <div class="reason-label">原因</div>
-                  <iw-simple-box :data="barData" />
+                  <iw-simple-box :data="saleReason" />
                 </div>
               </div>
             </div>
@@ -85,9 +86,11 @@ import IwSimpleBox from '@/page/components/simple-box'
 import IwSimpleBoxExtend from '@/page/components/simple-box-extend'
 import ResultUnit from '@/page/components/ResultUnit'
 import Top10Box from '@/page/components/top10-box'
-import { getTop10, getMileage, getUsedCar, getDealMethods, getBar } from '@/api/old-car'
+import { getTop10, getMileage, getUsedCar, getDealMethods } from '@/api/old-car'
 import { Chart } from '@/utils/echarts'
 import UpdatePath from '@/page/user-character/old-car/update-path.vue'
+import { getDetailReason } from '@/api/user-preference'
+import { downloadMixin } from '@/utils/mixin'
 
 export default {
   name: 'OldCar',
@@ -114,6 +117,7 @@ export default {
     IwSimpleBoxExtend,
     UpdatePath
   },
+  mixins: [downloadMixin],
   data() {
     return {
       tabList: [
@@ -128,27 +132,43 @@ export default {
       usedCarData: {},
       // 处理方法
       dealMethodsData: {},
-      barData: {}
+      // 置换前了解信息渠道
+      infoData: {},
+      // 置换渠道选择原因
+      chooseData: {},
+      // 二手车评估方法
+      usedCarReasonData: {},
+      // 二手车出售渠道
+      saleChannelData: {},
+      // 二手车出售渠道 - 原因
+      saleReason: {}
     }
   },
   created() {
     this.getData()
   },
   methods: {
+    changeDataForm(params) {
+      this.getData(params)
+    },
     changeTab(key) {
       this.tabKey = key
     },
-    getData() {
-      this.getTop10()
-      this.getMileage()
-      this.getUsedCar()
-      this.getDealMethods()
-      this.getBar()
+    getData(params) {
+      this.getTop10(params)
+      this.getMileage(params)
+      this.getUsedCar(params)
+      this.getDealMethods(params)
+      this.getInfoData(params)
+      this.getChooseData(params)
+      this.getUsedCarReasonData(params)
+      this.getSaleChannelData(params)
+      this.getSaleReason(params)
     },
     getTop10(params) {
       return getTop10(params).then(res => {
         const data = res.data || {}
-        this.top10Data = data.top10
+        this.top10Data = data.answerList
       })
     },
     getMileage(params) {
@@ -172,10 +192,34 @@ export default {
         }).getChart()
       })
     },
-    getBar(params) {
-      return getBar(params).then(res => {
+    getInfoData(params) {
+      return getDetailReason(params, '11365').then(res => {
         const data = res.data || {}
-        this.barData = data
+        this.infoData = data.option
+      })
+    },
+    getChooseData(params) {
+      return getDetailReason(params, '11364').then(res => {
+        const data = res.data || {}
+        this.chooseData = data.option
+      })
+    },
+    getUsedCarReasonData(params) {
+      return getDetailReason(params, '11371').then(res => {
+        const data = res.data || {}
+        this.usedCarReasonData = data.option
+      })
+    },
+    getSaleChannelData(params) {
+      return getDetailReason(params, '11368').then(res => {
+        const data = res.data || {}
+        this.saleChannelData = data.option
+      })
+    },
+    getSaleReason(params) {
+      return getDetailReason(params, '11369').then(res => {
+        const data = res.data || {}
+        this.saleReason = data.option
       })
     }
   }

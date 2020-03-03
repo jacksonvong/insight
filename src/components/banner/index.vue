@@ -2,7 +2,7 @@
   <div class="banner-box">
     <div class="banner">
       <div class="banner-left">
-        <h2>{{ title }}</h2>
+        <h2>{{ menu ? menu.title : title }}</h2>
         <div class="expand">
           <slot name="left" />
         </div>
@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+import { arr2table, menusFormatter } from '@/utils/helper'
 export default {
   name: 'IwBanner',
   props: {
@@ -23,7 +24,13 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      menu: undefined
+    }
+  },
+  mounted() {
+    const menus = arr2table(menusFormatter(this.$store.getters.menus))
+    this.menu = menus.find(item => item.url === this.$route.path)
   },
   methods: {
   }

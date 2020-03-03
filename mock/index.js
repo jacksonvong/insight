@@ -35,7 +35,7 @@ const proxy = {
   'POST /api/consumer-insight/common/get-vehicle-types': fromJSONFile('common-option/get-vehicle-types'),
 
   'POST /api/consumer-insight/overview/get-purchase-data': fromJSONFile('overview/get-purchase-data'),
-  'POST /api/consumer-insight/overview/get-all-functions': fromJSONFile('overview/get-all-functions'),
+  // 'POST /api/consumer-insight/overview/get-all-functions': fromJSONFile('overview/get-all-functions'),
   'POST /api/consumer-insight/overview/apply-buy': fromJSONFile('overview/apply-buy'),
   'POST /api/consumer-insight/overview/get-submodel-data': fromJSONFile('overview/get-submodel-data'),
   'POST /api/consumer-insight/overview/get-city-data': fromJSONFile('overview/get-city-data'),
@@ -65,8 +65,8 @@ const proxy = {
   'POST /api/consumer-insight/old-car/get-used-car': fromJSONFile('user-character/old-car/get-used-car'),
   'POST /api/consumer-insight/old-car/get-deal-methods': fromJSONFile('user-character/old-car/get-deal-methods'),
 
-  'POST /api/consumer-insight/old-car/get-bar': fromJSONFile('user-character/old-car/get-bar'),
+  'POST /api/consumer-insight/old-car/get-bar': fromJSONFile('user-character/old-car/get-bar')
   // 周边产品需求
-  'POST /api/consumer-insight/common-echart/get-echart-option': fromJSONFile('common-echart/10001')
+  // 'POST /api/consumer-insight/common-echart/get-echart-option': fromJSONFile('common-echart/10001')
 }
 module.exports = proxy

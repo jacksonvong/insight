@@ -9,10 +9,10 @@
       :key="index"
       :class="{ 'selected': currKey === index }"
       class="top10-item"
-      @click="onChangeItem(index , item.name)">
+      @click="onChangeItem(index , item)">
       <span class="top10-left">
         <span>{{ index + 1 }}. {{ item.name }}</span>
-        <span>{{ item.data }}%</span>
+        <span>{{ toPercent(item.value) }}</span>
       </span>
       <span class="top10-icon"><a-icon type="right"/></span>
     </div>
@@ -21,6 +21,7 @@
 
 <script>
 import { Icon } from 'ant-design-vue'
+import { toPercent } from '@/utils/filters'
 
 export default {
   name: 'Top10Box',
@@ -44,6 +45,9 @@ export default {
     onChangeItem(key, item) {
       this.currKey = key
       this.$emit('change', item)
+    },
+    toPercent() {
+      return toPercent(...arguments)
     }
   }
 }

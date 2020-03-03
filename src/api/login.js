@@ -55,7 +55,7 @@ export function getListUserFuncs() { // 所有产品列表
 
 export function getListMenuByFunc(params) { // 单个产品菜单
   return request({
-    url: '/iways-front/func/listMenuByFunc',
+    url: '/iways-front/func/listMenuByFunc?funcId=505',
     method: 'get',
     params: params
   })

@@ -1,13 +1,17 @@
 <template>
   <div class="overview">
     <!-- 0--顶部筛选条件 -->
-    <iw-banner :title="`概览`"/>
+    <iw-banner/>
     <div class="main-content">
       <iw-search
         :show-search="tabKey=='2'"
         :tab-list="tabList"
         :tab-key="tabKey"
         :post-disabled="selectedRowKeys.length==0"
+        :show-module="tabKey=='2'"
+        :show-contrast="false"
+        :show-download="false"
+        :show-apply-buy="true"
         styles="margin-bottom: 0; border-bottom: 0; "
         @onTabChange="changeTab"
         @change="changeDataForm"
@@ -15,7 +19,7 @@
       />
       <a-card v-if="tabKey=='1'" :body-style="{padding: '0'}" style="border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
         <div class="overview-table_total">
-          <span>样本量合计：{{ purchaseNum }}</span>
+          <span>{{ $t('overview.sampleNumTotal') }}：{{ purchaseNum }}</span>
         </div>
         <div class="overview-table">
           <div class="ant-table-body">
@@ -79,7 +83,7 @@
       </a-card>
       <a-card v-if="tabKey=='2'" :body-style="{padding: '0'}" style="border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
         <div class="overview-table_total">
-          <span>样本量合计：{{ sampleNum }}</span>
+          <span>{{ $t('overview.sampleNumTotal') }}：{{ sampleNum }}</span>
         </div>
         <div class="overview-table">
           <div class="ant-table-body">
@@ -173,36 +177,6 @@ import IwBanner from '@/components/banner/index'
 import IwSearch from '@/page/components/search'
 import { getPurchaseData, getSubModelData, getCityData, getAllFunctions, applyBuy } from '@/api/overview'
 
-const columns = [{
-  title: '模块',
-  dataIndex: 'module'
-}, {
-  title: '月份',
-  dataIndex: 'month'
-}, {
-  title: '车型',
-  dataIndex: 'subModel'
-}, {
-  title: '城市',
-  dataIndex: 'city'
-}, {
-  title: '现有样本量',
-  dataIndex: 'sampleNum',
-  scopedSlots: { customRender: 'sampleNum' }
-}]
-
-const innerColumns = [{
-  title: '模块',
-  dataIndex: 'module'
-}, {
-  title: '月份',
-  dataIndex: 'month'
-}, {
-  title: '样本量',
-  dataIndex: 'sampleNum',
-  scopedSlots: { customRender: 'sampleNum' }
-}]
-
 export default {
   name: 'Overview',
   components: {
@@ -217,15 +191,10 @@ export default {
   data() {
     return {
       tabList: [
-        {
-          key: '1',
-          tab: '我已购买'
-        }, {
-          key: '2',
-          tab: '全部功能'
-        }
+        // { key: '1', tab: this.$t('overview.own') },
+        { key: '2', tab: this.$t('overview.all') }
       ],
-      tabKey: '1',
+      tabKey: '2',
       dataForm: {},
       status: {
         purchase: 200,
@@ -236,7 +205,6 @@ export default {
       innerPurchaseData: [],
       sampleList: [],
       sampleNum: 0,
-      columns,
       checkAll: false,
       selectedRowKeys: [],
 
@@ -246,8 +214,37 @@ export default {
       },
       dataTime: undefined,
       confirmLoading: false,
-      innerColumns,
-      innerData: []
+      innerData: [],
+
+      columns: [{
+        title: this.$t('overview.module'),
+        dataIndex: 'module'
+      }, {
+        title: this.$t('overview.month'),
+        dataIndex: 'month'
+      }, {
+        title: this.$t('overview.subModel'),
+        dataIndex: 'subModel'
+      }, {
+        title: this.$t('overview.city'),
+        dataIndex: 'city'
+      }, {
+        title: this.$t('overview.sampleNum'),
+        dataIndex: 'sampleNum',
+        scopedSlots: { customRender: 'sampleNum' }
+      }],
+
+      innerColumns: [{
+        title: this.$t('overview.module'),
+        dataIndex: 'module'
+      }, {
+        title: this.$t('overview.month'),
+        dataIndex: 'month'
+      }, {
+        title: this.$t('overview.sampleNum'),
+        dataIndex: 'sampleNum',
+        scopedSlots: { customRender: 'sampleNum' }
+      }]
     }
   },
   computed: {

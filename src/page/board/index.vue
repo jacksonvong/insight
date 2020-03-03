@@ -6,6 +6,7 @@
       <iw-search
         :tab-list="tabList"
         :tab-key="tabKey"
+        :show-contrast="false"
         tab-type="editable-card"
         @onTabChange="changeTab"
         @change="changeDataForm"/>

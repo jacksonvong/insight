@@ -6,26 +6,26 @@
         @change="changeSearchForm"
       />
       <a-card title="查询结果">
-        <div class="iw-card-container iw-row">
-          <div v-for="(item, keyword) in trialData" :key="keyword" class="iw-card-container iw-col12">
+        <a-row :gutter="20" class="iw-card-container iw-row">
+          <a-col v-for="(item, keyword) in trialData" :span="12" :key="keyword" class="iw-card-container">
             <iw-card :title="item.title" style="width: 100%; height: 100%;">
               <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 180px;" />
               </template>
               <template v-else-if="item.data.series&&item.data.series.length">
-                <iw-simple-box :data="item.data" :show-number="false" :label-width="200" style="padding-top: 10px;" />
+                <iw-simple-box :data="item.data" :show-number="false" :label-width="200" is-percent style="padding-top: 10px;" />
               </template>
               <iw-empty v-else :status="item.status" style="height:200px;" />
             </iw-card>
-          </div>
-        </div>
+          </a-col>
+        </a-row>
       </a-card>
     </div>
   </div>
 </template>
 
 <script>
-import { Card } from 'ant-design-vue'
+import { Card, Row, Col } from 'ant-design-vue'
 import IwBanner from '@/components/banner/index'
 import IwCard from '@/page/components/card'
 import IwSearch from '@/page/components/search'
@@ -38,6 +38,8 @@ export default {
   name: 'Trial',
   components: {
     ACard: Card,
+    ARow: Row,
+    ACol: Col,
     IwBanner,
     IwCard,
     IwSearch,

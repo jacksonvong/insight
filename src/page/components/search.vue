@@ -8,7 +8,7 @@
     <a-card :style="'border-top-left-radius: 0; border-top-right-radius: 0;'+styles" class="search-card">
       <div v-if="showSearch">
         <div class="search-item">
-          <span class="search-item_label">时间: </span>
+          <span class="search-item_label">{{ $t('search.dateTime') }}: </span>
           <span class="search-item_box">
             <iw-date-picker
               v-model="dataForm.dataTime"
@@ -24,8 +24,8 @@
             />
           </span>
         </div>
-        <div class="search-item">
-          <span class="search-item_label">模块: </span>
+        <div v-if="showModule" class="search-item">
+          <span class="search-item_label">{{ $t('search.module') }}: </span>
           <span class="search-item_box">
             <iw-select
               v-model="dataForm.module"
@@ -38,17 +38,18 @@
           </span>
         </div>
         <div class="search-item">
-          <span class="search-item_label">区域: </span>
+          <span class="search-item_label">{{ $t('search.region') }}: </span>
           <span class="search-item_box">
             <iw-cascader
               v-model="dataForm.region"
               :texts="dataForm.regionTexts"
+              :default-value="[]"
+              :default-texts="[]"
               :data="searchFormData.region"
-              :column-name="['区域', '省份', '城市']"
+              :column-name="[$t('search.region'), $t('search.province'), $t('search.city')]"
+              :title="$t('search.region')"
               :height="200"
               multiple
-              title="区域"
-              placeholder="请选择"
               style="width: 120px;"
               class="iw-text-bold"
               @change="handleRegionChange"
@@ -66,14 +67,14 @@
           </span>
         </div>
         <div class="search-item">
-          <span class="search-item_label">市场: </span>
+          <span class="search-item_label">{{ $t('search.market') }}: </span>
           <span class="search-item_box">
             <iw-select
               v-model="dataForm.fuelType"
               :data="searchFormData.fuelType"
+              :placeholder="$t('search.energy')"
               multiple
               show-check-all
-              placeholder="能源"
               style="width: 120px;"
               class="iw-text-bold"
             />
@@ -82,9 +83,9 @@
             <iw-select
               v-model="dataForm.vehicleType"
               :data="searchFormData.vehicleType"
+              :placeholder="$t('search.energy')"
               multiple
               show-check-all
-              placeholder="车身"
               style="width: 120px;"
               class="iw-text-bold"
             />
@@ -93,9 +94,9 @@
             <iw-select
               v-model="dataForm.segment"
               :data="searchFormData.segment"
+              :placeholder="$t('search.energy')"
               multiple
               show-check-all
-              placeholder="级别"
               style="width: 120px;"
               class="iw-text-bold"
             />
@@ -104,9 +105,9 @@
             <iw-select
               v-model="dataForm.brandNati"
               :data="searchFormData.brandNati"
+              :placeholder="$t('search.brandNati')"
               multiple
               show-check-all
-              placeholder="车系"
               style="width: 120px;"
               class="iw-text-bold"
             />
@@ -114,10 +115,12 @@
           <span class="search-item_box">
             <iw-manfbrand
               v-model="dataForm.brand"
+              :default-value="[]"
               :data="searchFormData.brand"
+              :title="$t('search.brand')"
+              :placeholder="$t('search.brand')"
+              :height="276"
               multiple
-              title="品牌"
-              placeholder="品牌"
               style="width: 120px;"
               class="iw-text-bold"
               @change="handleManfBrandChange"
@@ -129,11 +132,11 @@
               :default-value="[]"
               :data="searchFormData.subModel"
               :show-letter="showLetter"
-              :filters="[{key: 1, value: '细分市场'}, {key: 2, value: '品牌'}]"
+              :filters="[{key: 1, value: $t('search.subModel')}, {key: 2, value: $t('search.brand')}]"
               :selected-filter="selectedFilter"
-              title="车型"
-              placeholder="车型"
-              size="mini"
+              :title="$t('search.brand')"
+              :placeholder="$t('search.brand')"
+              :height="276"
               placement="bottomLeft"
               style="width: 120px;"
               @filterChange="handleFilterChange"
@@ -144,8 +147,10 @@
         <div class="search-item">
           <span class="search-item_label"/>
           <span class="search-item_box">
-            <iw-button type="primary" @click="handleFormChange"> &nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
-            <iw-button :disabled="postDisabled" @click="handleApplyBuy">申请购买</iw-button>
+            <iw-button type="primary" @click="handleFormChange"> &nbsp;&nbsp;&nbsp;&nbsp;{{ $t('search.search') }}&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
+            <iw-button v-if="showApplyBuy" :disabled="postDisabled" @click="handleApplyBuy">{{ $t('search.applyBuy') }}</iw-button>
+            <iw-button v-if="showContrast" @click="handleComparison">{{ $t('search.comparison') }}</iw-button>
+            <iw-button v-if="showDownload" @click="handleDownload">{{ $t('search.download') }}</iw-button>
           </span>
         </div>
       </div>
@@ -170,6 +175,22 @@ export default {
       default: ''
     },
     showSearch: {
+      type: Boolean,
+      default: true
+    },
+    showModule: {
+      type: Boolean,
+      default: false
+    },
+    showApplyBuy: {
+      type: Boolean,
+      default: false
+    },
+    showContrast: {
+      type: Boolean,
+      default: true
+    },
+    showDownload: {
       type: Boolean,
       default: true
     },
@@ -201,7 +222,7 @@ export default {
   data() {
     return {
       // tabs
-      activeKey: '1',
+      activeKey: this.tabKey,
       panes: this.tabList,
       newTabIndex: this.tabList.length,
 
@@ -219,7 +240,7 @@ export default {
         vehicleType: undefined,
         segment: undefined,
         brandNati: undefined,
-        brand: undefined,
+        brand: [],
         subModel: undefined
       },
       searchFormData: {
@@ -247,8 +268,8 @@ export default {
   },
   computed: {
     pickerOptions() { // 日期选择控制
-      const startYm = this.searchFormData.timeRange.startYm
-      const endYm = this.searchFormData.timeRange.endYm
+      const startYm = this.searchFormData.timeRange.startYm + ''
+      const endYm = this.searchFormData.timeRange.endYm + ''
       if (!startYm || !endYm) return
       const months = [
         new Date(startYm.substr(0, 4) + '/' + startYm.substr(4, 2) + '/01'),
@@ -277,7 +298,7 @@ export default {
     add() {
       const panes = this.panes
       const activeKey = `${++this.newTabIndex}`
-      panes.push({ tab: `看板 ${activeKey}`, key: activeKey })
+      panes.push({ tab: `${this.$t('search.board')} ${activeKey}`, key: activeKey })
       this.panes = panes
       this.activeKey = activeKey
     },
@@ -305,31 +326,38 @@ export default {
     // search
     handleFormChange() {
       const dataForm = this.dataForm
-      this.$emit('change', {
-        brandIds: dataForm.brand,
+      const form = {
+        brandIds: dataForm.brand[0],
         brandNatiIds: dataForm.brandNati,
-        cityIds: dataForm.cityIds,
+        cityIds: this.cityIds,
         cityLevel: dataForm.cityLevel,
-        endYm: dataForm.dataTime ? dataForm.dataTime[1] : 0,
+        endYm: dataForm.dataTime ? dataForm.dataTime[1] : '',
         fuelTypeIds: dataForm.fuelType,
         modules: dataForm.module,
-        provinceIds: dataForm.provinceIds,
-        regionIds: dataForm.regionIds,
+        provinceIds: this.provinceIds,
+        regionIds: this.regionIds,
         segmentIds: dataForm.segment,
-        startYm: dataForm.dataTime ? dataForm.dataTime[0] : 0,
+        startYm: dataForm.dataTime ? dataForm.dataTime[0] : '',
         subModelIds: dataForm.subModel,
         vehicleTypeIds: dataForm.vehicleType
-      })
+      }
+      console.log('form', form)
+      this.$emit('change', form)
     },
     handleApplyBuy() {
       const dataForm = this.dataForm
       this.$emit('post', dataForm)
     },
+    handleComparison() {
+      this.$emit('comparison')
+    },
+    handleDownload() {
+      this.$emit('download')
+    },
     handleDateTimeChange(value) {
       console.log(value)
     },
     handleRegionChange(value, texts) {
-      console.log(value, texts)
       this.dataForm.region = value
       this.dataForm.regionTexts = texts
       const regionIds = []
@@ -349,12 +377,10 @@ export default {
       this.cityIds = cityIds
     },
     handleManfBrandChange(value) {
-      console.log(value)
       this.dataForm.brand = value
     },
     handleSubModelChange(value, texts) {
-      console.log(value, texts)
-      // this.dataForm.subModel = value
+      this.dataForm.subModel = value
     },
     handleFilterChange(key) {
       this.selectedFilter = key
@@ -460,6 +486,9 @@ export default {
     flex-wrap: wrap;
     .search-item_label {
       width: 80px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     .search-item_box {
       margin: 0 10px 10px 0;

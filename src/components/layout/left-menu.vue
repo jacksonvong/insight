@@ -2,9 +2,9 @@
   <div style="">
     <transition name="slide-to-left">
       <div v-if="collapsed" class="leftmenu-box">
-        <iw-scrollbar>
+        <iw-scrollbar :wrap-style="'height: ' + height +'px;'" >
           <a-menu
-            :default-selected-keys="['1']"
+            :default-selected-keys="[]"
             :default-open-keys="openKeys"
             class="leftmenu"
             mode="inline"
@@ -98,6 +98,11 @@ export default {
           size: '4px'
         }
       }
+    }
+  },
+  computed: {
+    height() {
+      return document.documentElement.clientHeight - 64
     }
   },
   watch: {

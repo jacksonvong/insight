@@ -13,6 +13,36 @@ export default {
   },
   common: {
     selectSource: 'Select Source',
-    selectMonth: 'Select Month'
+    selectMonth: 'Select Month',
+    result: 'Result'
+  },
+  search: {
+    dateTime: 'DateTime',
+    module: 'Module',
+    market: 'Market',
+    energy: 'Energy',
+    region: 'Region',
+    province: 'Province',
+    city: 'City',
+    vehicleType: 'VehicleType',
+    segment: 'Segment',
+    brandNati: 'BrandNati',
+    brand: 'Brand',
+    subModel: 'SubModel',
+    search: 'Search',
+    applyBuy: 'ApplyBuy',
+    comparison: 'Comparison',
+    download: 'Download',
+    board: 'Board'
+  },
+  overview: {
+    own: 'Own Functions',
+    all: 'All Functions',
+    module: 'Module',
+    month: 'Month',
+    subModel: 'SubModel',
+    city: 'City',
+    sampleNum: 'Sample Number',
+    sampleNumTotal: 'Sample Number Total'
   }
 }
