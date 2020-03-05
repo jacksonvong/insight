@@ -110,8 +110,8 @@ export default {
         obj = this[group + 'Data'][keyword]
       } else {
         obj = this[group + 'Data']
-        params.subModelId = params.subModelIds[0]
       }
+      params.subModelId = params.subModelIds[0]
       return new Promise((resolve, reject) => {
         getCompTop15(params).then(res => {
           const data = res.data || {}
