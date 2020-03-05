@@ -26,7 +26,6 @@ export default {
     reload() {
       this.isPageAlive = false
       this.$nextTick(() => {
-        console.log(23423423)
         this.isPageAlive = true
       })
     }

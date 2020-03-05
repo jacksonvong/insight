@@ -8,11 +8,11 @@
 
     <!-- 主体 -->
     <div class="main-panel">
-      <app-main v-if="isPageAlive" />
-      <!-- <keep-alive>
-        <router-view v-if="$route.meta.keepAlive" class="conten-entry" />
+      <!-- <app-main v-if="isPageAlive" /> -->
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive&&isPageAlive" class="conten-entry" />
       </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive&&isPageAlive" class="conten-entry" /> -->
+      <router-view v-if="!$route.meta.keepAlive&&isPageAlive" class="conten-entry" />
     </div>
   </div>
 </template>
