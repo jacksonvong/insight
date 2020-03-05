@@ -7,32 +7,36 @@
         @change="changeDataForm"
       />
       <a-card title="查询结果">
-        <div class="iw-card-container iw-row">
-          <div class="iw-card-container  iw-col iw-col12">
+        <a-row :gutter="20" class="iw-card-container">
+          <a-col :span="12" class="iw-card-container">
             <iw-card title="信息接触媒体" style="width: 100%;" body-style="height: 500px;">
               <iw-table-box :data="infoData.data" :table-data="orderData.data" />
             </iw-card>
-          </div>
-          <div class="iw-card-container iw-col iw-col12">
-            <iw-card v-for="(item, key) in otherData" :key="key" :title="item.title">
-              <iw-chart v-if="item.data&&item.key==='websit'" :options="item.data" />
-              <iw-simple-box v-else-if="item.data" :data="item.data" is-percent />
-              <iw-empty v-else :status="item.status" style="height: 180px;" />
-            </iw-card>
-          </div>
-          <div class="iw-card-container  iw-col iw-col8">
+          </a-col >
+          <a-col :span="12" class="iw-card-container">
+            <a-row :gutter="20" class="iw-card-container">
+              <a-col v-for="(item, key) in otherData" :key="key" class="iw-card-container">
+                <iw-card :title="item.title" body-style="height: auto;">
+                  <iw-chart v-if="item.data&&item.key==='websit'" :options="item.data" />
+                  <iw-simple-box v-else-if="item.data" :data="item.data" is-percent style="min-height: 180px;" />
+                  <iw-empty v-else :status="item.status" style="height: 180px;" />
+                </iw-card>
+              </a-col>
+            </a-row>
+          </a-col >
+          <a-col :span="8" class="iw-card-container">
             <iw-card title="促购力最大的信息渠道" style="width: 100%;" body-style="height: 100%;">
               <iw-simple-box :data="purchaseData.data" :label-width="140" is-percent />
             </iw-card>
-          </div>
-        </div>
+          </a-col >
+        </a-row>
       </a-card>
     </div>
   </div>
 </template>
 
 <script>
-import { Card } from 'ant-design-vue'
+import { Card, Row, Col } from 'ant-design-vue'
 import IwBanner from '@/components/banner/index'
 import IwSearch from '@/page/components/search'
 import IwCard from '@/page/components/card'
@@ -47,6 +51,8 @@ export default {
   name: 'Info',
   components: {
     ACard: Card,
+    ARow: Row,
+    ACol: Col,
     IwBanner: IwBanner,
     IwSearch: IwSearch,
     IwCard,
@@ -77,7 +83,7 @@ export default {
   },
   methods: {
     changeDataForm(form) {
-      console.log(form)
+      this.dataForm = Object.assign({}, this.dataForm, form)
       this.getData()
     },
 

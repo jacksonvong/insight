@@ -4,7 +4,7 @@ function fromJSONFile(filename) {
   return (req, res) => {
     try {
       let data
-      if (filename.indexOf('common-echart') > -1) {
+      if (filename.indexOf('common-echart') > -1 || filename.indexOf('comp-compare') > -1) {
         const key = req.body.data.key
         const path = filename.replace('10001', key)
         data = fs.readFileSync(`mock/data/${path}.json`).toString()
@@ -51,6 +51,8 @@ const proxy = {
   'POST /api/consumer-insight/board/get-reason': fromJSONFile('board/get-reason'),
   // 竞争对手
   'POST /api/consumer-insight/comp-compare/get-contact-order': fromJSONFile('comp-compare/get-contact-order'),
+  'POST /api/consumer-insight/comp-compare/get-comp-top15': fromJSONFile('comp-compare/get-comp-top15/10001'),
+  'POST /api/consumer-insight/comp-compare/get-comp-cross': fromJSONFile('comp-compare/get-comp-cross'),
   'POST /api/consumer-insight/compete/get-select-reason': fromJSONFile('compete/get-select-reason'),
   'POST /api/consumer-insight/compete/get-bubble': fromJSONFile('compete/get-bubble2'),
 

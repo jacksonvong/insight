@@ -6,6 +6,7 @@
       <iw-search
         :tab-list="tabList"
         :tab-key="tabKey"
+        :multiple="{submodel: false}"
         @onTabChange="changeTab"
         @change="changeDataForm"
       />
@@ -149,7 +150,8 @@ export default {
       }
     },
     changeDataForm(form) {
-      console.log(form)
+      this.dataForm = Object.assign({}, this.dataForm, form)
+      this.getData()
     },
     // API
     getData() {

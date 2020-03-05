@@ -29,3 +29,24 @@ export function getBubble(params) {
     }
   })
 }
+
+export function getCompTop15(params) {
+  return request({
+    url: '/consumer-insight/comp-compare/get-comp-top15',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+
+export function getCompCross(params) {
+  return request({
+    url: '/consumer-insight/comp-compare/get-comp-cross',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+

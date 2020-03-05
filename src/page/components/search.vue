@@ -133,6 +133,7 @@
               :show-letter="showLetter"
               :filters="[{key: 1, value: $t('search.subModel')}, {key: 2, value: $t('search.brand')}]"
               :selected-filter="selectedFilter"
+              :multiple="multiple.submodel"
               :title="$t('search.subModel')"
               :placeholder="$t('search.subModel')"
               :height="276"
@@ -173,6 +174,14 @@ export default {
     title: {
       type: [String, Boolean],
       default: ''
+    },
+    multiple: {
+      type: Object,
+      default() {
+        return {
+          submodel: true
+        }
+      }
     },
     showSearch: {
       type: Boolean,
@@ -341,7 +350,6 @@ export default {
         subModelIds: dataForm.subModel,
         vehicleTypeIds: dataForm.vehicleType
       }
-      console.log('form', form)
       this.$emit('change', form)
     },
     handleApplyBuy() {
@@ -392,17 +400,23 @@ export default {
         this.searchFormData.subModel = this.subModelData[0]
       }
     },
-    getData() {
+    async getData() {
       this.getTimeRange()
       this.getBrand()
       this.getCityLevel()
       this.getModule()
       this.getDimension()
-      this.getSubModel()
       this.getFuelType()
       this.getVehicleType()
       this.getSegment()
       this.getBrandNatis()
+      const subModel = this.getSubModel()
+      if (this.multiple.submodel === false) {
+        await subModel
+        console.log(this.subModelData)
+        this.handleSubModelChange([this.subModelData[0][0]['children'][0]['children'][0]['key']])
+        this.handleFormChange()
+      }
     },
     getTimeRange() {
       return getTimeRange()
@@ -448,8 +462,9 @@ export default {
       return getSubModel()
         .then(response => {
           const data = response.data || []
+          const subModelData = data[0]
           this.subModelData = data
-          this.searchFormData.subModel = data[0]
+          this.searchFormData.subModel = subModelData
         })
     },
     getFuelType() {
