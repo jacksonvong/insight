@@ -20,7 +20,7 @@ const app = {
     },
     device: 'desktop',
     filter: Cookies.get('filter') || 'default',
-    language: Cookies.get('language') || 'zh',
+    language: Cookies.get('language') || 'zh_CN',
     size: Cookies.get('size') || 'medium'
   },
   mutations: {

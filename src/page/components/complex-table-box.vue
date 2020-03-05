@@ -27,22 +27,22 @@
         <div v-for="item in data.yAxis[0].data" :key="item" class="iw-table-name">{{ item }}</div>
       </div>
       <div class="iw-table-center">
-        <div v-for="(item, key) in data.series[0].data" :key="key" :title="(item&&item.value?item.value:item) | toPercent" class="iw-table-bar-wrap">
-          <span :style="{width: toPercent(item&&item.value?item.value:item)}" class="iw-table-bar" />
+        <div v-for="(item, key) in data.series[0].data" :key="key" :title="(item&&item.hasOwnProperty('value')?item.value:item) | toPercent(1)" class="iw-table-bar-wrap">
+          <span :style="{width: toPercent(item&&item.hasOwnProperty('value')?item.value:item, 1)}" class="iw-table-bar" />
         </div>
       </div>
       <div class="iw-table-right">
         <div class="iw-table-container">
           <div v-for="(item, key) in tableData.answerOrders" :key="key" class="iw-table-row">
-            <div class="iw-table-number">{{ item.sortOneRate | toPercent }}</div>
-            <div class="iw-table-number">{{ item.sortTwoRate | toPercent }}</div>
-            <div class="iw-table-number">{{ item.sortThreeRate | toPercent }}</div>
-            <div class="iw-table-number">{{ item.sortFourRate | toPercent }}</div>
+            <div class="iw-table-number">{{ item.sortOneRate | toPercent(item, 1) }}</div>
+            <div class="iw-table-number">{{ item.sortTwoRate | toPercent(item, 1) }}</div>
+            <div class="iw-table-number">{{ item.sortThreeRate | toPercent(item, 1) }}</div>
+            <div class="iw-table-number">{{ item.sortFourRate | toPercent(item, 1) }}</div>
           </div>
         </div>
         <div v-if="false" class="iw-table-container iw-table-col3">
           <div v-for="(item, key) in tableData.answerOrders" :key="key" class="iw-table-row">
-            <div class="iw-table-number">{{ item.data5 | toPercent }}</div>
+            <div class="iw-table-number">{{ item.data5 | toPercent(item, 1) }}</div>
             <div class="iw-table-number">{{ item.data6 }}</div>
           </div>
         </div>

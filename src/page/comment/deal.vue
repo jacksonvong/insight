@@ -9,7 +9,7 @@
         <a-row :gutter="20" class="iw-card-container iw-row">
           <a-col :span="12">
             <div v-for="(item, keyword) in leftData" :key="keyword" class="iw-card-container">
-              <iw-card :title="item.title+'['+item.sampleNum+']'" style="width: 100%;">
+              <iw-card :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgNum||0)" style="width: 100%;">
                 <template v-if="item.option.series&&item.option.series.length&&pieKeys.includes(keyword)">
                   <iw-chart :options="item.option" style="height: 180px;" />
                 </template>
@@ -25,7 +25,7 @@
               <iw-card :title="item.title" style="width: 100%;">
                 <a-row v-if=" item.children" class="iw-card-container">
                   <a-col v-for="(item2, keyword2) in item.children" :span="12" :key="item2.key" class="iw-card-container">
-                    <iw-card-inner :title="item2.title" >
+                    <iw-card-inner :title="item2.title+'['+(item2.sampleNum||0)+']'" :extra="'MEAN '+(item2.avgnum||0)" >
                       <template v-if="item2.option&&pieKeys.includes(keyword2)">
                         <iw-chart :options="item2.option" style="height: 180px;" />
                       </template>
@@ -55,6 +55,7 @@ import IwSimpleBox from '@/page/components/simple-box'
 import { getEchartOption } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
+import { toPercent } from '@/utils/filters'
 
 export default {
   name: 'Deal',
@@ -99,6 +100,9 @@ export default {
     this.getData()
   },
   methods: {
+    toPercent() {
+      return toPercent(...arguments)
+    },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)
       this.getData()
@@ -150,6 +154,7 @@ export default {
           } else {
             this.$set(obj, 'option', data.option)
           }
+          this.$set(obj, 'avgNum', data.avgNum)
           this.$set(obj, 'sampleNum', data.sampleNum)
           this.$set(obj, 'status', 200)
           resolve(res)

@@ -10,11 +10,10 @@ import * as filters from './utils/filters'
 import i18n from './lang' // Internationalization
 import './icons' // icon
 import './errorLog' // error log
-import './asyncRouter' //
+// import './asyncRouter' //
 
 const Vue = require('vue')
 const IwaysUI = require('iways-ui')
-// const ElementUI = require('element-ui')
 
 // 注册全局过滤器
 Object.keys(filters).forEach(key => {
@@ -23,7 +22,6 @@ Object.keys(filters).forEach(key => {
 
 promise.polyfill()
 Vue.use(IwaysUI, { size: 'small' })
-// Vue.use(ElementUI, { size: 'mini' })
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

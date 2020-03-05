@@ -8,7 +8,7 @@
       <a-card title="查询结果">
         <a-row :gutter="20" class="iw-card-container iw-row">
           <a-col :span="12" class="iw-card-container">
-            <iw-card v-for="(item, keyword) in leftData" :key="keyword" :title="item.title" style="width: 100%;" body-style="height:297px;">
+            <iw-card v-for="(item, keyword) in leftData" :key="keyword" :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)" style="width: 100%;" body-style="height:297px;">
               <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 100%;" />
               </template>
@@ -19,7 +19,7 @@
             </iw-card>
           </a-col>
           <a-col :span="12" class="iw-card-container">
-            <iw-card v-for="(item, keyword) in rightData" :key="keyword" :title="item.title" style="width: 100%;" body-style="height:180px;">
+            <iw-card v-for="(item, keyword) in rightData" :key="keyword" :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)" style="width: 100%;" body-style="height:180px;">
               <template v-if="item.data&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 180px;" />
               </template>
@@ -44,6 +44,7 @@ import IwSimpleBox from '@/page/components/simple-box'
 import { getEchartOption } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
+import { toPercent } from '@/utils/filters'
 
 export default {
   name: 'Personal',
@@ -77,6 +78,9 @@ export default {
     this.getData()
   },
   methods: {
+    toPercent() {
+      return toPercent(...arguments)
+    },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)
       this.getData()
@@ -95,7 +99,6 @@ export default {
       }
     },
     getEchartOption(params, group, keyword) {
-      console.log(keyword)
       return new Promise((resolve, reject) => {
         getEchartOption(params).then(res => {
           const data = res.data || {}
@@ -113,7 +116,8 @@ export default {
                 showTooltip: false
               }).getChart()
           )
-          console.log(this[group + 'Data'][keyword])
+          this.$set(this[group + 'Data'][keyword], 'avgNum', data.avgNum)
+          this.$set(this[group + 'Data'][keyword], 'sampleNum', data.sampleNum)
           this.$set(this[group + 'Data'][keyword], 'status', 200)
           resolve(res)
         }).catch(res => {

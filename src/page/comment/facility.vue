@@ -8,7 +8,7 @@
       <a-card title="查询结果">
         <a-row :gutter="20" class="iw-card-container iw-row">
           <a-col v-for="(item, keyword) in facilityData" :span="12" :key="keyword" class="iw-card-container">
-            <iw-card :title="item.title" style="width: 100%; height: 100%;">
+            <iw-card :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)" style="width: 100%; height: 100%;">
               <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 180px;" />
               </template>
@@ -33,6 +33,7 @@ import IwSimpleBox from '@/page/components/simple-box'
 import { getEchartOption } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
+import { toPercent } from '@/utils/filters'
 
 export default {
   name: 'Facility',
@@ -60,6 +61,9 @@ export default {
     this.getData()
   },
   methods: {
+    toPercent() {
+      return toPercent(...arguments)
+    },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)
       this.getData()
@@ -76,7 +80,6 @@ export default {
       return new Promise((resolve, reject) => {
         getEchartOption(params).then(res => {
           const data = res.data || {}
-          console.log(data)
           if (data.option.series && data.option.series.length) {
             const option = (this.pieKeys.includes(keyword))
               ? new Chart('pie', data.option, {
@@ -94,6 +97,8 @@ export default {
           } else {
             this.$set(this[group + 'Data'][keyword], 'data', data.option)
           }
+          this.$set(this[group + 'Data'][keyword], 'avgNum', data.avgNum)
+          this.$set(this[group + 'Data'][keyword], 'sampleNum', data.sampleNum)
           this.$set(this[group + 'Data'][keyword], 'status', 200)
           resolve(res)
         }).catch(res => {

@@ -5,7 +5,7 @@
       <iw-search @change="changeSearchForm" />
       <a-card title="查询结果">
         <div class="iw-card-container">
-          <iw-card v-for="(item, keyword) in accessoryData" :key="item.key" :title="item.title+'['+(item.sampleNum||0)+']'" body-style="height: auto;">
+          <iw-card v-for="(item, keyword) in accessoryData" :key="item.key" :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" body-style="height: auto;">
             <div class="iw-card-container">
               <template v-if="item.option&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.option" style="height: 180px;" />
@@ -31,6 +31,7 @@ import IwSearch from '@/page/components/search'
 import { getEchartOption } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
+import { toPercent } from '@/utils/filters'
 
 export default {
   name: 'UserBackground',
@@ -65,6 +66,9 @@ export default {
     this.getData()
   },
   methods: {
+    toPercent() {
+      return toPercent(...arguments)
+    },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)
       this.getData()
@@ -95,9 +99,9 @@ export default {
                 showTooltip: false
               }).getChart()
           )
-          console.log(this[group + 'Data'][keyword])
-          this.$set(this[group + 'Data'][keyword], 'status', 200)
+          this.$set(this[group + 'Data'][keyword], 'avgNum', data.avgNum)
           this.$set(this[group + 'Data'][keyword], 'sampleNum', data.sampleNum)
+          this.$set(this[group + 'Data'][keyword], 'status', 200)
           resolve(res)
         }).catch(res => {
           this.$set(this[group + 'Data'][keyword], 'status', 500)

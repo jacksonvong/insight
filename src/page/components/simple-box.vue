@@ -53,11 +53,11 @@ export default {
       const data = this.data.series instanceof Array ? this.data.series[0].data : this.data.series.data
       const maxValue = this.maxValue
       return data.map(item => {
-        const value = item.hasOwnProperty('value') ? item.value : item
+        const value = item && item.hasOwnProperty('value') ? item.value : item
         const i = {
           ...item,
-          value: this.isPercent ? toPercent(value) : toThousand(value),
-          width: this.isPercent ? toPercent(value) : toPercent(maxValue && value ? value / maxValue : 0)
+          value: this.isPercent ? toPercent(value, 1) : toThousand(value),
+          width: this.isPercent ? (value ? toPercent(value, 1) : '0%') : toPercent(maxValue && value ? value / maxValue : 0, 1)
         }
         return i
       })
@@ -65,7 +65,7 @@ export default {
     maxValue() {
       const data = this.data.series instanceof Array ? this.data.series[0].data : this.data.series.data
       return Math.max(...data.map(item => {
-        const value = item.hasOwnProperty('value') ? item.value : item
+        const value = item && item.hasOwnProperty('value') ? item.value : item
         return value
       })) || 0
     }

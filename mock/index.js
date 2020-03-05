@@ -2,16 +2,20 @@ const fs = require('fs')
 
 function fromJSONFile(filename) {
   return (req, res) => {
-    let data
-    if (filename.indexOf('common-echart') > -1) {
-      const key = req.body.data.key
-      const path = filename.replace('10001', key)
-      data = fs.readFileSync(`mock/data/${path}.json`).toString()
-    } else {
-      data = fs.readFileSync(`mock/data/${filename}.json`).toString()
+    try {
+      let data
+      if (filename.indexOf('common-echart') > -1) {
+        const key = req.body.data.key
+        const path = filename.replace('10001', key)
+        data = fs.readFileSync(`mock/data/${path}.json`).toString()
+      } else {
+        data = fs.readFileSync(`mock/data/${filename}.json`).toString()
+      }
+      const json = JSON.parse(data)
+      return res.json(json)
+    } catch (e) {
+      console.log(e)
     }
-    const json = JSON.parse(data)
-    return res.json(json)
   }
 }
 const proxy = {
@@ -35,7 +39,7 @@ const proxy = {
   'POST /api/consumer-insight/common/get-vehicle-types': fromJSONFile('common-option/get-vehicle-types'),
 
   'POST /api/consumer-insight/overview/get-purchase-data': fromJSONFile('overview/get-purchase-data'),
-  // 'POST /api/consumer-insight/overview/get-all-functions': fromJSONFile('overview/get-all-functions'),
+  'POST /api/consumer-insight/overview/get-all-functions': fromJSONFile('overview/get-all-functions'),
   'POST /api/consumer-insight/overview/apply-buy': fromJSONFile('overview/apply-buy'),
   'POST /api/consumer-insight/overview/get-submodel-data': fromJSONFile('overview/get-submodel-data'),
   'POST /api/consumer-insight/overview/get-city-data': fromJSONFile('overview/get-city-data'),
@@ -67,7 +71,7 @@ const proxy = {
 
   'POST /api/consumer-insight/old-car/get-bar': fromJSONFile('user-character/old-car/get-bar'),
   // 周边产品需求
-  // 'POST /api/consumer-insight/common-echart/get-echart-option': fromJSONFile('common-echart/10001')
+  'POST /api/consumer-insight/common-echart/get-echart-option': fromJSONFile('common-echart/10001'),
   'POST /api/consumer-insight/common-echart/get-echart-option-contrast': fromJSONFile('common-echart-contrast/10001')
 }
 module.exports = proxy

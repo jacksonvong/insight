@@ -1020,7 +1020,6 @@ export class Chart {
         }
       })
     }
-    console.log(option)
     return option
   }
 

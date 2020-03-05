@@ -20,7 +20,7 @@ export default {
     dateTime: '时间',
     module: '模块',
     market: '市场',
-    energy: '能源',
+    fuel: '能源',
     region: '区域',
     province: '省份',
     city: '城市',
@@ -31,7 +31,7 @@ export default {
     subModel: '车型',
     search: '查询',
     applyBuy: '申请购买',
-    comparison: '对比分析',
+    compare: '对比分析',
     download: '下载',
     board: '看板'
   },

@@ -6,10 +6,10 @@
       <a-card title="查询结果">
         <a-row :gutter="20" class="iw-card-container">
           <a-col :span="12" class="iw-card-container">
-            <iw-card title="金融产品" style="width: 100%;" body-style="height: 500px;">
+            <iw-card title="金融产品" style="width: 100%;" body-style="height: 644px;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in financeData" :key="item.key" class="iw-card-container iw-col8">
-                  <iw-card-inner :title="item.title" >
+                  <iw-card-inner :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)">
                     <template v-if="item.data&&pieKeys.includes(keyword)">
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
@@ -26,7 +26,7 @@
             <iw-card title="保险产品" style="width: 100%;" body-style="height: auto;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in insuranceData" :key="item.key" class="iw-card-container iw-col8">
-                  <iw-card-inner :title="item.title">
+                  <iw-card-inner :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)">
                     <template v-if="item.data&&pieKeys.includes(keyword)">
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
@@ -41,7 +41,7 @@
             <iw-card title="延保产品" style="width: 100%;" body-style="height: auto;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in extendData" :key="item.key" class="iw-card-container iw-col12">
-                  <iw-card-inner :title="item.title" >
+                  <iw-card-inner :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)">
                     <template v-if="item.data&&pieKeys.includes(keyword)">
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
@@ -70,6 +70,7 @@ import IwSearch from '@/page/components/search'
 import { getEchartOption } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
+import { toPercent } from '@/utils/filters'
 
 export default {
   name: 'Finance',
@@ -93,7 +94,8 @@ export default {
         period: { key: 10004, title: '余款期数', status: 0, data: {}}, // 余款期数 key: 10004
         loan: { key: 10002, title: '贷款途径', status: 0, data: {}}, // 贷款途径 key: 10002
         repay: { key: 10005, title: '还款方式', status: 0, data: {}}, // 还款方式 key: 10005
-        rate: { key: 10007, title: '利率计算方式', status: 0, data: {}} // 利率 key: 10007
+        rateCalc: { key: 10006, title: '利率计算方式', status: 0, data: {}}, // 利率计算方式 key: 10006
+        rate: { key: 10007, title: '利率', status: 0, data: {}} // 利率 key: 10007
       },
       insuranceData: {
         buy: { key: 10008, title: '购买保险', status: 0, data: {}}, // 购买保险 key: 10008
@@ -104,13 +106,16 @@ export default {
         situation: { key: 11391, title: '购买情况', status: 0, data: {}}, // 购买情况 key: 11391
         buyFee: { key: 10013, title: '购买费用', status: 0, data: {}} // 购买费用 key: 10013
       },
-      pieKeys: ['payType', 'loan', 'repay', 'buy', 'situation']
+      pieKeys: ['payType', 'loan', 'repay', 'rateCalc', 'buy', 'situation']
     }
   },
   created() {
     this.getData()
   },
   methods: {
+    toPercent() {
+      return toPercent(...arguments)
+    },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)
       this.getData()
@@ -151,7 +156,8 @@ export default {
                 showTooltip: false
               }).getChart()
           )
-          console.log(this[group + 'Data'][keyword])
+          this.$set(this[group + 'Data'][keyword], 'avgNum', data.avgNum)
+          this.$set(this[group + 'Data'][keyword], 'sampleNum', data.sampleNum)
           this.$set(this[group + 'Data'][keyword], 'status', 200)
           resolve(res)
         }).catch(res => {

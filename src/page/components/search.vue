@@ -71,7 +71,7 @@
             <iw-select
               v-model="dataForm.fuelType"
               :data="searchFormData.fuelType"
-              :placeholder="$t('search.energy')"
+              :placeholder="$t('search.fuel')"
               multiple
               show-check-all
               style="width: 120px;"
@@ -148,7 +148,7 @@
           <span class="search-item_box">
             <iw-button type="primary" @click="handleFormChange"> &nbsp;&nbsp;&nbsp;&nbsp;{{ $t('search.search') }}&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
             <iw-button v-if="showApplyBuy" :disabled="postDisabled" @click="handleApplyBuy">{{ $t('search.applyBuy') }}</iw-button>
-            <iw-button v-if="showContrast" @click="handleComparison">{{ $t('search.comparison') }}</iw-button>
+            <iw-button v-if="showContrast" @click="handleComparison">{{ $t('search.compare') }}</iw-button>
             <iw-button v-if="showDownload" @click="handleDownload">{{ $t('search.download') }}</iw-button>
           </span>
         </div>
@@ -161,6 +161,7 @@
 import { Card, Tabs } from 'ant-design-vue'
 import { getTimeRange, getDimension, getCityLevel, getFuelType, getVehicleType, getSegment,
   getBrand, getBrandNatis, getModule, getSubModel } from '@/api/option'
+import moment from 'moment'
 export default {
   name: 'Search',
   components: {
@@ -408,6 +409,11 @@ export default {
         .then(response => {
           const data = response.data || []
           this.searchFormData.timeRange = data
+          // set default value
+          this.dataForm.dataTime = [
+            moment(data.endYm, 'YYYYMM').format('YYYY01'),
+            moment(data.endYm, 'YYYYMM').format('YYYYMM')
+          ]
         })
     },
     getDimension() {
