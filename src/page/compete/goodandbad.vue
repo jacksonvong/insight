@@ -127,9 +127,9 @@ export default {
   data() {
     return {
       tabList: [
-        { key: '1', tab: '原因分析' },
-        { key: '2', tab: '竞争对手' },
-        { key: '3', tab: '流出对手' }
+        { key: '1', tab: '选择和放弃原因' },
+        { key: '2', tab: '流入对手分析' },
+        { key: '3', tab: '流出对手分析' }
       ],
       tabKey: '1',
       selectReasonData: {},

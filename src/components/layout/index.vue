@@ -8,17 +8,18 @@
 
     <!-- 主体 -->
     <div class="main-panel">
-      <keep-alive>
-        <!--使用keep-alive会将页面缓存-->
+      <app-main v-if="isPageAlive" />
+      <!-- <keep-alive>
         <router-view v-if="$route.meta.keepAlive" class="conten-entry" />
       </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive" class="conten-entry" />
+      <router-view v-if="!$route.meta.keepAlive&&isPageAlive" class="conten-entry" /> -->
     </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
 import HeaderMenu from '@/components/layout/header-menu.vue'
 import LeftMenu from '@/components/layout/left-menu.vue'
+import AppMain from '@/components/layout/app-main.vue'
 import { modulePath } from '@/utils/auth'
 import menu from '@/assets/data/menu'
 function checkIE() {
@@ -28,7 +29,12 @@ function checkIE() {
 export default {
   name: 'App',
   components: {
-    HeaderMenu, LeftMenu
+    HeaderMenu, LeftMenu, AppMain
+  },
+  provide() {
+    return {
+      reload: this.reload
+    }
   },
   data() {
     return {
@@ -36,7 +42,8 @@ export default {
       funcId: this.$route.query.funcId || '',
       product: {},
       LeftMenu: false,
-      HeaderMenu: false
+      HeaderMenu: false,
+      isPageAlive: true
     }
   },
   computed: {
@@ -88,7 +95,21 @@ export default {
       }
     },
     switchLanguage() {
-      this.init(this.$route)
+      // 重载内容
+      this.reload()
+      // 重新请求菜单
+      this.$store.dispatch('GetMenus').then(res => {
+        const menus = res.data
+        this.$store.dispatch('GenerateRoutes', { menus }).then(() => {
+          this.init(this.$route)
+        })
+      })
+    },
+    reload() {
+      this.isPageAlive = false
+      this.$nextTick(() => {
+        this.isPageAlive = true
+      })
     },
     controlPanel(status) {
       this.statusClass = status ? 'leftmenu-expand' : ''

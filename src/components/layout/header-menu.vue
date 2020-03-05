@@ -111,18 +111,12 @@ export default {
       const lang = item.key
       this.$i18n.locale = lang
       this.$store.dispatch('setLanguage', lang)
-      this.$store.dispatch('GetMenus').then(res => {
-        const menus = res.data
-        store.dispatch('GenerateRoutes', { menus }).then(() => {
-          this.$emit('switchLanguage')
-          if (lang === 'zh_CN') {
-            message.success('语言切换成功')
-          }
-          if (lang === 'en') {
-            message.success('Switch Language Success')
-          }
-        })
-      })
+      if (lang === 'zh_CN') {
+        message.success('语言切换成功')
+      } else if (lang === 'en') {
+        message.success('Switch Language Success')
+      }
+      this.$emit('switchLanguage')
     },
     logout() {
       store.dispatch('LogOut').then(response => {

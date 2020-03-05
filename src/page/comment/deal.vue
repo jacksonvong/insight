@@ -25,7 +25,7 @@
               <iw-card :title="item.title" style="width: 100%;">
                 <a-row v-if=" item.children" class="iw-card-container">
                   <a-col v-for="(item2, keyword2) in item.children" :span="12" :key="item2.key" class="iw-card-container">
-                    <iw-card-inner :title="item2.title+'['+(item2.sampleNum||0)+']'" :extra="'MEAN '+(item2.avgnum||0)" >
+                    <iw-card-inner :title="item2.title+'['+toThousand(item2.sampleNum)+']'" :extra="'MEAN '+toThousand(item2.avgNum, 1)" >
                       <template v-if="item2.option&&pieKeys.includes(keyword2)">
                         <iw-chart :options="item2.option" style="height: 180px;" />
                       </template>
