@@ -1,8 +1,8 @@
 {
   "questUID": "string",
   "data": {
-    "sampleNum": 0,
-    "avgNum": null,
+    "sampleNum": 2303,
+    "avgNum": 0.236562233,
     "option": {
       "title": null,
       "legend": {

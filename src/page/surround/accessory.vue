@@ -5,7 +5,7 @@
       <iw-search @change="changeSearchForm" />
       <a-card title="查询结果">
         <div class="iw-card-container">
-          <iw-card v-for="(item, keyword) in accessoryData" :key="item.key" :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" body-style="height: auto;">
+          <iw-card v-for="(item, keyword) in accessoryData" :key="item.key" :title="item.title+'['+toThousand(item.sampleNum)+']'" body-style="height: auto;">
             <div class="iw-card-container">
               <template v-if="item.option&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.option" style="height: 180px;" />
@@ -31,7 +31,7 @@ import IwSearch from '@/page/components/search'
 import { getEchartOption } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
-import { toPercent } from '@/utils/filters'
+import { toThousand } from '@/utils/filters'
 
 export default {
   name: 'UserBackground',
@@ -66,8 +66,8 @@ export default {
     this.getData()
   },
   methods: {
-    toPercent() {
-      return toPercent(...arguments)
+    toThousand() {
+      return toThousand(...arguments)
     },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)

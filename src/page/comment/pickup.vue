@@ -8,7 +8,7 @@
       <a-card title="查询结果">
         <a-row :gutter="20" class="iw-card-container iw-row">
           <a-col :span="12" class="iw-card-container">
-            <iw-card v-for="(item, keyword) in leftData" :key="keyword" :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgNum||0)" style="width: 100%;">
+            <iw-card v-for="(item, keyword) in leftData" :key="keyword" :title="item.title+'['+toThousand(item.sampleNum)+']'" :extra="'MEAN '+toThousand(item.avgNum, 1)" style="width: 100%;">
               <template v-if="item.option.series&&item.option.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.option" style="height: 180px;" />
               </template>
@@ -19,7 +19,7 @@
             </iw-card>
           </a-col>
           <a-col :span="12" class="iw-card-container">
-            <iw-card v-for="(item, keyword) in rightData" :key="keyword" :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgNum||0)" style="width: 100%;" body-style="height: 500px;">
+            <iw-card v-for="(item, keyword) in rightData" :key="keyword" :title="item.title+'['+toThousand(item.sampleNum)+']'" :extra="'MEAN '+toThousand(item.avgNum, 1)" style="width: 100%;" body-style="height: 500px;">
               <template v-if="item.option.series&&item.option.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.option" style="height: 360px;" />
               </template>
@@ -44,7 +44,7 @@ import IwSimpleBox from '@/page/components/simple-box'
 import { getEchartOption } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
-import { toPercent } from '@/utils/filters'
+import { toThousand } from '@/utils/filters'
 
 export default {
   name: 'Pickup',
@@ -75,8 +75,8 @@ export default {
     this.getData()
   },
   methods: {
-    toPercent() {
-      return toPercent(...arguments)
+    toThousand() {
+      return toThousand(...arguments)
     },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)

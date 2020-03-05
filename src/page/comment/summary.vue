@@ -9,7 +9,7 @@
       <a-card v-if="activeCard===1" title="查询结果">
         <a-row :gutter="20" class="iw-card-container iw-row">
           <a-col v-for="(item, keyword) in summaryData" :span="12" :key="keyword" class="iw-card-container">
-            <iw-card :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)" style="width: 100%;">
+            <iw-card :title="item.title+'['+toThousand(item.sampleNum)+']'" :extra="'MEAN '+toThousand(item.avgNum, 1)" style="width: 100%;">
               <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 180px;" />
               </template>
@@ -24,7 +24,7 @@
       <a-card v-if="activeCard===2" title="查询结果">
         <a-row :gutter="20" class="iw-card-container iw-row">
           <a-col v-for="(item, keyword) in summaryData" :span="12" :key="keyword" class="iw-card-container">
-            <iw-card :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)" style="width: 100%;">
+            <iw-card :title="item.title+'['+toThousand(item.sampleNum)+']'" :extra="'MEAN '+toThousand(item.avgNum, 1)" style="width: 100%;">
               <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 100%;" />
               </template>
@@ -49,7 +49,7 @@ import IwSimpleBox from '@/page/components/simple-box'
 import { getEchartOption, getEchartOptionContrast } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
-import { toPercent } from '@/utils/filters'
+import { toThousand } from '@/utils/filters'
 
 export default {
   name: 'Summary',
@@ -81,8 +81,8 @@ export default {
     this.getData()
   },
   methods: {
-    toPercent() {
-      return toPercent(...arguments)
+    toThousand() {
+      return toThousand(...arguments)
     },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)

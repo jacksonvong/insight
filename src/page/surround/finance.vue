@@ -9,7 +9,7 @@
             <iw-card title="金融产品" style="width: 100%;" body-style="height: 644px;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in financeData" :key="item.key" class="iw-card-container iw-col8">
-                  <iw-card-inner :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)">
+                  <iw-card-inner :title="item.title+'['+toThousand(item.sampleNum)+']'" :extra="'MEAN '+toThousand(item.avgNum, 1)">
                     <template v-if="item.data&&pieKeys.includes(keyword)">
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
@@ -26,7 +26,7 @@
             <iw-card title="保险产品" style="width: 100%;" body-style="height: auto;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in insuranceData" :key="item.key" class="iw-card-container iw-col8">
-                  <iw-card-inner :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)">
+                  <iw-card-inner :title="item.title+'['+toThousand(item.sampleNum)+']'" :extra="'MEAN '+toThousand(item.avgNum, 1)">
                     <template v-if="item.data&&pieKeys.includes(keyword)">
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
@@ -41,7 +41,7 @@
             <iw-card title="延保产品" style="width: 100%;" body-style="height: auto;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in extendData" :key="item.key" class="iw-card-container iw-col12">
-                  <iw-card-inner :title="item.title+'['+toPercent(item.sampleNum, 1)+']'" :extra="'MEAN '+(item.avgnum||0)">
+                  <iw-card-inner :title="item.title+'['+toThousand(item.sampleNum)+']'" :extra="'MEAN '+toThousand(item.avgNum, 1)">
                     <template v-if="item.data&&pieKeys.includes(keyword)">
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
@@ -70,7 +70,7 @@ import IwSearch from '@/page/components/search'
 import { getEchartOption } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
-import { toPercent } from '@/utils/filters'
+import { toThousand } from '@/utils/filters'
 
 export default {
   name: 'Finance',
@@ -113,8 +113,8 @@ export default {
     this.getData()
   },
   methods: {
-    toPercent() {
-      return toPercent(...arguments)
+    toThousand() {
+      return toThousand(...arguments)
     },
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)
