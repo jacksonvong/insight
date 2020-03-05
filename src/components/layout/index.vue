@@ -1,7 +1,7 @@
 <template>
   <div :class="[statusClass, isItsOwn ? '' : 'in-frame']" class="mainpart iways">
     <!-- 头部菜单 -->
-    <component ref="headerMenuId" :is="HeaderMenu" :options="product" />
+    <component ref="headerMenuId" :is="HeaderMenu" :options="product" @switchLanguage="switchLanguage" />
 
     <!-- 左侧菜单 -->
     <component v-show="product" :is="LeftMenu" :options="product" @controlParentPanel="controlPanel" />
@@ -84,9 +84,11 @@ export default {
         }
       } else {
         this.leftMenu = 'LeftMenu'
-        const key = modulePath(to)
-        this.product = this.$store.getters.addRouters[key] || menu[0] // 测试
+        this.product = this.$store.getters.menus[0] || menu[0] // 测试
       }
+    },
+    switchLanguage() {
+      this.init(this.$route)
     },
     controlPanel(status) {
       this.statusClass = status ? 'leftmenu-expand' : ''

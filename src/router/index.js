@@ -35,6 +35,8 @@ const Pickup = () => import('@/page/comment/pickup.vue')
 const Finance = () => import('@/page/surround/finance.vue')
 const Accessory = () => import('@/page/surround/accessory.vue')
 
+const Advance = () => import('@/page/senior/index.vue')
+
 Vue.use(Router)
 
 export const constantRouterMap = [
@@ -110,6 +112,8 @@ export const asyncRouterMap = [
 
       { path: '/insight/surround/finance', name: 'Finance', component: Finance },
       { path: '/insight/surround/accessory', name: 'Accessory', component: Accessory },
+
+      { path: '/insight/analy/advance', name: 'Advance', component: Advance },
 
       { path: '*', redirect: '/insight/overview' }
     ]

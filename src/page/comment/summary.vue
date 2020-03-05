@@ -3,14 +3,30 @@
     <iw-banner/>
     <div class="main-content">
       <iw-search
+        @comparison="changeContrastForm"
         @change="changeSearchForm"
       />
-      <a-card title="查询结果">
+      <a-card v-if="activeCard===1" title="查询结果">
         <a-row :gutter="20" class="iw-card-container iw-row">
           <a-col v-for="(item, keyword) in summaryData" :span="12" :key="keyword" class="iw-card-container">
             <iw-card :title="item.title" style="width: 100%;">
               <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
                 <iw-chart :options="item.data" style="height: 180px;" />
+              </template>
+              <template v-else-if="item.data.series&&item.data.series.length">
+                <iw-simple-box :data="item.data" :show-number="false" :label-width="200" is-percent style="padding-top: 10px;" />
+              </template>
+              <iw-empty v-else :status="item.status" style="height:200px;" />
+            </iw-card>
+          </a-col>
+        </a-row>
+      </a-card>
+      <a-card v-if="activeCard===2" title="查询结果">
+        <a-row :gutter="20" class="iw-card-container iw-row">
+          <a-col v-for="(item, keyword) in summaryData" :span="12" :key="keyword" class="iw-card-container">
+            <iw-card :title="item.title" style="width: 100%;">
+              <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
+                <iw-chart :options="item.data" style="height: 100%;" />
               </template>
               <template v-else-if="item.data.series&&item.data.series.length">
                 <iw-simple-box :data="item.data" :show-number="false" :label-width="200" is-percent style="padding-top: 10px;" />
@@ -30,7 +46,7 @@ import IwBanner from '@/components/banner/index'
 import IwCard from '@/page/components/card'
 import IwSearch from '@/page/components/search'
 import IwSimpleBox from '@/page/components/simple-box'
-import { getEchartOption } from '@/api/common'
+import { getEchartOption, getEchartOptionContrast } from '@/api/common'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
 
@@ -48,7 +64,9 @@ export default {
   },
   data() {
     return {
+      activeCard: 1,
       dataForm: {},
+      contrastForm: {},
       pieKeys: ['a', 'b', 'c'],
       summaryData: {
         a: { key: 10070, title: '总体销售满意度', status: 0, data: {}},
@@ -64,7 +82,13 @@ export default {
   methods: {
     changeSearchForm(form) {
       this.dataForm = Object.assign(this.dataForm, form)
+      this.activeCard = 1
       this.getData()
+    },
+    changeContrastForm(form) {
+      this.dataForm = Object.assign(this.dataForm, form)
+      this.activeCard = 2
+      this.getContrastData()
     },
     // API
     getData() {
@@ -72,6 +96,13 @@ export default {
         const item = this.summaryData[keyword]
         const params = Object.assign({}, this.dataForm, { key: item.key })
         this.getEchartOption(params, 'summary', keyword)
+      }
+    },
+    getContrastData() {
+      for (const keyword in this.summaryData) {
+        const item = this.summaryData[keyword]
+        const params = Object.assign({}, this.contrastForm, { key: item.key })
+        this.getEchartOptionContrast(params, 'summary', keyword)
       }
     },
     getEchartOption(params, group, keyword) {
@@ -92,6 +123,32 @@ export default {
                 showTooltip: false
               }).getChart()
           )
+          this.$set(this[group + 'Data'][keyword], 'status', 200)
+          resolve(res)
+        }).catch(res => {
+          this.$set(this[group + 'Data'][keyword], 'status', 500)
+          reject(res)
+        })
+      })
+    },
+    getEchartOptionContrast(params, group, keyword) {
+      return new Promise((resolve, reject) => {
+        getEchartOptionContrast(params).then(res => {
+          const data = res.data || {}
+          this.$set(this[group + 'Data'][keyword], 'data', new Chart('bar', data.option, {
+            backgroundColor: 'transparent',
+            dataZoom: { show: false },
+            legend: { orient: 'horizontal', bottom: 0 },
+            grid: {
+              top: 10,
+              bottom: 30,
+              left: 50,
+              right: 50
+            },
+            barMaxWidth: 24,
+            labelColor: '#FFF',
+            defaultField: { type: 'normal', unit: '' }
+          }).getChart())
           this.$set(this[group + 'Data'][keyword], 'status', 200)
           resolve(res)
         }).catch(res => {

@@ -160,15 +160,23 @@ export class Chart {
     this.config.geoJson = geoJson
     // 排除异常
     if (this.config.dataZoom.start === undefined) {
-      if (this.option.xAxis && this.option.xAxis[0].data) {
-        const len = this.option.xAxis[0].data.length
-        this.config.dataZoom.start = len <= this.config.numPerPage ? 0 : parseInt(((len - this.config.numPerPage) / len) * 100)
+      if (this.option.xAxis) {
+        let xAxis = this.option.xAxis
+        xAxis = _.get(xAxis, '[0]') || xAxis
+        if (xAxis.data && xAxis.data.length) {
+          const len = xAxis.data.length
+          this.config.dataZoom.start = len <= this.config.numPerPage ? 0 : parseInt(((len - this.config.numPerPage) / len) * 100)
+        }
       }
     }
     if (this.config.dataZoom.start === undefined) {
-      if (this.option.yAxis && this.option.yAxis[0].data && this.option.yAxis[0].type === 'category') {
-        const len = this.option.yAxis[0].data.length
-        this.config.dataZoom.start = len <= this.config.numPerPage ? 0 : parseInt(((len - this.config.numPerPage) / len) * 100)
+      if (this.option.yAxis) {
+        let yAxis = this.option.yAxis
+        yAxis = _.get(yAxis, '[0]') || yAxis
+        if (yAxis && yAxis.data && yAxis.type === 'category') {
+          const len = yAxis.data.length
+          this.config.dataZoom.start = len <= this.config.numPerPage ? 0 : parseInt(((len - this.config.numPerPage) / len) * 100)
+        }
       }
     }
   }
@@ -850,6 +858,8 @@ export class Chart {
   getBarChart() {
     const _this = this
     const config = this.config
+    const xAxis = _.get(this.option.xAxis, '[0]') || this.option.xAxis
+    const yAxis = _.get(this.option.yAxis, '[0]') || this.option.yAxis
     const option = {
       backgroundColor: config.backgroundColor || '#fff',
       title: _this.option.title ? [
@@ -884,7 +894,7 @@ export class Chart {
           }
         }
       },
-      color: (config.customColor && config.customColor.length) ? config.customColor : color.bar[Math.min(_this.option.series[0].data.length, 12) - 1],
+      color: (config.customColor && config.customColor.length) ? config.customColor : color.bar,
       legend: _this.option.legend && config.legend === false ? {
         orient: 'horizontal',
         bottom: '5%',
@@ -905,12 +915,8 @@ export class Chart {
         borderWidth: 0,
         ...config.grid
       },
-      // grid: {
-      //   borderWidth: 0,
-      //   ..._this.config.grid
-      // },
       xAxis: [
-        _this.option.xAxis && _this.option.xAxis[0] ? {
+        xAxis ? {
           name: config.xAxisName[0],
           nameTextStyle: {
             color: '#7f8593'
@@ -929,17 +935,13 @@ export class Chart {
             interval: config.axisLabelInterval,
             rotate: config.axisLabelRotate
           },
-          show: !!_this.option.xAxis[0],
-          type: _this.option.xAxis[0].type || config.xAxisType,
-          data: (_this.option.xAxis[0] && _this.option.xAxis[0].data) ? _this.option.xAxis[0].data.map(item => { return item || '' }) : []
+          show: !!xAxis,
+          type: xAxis.type || config.xAxisType,
+          data: xAxis && xAxis.data ? xAxis.data.map(item => { return item || '' }) : []
         } : {}
-        // this.option.xAxis && this.option.xAxis[1] ? {
-        //   show: !!this.option.xAxis[1],
-        //   type: this.option.xAxis[1].type || config.xAxisType
-        // } : {}
       ],
       yAxis: [
-        config.yAxisShow && _this.option.yAxis && _this.option.yAxis[0] ? {
+        config.yAxisShow && yAxis ? {
           name: config.yAxisName[0],
           nameLocation: config.yAxisInverse ? 'start' : 'end',
           nameTextStyle: {
@@ -960,11 +962,10 @@ export class Chart {
             fontSize: 12,
             color: '#7f8593'
           },
-          max: config.yAxisMax,
-          show: _this.option.yAxis[0].show,
-          type: _this.option.yAxis[0].type || config.yAxisType,
+          show: yAxis.show,
+          type: yAxis.type || config.yAxisType,
           inverse: config.yAxisInverse,
-          data: _this.option.yAxis[0] ? _this.option.yAxis[0].data : []
+          data: yAxis && yAxis.data ? yAxis.data : []
         } : { max: config.yAxisShow, show: false }
       ],
       dataZoom: config.dataZoom.show ? [
@@ -1002,7 +1003,8 @@ export class Chart {
           markLine: config.itemShowIndex.includes(key) ? config.markLine : {},
           label: {
             normal: {
-              show: config.itemShowIndex.includes(key),
+              show: true,
+              position: 'inside',
               color: config.labelColor,
               formatter: (params) => {
                 if (config.labelFormatter) {
@@ -1018,6 +1020,7 @@ export class Chart {
         }
       })
     }
+    console.log(option)
     return option
   }
 

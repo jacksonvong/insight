@@ -1,0 +1,122 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "tooltip": {
+        "trigger": "axis", 
+        "axisPointer": {
+          "type": "shadow"
+        }
+      }, 
+      "legend": {
+        "data": [
+          "直接访问", 
+          "邮件营销", 
+          "联盟广告", 
+          "视频广告", 
+          "搜索引擎", 
+          "其他"
+        ]
+      }, 
+      "yAxis": {
+        "type": "value"
+      }, 
+      "xAxis": {
+        "type": "category", 
+        "data": [
+          "周一", 
+          "周二", 
+          "周三"
+        ]
+      }, 
+      "series": [
+        {
+          "name": "直接访问", 
+          "type": "bar", 
+          "stack": "总量", 
+          "label": {
+            "show": true
+          }, 
+          "data": [
+            320, 
+            302, 
+            301
+          ]
+        }, 
+        {
+          "name": "邮件营销", 
+          "type": "bar", 
+          "stack": "总量", 
+          "label": {
+            "show": true
+          }, 
+          "data": [
+            120, 
+            132, 
+            101
+          ]
+        }, 
+        {
+          "name": "联盟广告", 
+          "type": "bar", 
+          "stack": "总量", 
+          "label": {
+            "show": true, 
+            "position": "inside"
+          }, 
+          "data": [
+            220, 
+            182, 
+            191
+          ]
+        }, 
+        {
+          "name": "视频广告", 
+          "type": "bar", 
+          "stack": "总量", 
+          "label": {
+            "show": true
+          }, 
+          "data": [
+            150, 
+            212, 
+            201
+          ]
+        }, 
+        {
+          "name": "搜索引擎", 
+          "type": "bar", 
+          "stack": "总量", 
+          "label": {
+            "show": true
+          }, 
+          "data": [
+            820, 
+            832, 
+            901
+          ]
+        },
+        {
+          "name": "其他", 
+          "type": "bar", 
+          "stack": "总量", 
+          "label": {
+            "show": true
+          }, 
+          "data": [
+            820, 
+            832, 
+            901
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

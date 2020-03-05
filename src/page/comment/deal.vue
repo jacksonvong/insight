@@ -9,12 +9,12 @@
         <a-row :gutter="20" class="iw-card-container iw-row">
           <a-col :span="12">
             <div v-for="(item, keyword) in leftData" :key="keyword" class="iw-card-container">
-              <iw-card :title="item.title" style="width: 100%;">
-                <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
-                  <iw-chart :options="item.data" style="height: 180px;" />
+              <iw-card :title="item.title+'['+item.sampleNum+']'" style="width: 100%;">
+                <template v-if="item.option.series&&item.option.series.length&&pieKeys.includes(keyword)">
+                  <iw-chart :options="item.option" style="height: 180px;" />
                 </template>
-                <template v-else-if="item.data.series&&item.data.series.length">
-                  <iw-simple-box :data="item.data" :show-number="false" :label-width="200" style="padding-top: 10px;" />
+                <template v-else-if="item.option.series&&item.option.series.length">
+                  <iw-simple-box :data="item.option" :show-number="false" :label-width="200" is-percent style="padding-top: 10px;" />
                 </template>
                 <iw-empty v-else :status="item.status" style="height:200px;" />
               </iw-card>
@@ -26,11 +26,11 @@
                 <a-row v-if=" item.children" class="iw-card-container">
                   <a-col v-for="(item2, keyword2) in item.children" :span="12" :key="item2.key" class="iw-card-container">
                     <iw-card-inner :title="item2.title" >
-                      <template v-if="item2.data&&pieKeys.includes(keyword2)">
-                        <iw-chart :options="item2.data" style="height: 180px;" />
+                      <template v-if="item2.option&&pieKeys.includes(keyword2)">
+                        <iw-chart :options="item2.option" style="height: 180px;" />
                       </template>
-                      <template v-else-if="item2.data">
-                        <iw-simple-box :data="item2.data" :show-number="false" :label-width="150" style="padding-top: 10px;" />
+                      <template v-else-if="item2.option">
+                        <iw-simple-box :data="item2.option" :show-number="false" :label-width="150" is-percent style="padding-top: 10px;" />
                       </template>
                       <iw-empty v-else :status="item2.status" style="height:200px;" />
                     </iw-card-inner>
@@ -74,22 +74,22 @@ export default {
       dataForm: {},
       pieKeys: ['a', 'c1', 'd1'],
       leftData: {
-        a: { key: 10082, title: '交易过程满意度', status: 0, data: {}},
-        b: { key: 10083, title: '不满意的原因', status: 0, data: {}}
+        a: { key: 10082, title: '交易过程满意度', status: 0, option: {}},
+        b: { key: 10083, title: '不满意的原因', status: 0, option: {}}
       },
       rightData: {
         c: {
           title: '对赠送内容评价',
           children: {
-            c1: { key: 10085, title: '是否遵守承诺', status: 0, data: {}},
-            c2: { key: 10084, title: '是否遵守承诺', status: 0, data: {}}
+            c1: { key: 10085, title: '是否遵守承诺', status: 0, option: {}},
+            c2: { key: 10084, title: '赠送内容', status: 0, option: {}}
           }
         },
         d: {
           title: '对金融贷款评价',
           children: {
-            d1: { key: 10086, title: '金融贷款满意度', status: 0, data: {}},
-            d2: { key: 10087, title: '不满意的原因', status: 0, data: {}}
+            d1: { key: 10086, title: '金融贷款满意度', status: 0, option: {}},
+            d2: { key: 10087, title: '不满意的原因', status: 0, option: {}}
           }
         }
       }
@@ -146,10 +146,11 @@ export default {
                 legend: { show: false },
                 showTooltip: false
               }).getChart()
-            this.$set(obj, 'data', option)
+            this.$set(obj, 'option', option)
           } else {
-            this.$set(obj, 'data', data.option)
+            this.$set(obj, 'option', data.option)
           }
+          this.$set(obj, 'sampleNum', data.sampleNum)
           this.$set(obj, 'status', 200)
           resolve(res)
         }).catch(res => {

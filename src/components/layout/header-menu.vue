@@ -13,35 +13,49 @@
         </router-link>
       </dd>
     </dl>
-    <a-dropdown :trigger="['click']" class="userbtn">
-      <a class="ant-dropdown-link" href="#">
-        <i class="userlogo"><em v-if="showNewMsg" class="y-news-spot" /></i>
-        {{ username }} <a-icon type="down" />
-      </a>
-      <a-menu slot="overlay">
-        <a-menu-item key="0">
-          <a href="javascript:void(0)">基本信息</a>
-        </a-menu-item>
-        <a-menu-item key="1">
-          <a href="#/feedback_results">反馈结果</a>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a href="#/change_password">修改密码</a>
-        </a-menu-item>
-        <a-menu-divider />
-        <a-menu-item key="4">
-          <a @click="logout()">退出登录</a>
-        </a-menu-item>
-      </a-menu>
-    </a-dropdown>
-    <router-link v-if="isProductPage" class="back-home" to="/home">
-      返回快捷入口
-    </router-link>
+    <div class="header-right">
+      <router-link v-if="isProductPage" class="back-home" to="/home">
+        返回快捷入口
+      </router-link>
+      <a-dropdown :trigger="['click']" class="userbtn">
+        <img v-if="language === 'zh_CN'" style="height: 20px;" src="~@/assets/images/home/language-zh.png" alt="">
+        <img v-if="language === 'en'" style="height: 20px;" src="~@/assets/images/home/language-en.png" alt="">
+        <a-menu slot="overlay" @click="handleSetLanguage">
+          <a-menu-item key="zh_CN" :disabled="language==='zh_CN'">
+            中文
+          </a-menu-item>
+          <a-menu-item key="en" :disabled="language==='en'">
+            English
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+      <a-dropdown :trigger="['click']" :title="username" class="userbtn">
+        <a class="ant-dropdown-link" href="#">
+          <i class="userlogo"><em v-if="showNewMsg" class="y-news-spot" /></i>
+          {{ username }} <a-icon type="down" />
+        </a>
+        <a-menu slot="overlay">
+          <a-menu-item key="0">
+            <a href="#/base_info">基本信息</a>
+          </a-menu-item>
+          <a-menu-item key="1">
+            <a href="#/feedback_results">反馈结果</a>
+          </a-menu-item>
+          <a-menu-item key="3">
+            <a href="#/change_password">修改密码</a>
+          </a-menu-item>
+          <a-menu-divider />
+          <a-menu-item key="4">
+            <a @click="logout()">退出登录</a>
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { Dropdown, Menu, Icon } from 'ant-design-vue'
+import { Dropdown, Menu, Icon, message } from 'ant-design-vue'
 import store from '@/store'
 import { getFeedbackData } from '@/api/index'
 
@@ -73,6 +87,9 @@ export default {
     }
   },
   computed: {
+    language() {
+      return this.$store.state.app.language
+    },
     isProductPage() {
       return !['/home', '/information', '/home/', '/information/'].includes(this.$route.path)
     }
@@ -89,6 +106,23 @@ export default {
     switchProduct(item) {
       this.$router.push({ path: item.url })
       this.selectedMenu = item.title
+    },
+    handleSetLanguage(item) {
+      const lang = item.key
+      this.$i18n.locale = lang
+      this.$store.dispatch('setLanguage', lang)
+      this.$store.dispatch('GetMenus').then(res => {
+        const menus = res.data
+        store.dispatch('GenerateRoutes', { menus }).then(() => {
+          this.$emit('switchLanguage')
+          if (lang === 'zh_CN') {
+            message.success('语言切换成功')
+          }
+          if (lang === 'en') {
+            message.success('Switch Language Success')
+          }
+        })
+      })
     },
     logout() {
       store.dispatch('LogOut').then(response => {
@@ -177,15 +211,19 @@ $font-family: 'PingFangHK-Semibold';
       }
     }
   }
+  .header-right{
+    position: absolute;top: 0;right: 0;
+  }
   .back-home{
-    float: right;background: rgba(255,255,255,.1);color: #fff;border-radius: 13.5px;
+    float: left;;background: rgba(255,255,255,.1);color: #fff;border-radius: 13.5px;
     width: 106px;height: 27px;line-height: 26px;text-align: center;margin: 18px 20px 0 0;
   }
   .userbtn {
-    @include clearfix();
-    float: right;
+    @include clearfix();@include text-hide();
+    float: left;
+    margin: 22px 20px 0 0;
+    max-width: 160px;
     color: #fff;
-    line-height: $height;
     cursor: pointer;
     .el-dropdown { height: 40px; }
     .dropdown-btn { @include font-adjust(14px, $height, #fff, left); }

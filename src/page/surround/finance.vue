@@ -14,7 +14,7 @@
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
                     <template v-else-if="item.data">
-                      <iw-simple-box :data="item.data" :show-number="false" :label-width="70" is-percent style="padding-top: 10px; height: 200px;" />
+                      <iw-simple-box :data="item.data" :show-number="false" :label-width="70" :is-percent="keyword!=='rate'" style="padding-top: 10px; min-height: 180px;" />
                     </template>
                     <iw-empty v-else :status="item.status" style="height:200px;" />
                   </iw-card-inner>
@@ -23,7 +23,7 @@
             </iw-card>
           </a-col>
           <a-col :span="12" class="iw-card-container">
-            <iw-card title="保险产品" style="width: 100%; height: auto;">
+            <iw-card title="保险产品" style="width: 100%;" body-style="height: auto;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in insuranceData" :key="item.key" class="iw-card-container iw-col8">
                   <iw-card-inner :title="item.title">
@@ -31,14 +31,14 @@
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
                     <template v-else-if="item.data">
-                      <iw-simple-box :data="item.data" :show-number="false" :label-width="100" is-percent style="padding-top: 10px;" />
+                      <iw-simple-box :data="item.data" :show-number="false" :label-width="100" is-percent style="padding-top: 10px; min-height: 180px;" />
                     </template>
                     <iw-empty v-else :status="item.status" style="height:200px;" />
                   </iw-card-inner>
                 </div>
               </div>
             </iw-card>
-            <iw-card title="延保产品" style="width: 100%; height: auto;">
+            <iw-card title="延保产品" style="width: 100%;" body-style="height: auto;">
               <div class="iw-card-container">
                 <div v-for="(item, keyword) in extendData" :key="item.key" class="iw-card-container iw-col12">
                   <iw-card-inner :title="item.title" >
@@ -46,7 +46,7 @@
                       <iw-chart :options="item.data" style="height: 180px;" />
                     </template>
                     <template v-else-if="item.data">
-                      <iw-simple-box :data="item.data" :show-number="false" :label-width="100" is-percent style="padding-top: 10px;" />
+                      <iw-simple-box :data="item.data" :show-number="false" :label-width="100" is-percent style="padding-top: 10px; min-height: 180px;" />
                     </template>
                     <iw-empty v-else :status="item.status" style="height:200px;" />
                   </iw-card-inner>
@@ -93,7 +93,7 @@ export default {
         period: { key: 10004, title: '余款期数', status: 0, data: {}}, // 余款期数 key: 10004
         loan: { key: 10002, title: '贷款途径', status: 0, data: {}}, // 贷款途径 key: 10002
         repay: { key: 10005, title: '还款方式', status: 0, data: {}}, // 还款方式 key: 10005
-        rate: { key: 10007, title: '利率', status: 0, data: {}} // 利率 key: 10007
+        rate: { key: 10007, title: '利率计算方式', status: 0, data: {}} // 利率 key: 10007
       },
       insuranceData: {
         buy: { key: 10008, title: '购买保险', status: 0, data: {}}, // 购买保险 key: 10008

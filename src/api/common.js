@@ -10,3 +10,13 @@ export function getEchartOption(params) {
   })
 }
 
+export function getEchartOptionContrast(params) {
+  return request({
+    url: '/consumer-insight/common-echart/get-echart-option-contrast',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+

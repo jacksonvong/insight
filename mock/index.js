@@ -3,7 +3,7 @@ const fs = require('fs')
 function fromJSONFile(filename) {
   return (req, res) => {
     let data
-    if (filename === 'common-echart/10001') {
+    if (filename.indexOf('common-echart') > -1) {
       const key = req.body.data.key
       const path = filename.replace('10001', key)
       data = fs.readFileSync(`mock/data/${path}.json`).toString()
@@ -65,8 +65,9 @@ const proxy = {
   'POST /api/consumer-insight/old-car/get-used-car': fromJSONFile('user-character/old-car/get-used-car'),
   'POST /api/consumer-insight/old-car/get-deal-methods': fromJSONFile('user-character/old-car/get-deal-methods'),
 
-  'POST /api/consumer-insight/old-car/get-bar': fromJSONFile('user-character/old-car/get-bar')
+  'POST /api/consumer-insight/old-car/get-bar': fromJSONFile('user-character/old-car/get-bar'),
   // 周边产品需求
   // 'POST /api/consumer-insight/common-echart/get-echart-option': fromJSONFile('common-echart/10001')
+  'POST /api/consumer-insight/common-echart/get-echart-option-contrast': fromJSONFile('common-echart-contrast/10001')
 }
 module.exports = proxy

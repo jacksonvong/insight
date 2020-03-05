@@ -13,7 +13,6 @@
             <iw-date-picker
               v-model="dataForm.dataTime"
               :picker-options="pickerOptions"
-              :clearable="false"
               :editable="false"
               value-format="yyyyMM"
               type="monthrange"
@@ -83,7 +82,7 @@
             <iw-select
               v-model="dataForm.vehicleType"
               :data="searchFormData.vehicleType"
-              :placeholder="$t('search.energy')"
+              :placeholder="$t('search.vehicleType')"
               multiple
               show-check-all
               style="width: 120px;"
@@ -94,7 +93,7 @@
             <iw-select
               v-model="dataForm.segment"
               :data="searchFormData.segment"
-              :placeholder="$t('search.energy')"
+              :placeholder="$t('search.segment')"
               multiple
               show-check-all
               style="width: 120px;"
@@ -134,8 +133,8 @@
               :show-letter="showLetter"
               :filters="[{key: 1, value: $t('search.subModel')}, {key: 2, value: $t('search.brand')}]"
               :selected-filter="selectedFilter"
-              :title="$t('search.brand')"
-              :placeholder="$t('search.brand')"
+              :title="$t('search.subModel')"
+              :placeholder="$t('search.subModel')"
               :height="276"
               placement="bottomLeft"
               style="width: 120px;"
@@ -330,7 +329,7 @@ export default {
         brandIds: dataForm.brand[0],
         brandNatiIds: dataForm.brandNati,
         cityIds: this.cityIds,
-        cityLevel: dataForm.cityLevel,
+        cityLevelIds: dataForm.cityLevel,
         endYm: dataForm.dataTime ? dataForm.dataTime[1] : '',
         fuelTypeIds: dataForm.fuelType,
         modules: dataForm.module,

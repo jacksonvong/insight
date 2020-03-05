@@ -46,7 +46,7 @@
                           {{ row[column.dataIndex].name }}
                         </template>
                         <template v-else-if="column.dataIndex=='month'">
-                          {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }} 至 {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }}
+                          {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }} 至 {{ moment(row.endYm, 'YYYYMM').format('YYYY-MM') }}
                         </template>
                         <template v-else-if="column.dataIndex=='sampleNum'">
                           <a href="javascript:;" @click="handleSampleClick(row.module.name, row.ymSamples)">{{ row[column.dataIndex] }}</a>
@@ -105,7 +105,7 @@
                         {{ row[column.dataIndex].name }}
                       </template>
                       <template v-else-if="column.dataIndex=='month'">
-                        {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }} 至 {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }}
+                        {{ moment(row.startYm, 'YYYYMM').format('YYYY-MM') }} 至 {{ moment(row.endYm, 'YYYYMM').format('YYYY-MM') }}
                       </template>
                       <template v-else-if="column.dataIndex=='sampleNum'">
                         <a href="javascript:;" @click="handleSampleClick(row.module.name, row.ymSamples)">{{ row[column.dataIndex] }}</a>
@@ -212,7 +212,10 @@ export default {
         detail: false,
         post: false
       },
-      dataTime: undefined,
+      dataTime: [
+        moment([moment().year(), 0]).format('YYYYMM'),
+        moment([moment().year(), 0]).add(11, 'months').format('YYYYMM')
+      ],
       confirmLoading: false,
       innerData: [],
 
@@ -276,14 +279,7 @@ export default {
       }
       const selectedSampleList = this.sampleList.filter((item, key) => this.selectedRowKeys.includes(key))
       const params = { startYm: this.dataTime[0], endYm: this.dataTime[1] }
-      params.modules = selectedSampleList.map(item => {
-        item = {
-          moduleId: item.module.id,
-          cityId: item.city.id,
-          subModelId: item.subModel.id
-        }
-        return item
-      })
+      params.sampleList = selectedSampleList
       this.applyBuy(params)
       this.visible.post = false
     },

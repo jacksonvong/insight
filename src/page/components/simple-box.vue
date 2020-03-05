@@ -1,15 +1,15 @@
 <template>
   <div v-if="data.series" class="iw-charts-box">
     <div :style="'width: ' + (!isNaN(labelWidth) ? (labelWidth + 'px') : 'auto')" class="iw-charts-left">
-      <div v-for="(item, key) in yAxisData" :key="key" :title="item" class="iw-charts-name">{{ item }}</div>
+      <div v-for="(item, key) in yAxisData" :key="key" :title="item" :class="['iw-charts-name', {'high-bar': highBar}]">{{ item }}</div>
     </div>
     <div class="iw-charts-center">
-      <div v-for="(item, key) in seriesData" :key="key" :title="item.value" class="iw-charts-bar-wrap" >
+      <div v-for="(item, key) in seriesData" :key="key" :title="item.value" :class="['iw-charts-bar-wrap', {'high-bar': highBar}]" >
         <span :style="{width: item.width}" class="iw-charts-bar" />
       </div>
     </div>
     <div v-if="showNumber" class="iw-charts-right">
-      <div v-for="(item, key) in seriesData" :key="key" class="iw-charts-bar-number">{{ item.value }}</div>
+      <div v-for="(item, key) in seriesData" :key="key" :class="['iw-charts-bar-number', {'high-bar': highBar}]">{{ item.value }}</div>
     </div>
   </div>
 </template>
@@ -30,6 +30,10 @@ export default {
       default: ''
     },
     isPercent: {
+      type: Boolean,
+      default: false
+    },
+    highBar: {
       type: Boolean,
       default: false
     },
@@ -61,9 +65,9 @@ export default {
     maxValue() {
       const data = this.data.series instanceof Array ? this.data.series[0].data : this.data.series.data
       return Math.max(...data.map(item => {
-        const value = (item && item.value) ? item.value : item
+        const value = item.hasOwnProperty('value') ? item.value : item
         return value
-      }))
+      })) || 0
     }
   },
   created() {
@@ -97,6 +101,10 @@ export default {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      &.high-bar {
+        height: 40px;
+        padding: 12px 0;
+      }
     }
   }
   .iw-charts-right {
@@ -113,6 +121,10 @@ export default {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      &.high-bar {
+        height: 40px;
+        padding: 12px 0;
+      }
     }
   }
   .iw-charts-center {
@@ -132,6 +144,13 @@ export default {
         height: 8px;
         max-width: 100%;
         width: 0%;
+      }
+      &.high-bar {
+        height: 40px;
+        padding: 12px 0;
+        .iw-charts-bar {
+          height: 16px;
+        }
       }
     }
   }

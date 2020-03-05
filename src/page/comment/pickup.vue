@@ -7,13 +7,24 @@
       />
       <a-card title="查询结果">
         <a-row :gutter="20" class="iw-card-container iw-row">
-          <a-col v-for="(item, keyword) in pickupData" :span="12" :key="keyword" class="iw-card-container">
-            <iw-card :title="item.title" style="width: 100%; height: 100%;">
-              <template v-if="item.data.series&&item.data.series.length&&pieKeys.includes(keyword)">
-                <iw-chart :options="item.data" style="height: 180px;" />
+          <a-col :span="12" class="iw-card-container">
+            <iw-card v-for="(item, keyword) in leftData" :key="keyword" :title="item.title+'['+(item.sampleNum||0)+']'" :extra="'avgNum: '+item.avgNum" style="width: 100%; height: 100%;">
+              <template v-if="item.option.series&&item.option.series.length&&pieKeys.includes(keyword)">
+                <iw-chart :options="item.option" style="height: 180px;" />
               </template>
-              <template v-else-if="item.data.series&&item.data.series.length">
-                <iw-simple-box :data="item.data" :show-number="false" :label-width="200" is-percent style="padding-top: 10px;" />
+              <template v-else-if="item.option.series&&item.option.series.length">
+                <iw-simple-box :data="item.option" :show-number="false" :label-width="200" is-percent style="padding-top: 10px;" />
+              </template>
+              <iw-empty v-else :status="item.status" style="height:200px;" />
+            </iw-card>
+          </a-col>
+          <a-col :span="12" class="iw-card-container">
+            <iw-card v-for="(item, keyword) in rightData" :key="keyword" :title="item.title+'['+(item.sampleNum||0)+']'" style="width: 100%; height: 100%;" body-style="height: 500px;">
+              <template v-if="item.option.series&&item.option.series.length&&pieKeys.includes(keyword)">
+                <iw-chart :options="item.option" style="height: 360px;" />
+              </template>
+              <template v-else-if="item.option.series&&item.option.series.length">
+                <iw-simple-box :data="item.option" :show-number="false" :label-width="200" is-percent high-bar style="padding-top: 10px;" />
               </template>
               <iw-empty v-else :status="item.status" style="height:200px;" />
             </iw-card>
@@ -50,10 +61,12 @@ export default {
     return {
       dataForm: {},
       pieKeys: ['a'],
-      pickupData: {
-        a: { key: 10088, title: '交车过程满意度', status: 0, data: {}},
-        b: { key: 10089, title: '交车过程销售人员的行为', status: 0, data: {}},
-        c: { key: 10090, title: '不满意的原因', status: 0, data: {}}
+      leftData: {
+        a: { key: 10088, title: '交车过程满意度', status: 0, option: {}},
+        b: { key: 10089, title: '不满意的原因', status: 0, option: {}}
+      },
+      rightData: {
+        c: { key: 10090, title: '交车过程销售人员的行为', status: 0, option: {}}
       }
     }
   },
@@ -67,10 +80,15 @@ export default {
     },
     // API
     getData() {
-      for (const keyword in this.pickupData) {
-        const item = this.pickupData[keyword]
+      for (const keyword in this.leftData) {
+        const item = this.leftData[keyword]
         const params = Object.assign({}, this.dataForm, { key: item.key })
-        this.getEchartOption(params, 'pickup', keyword)
+        this.getEchartOption(params, 'left', keyword)
+      }
+      for (const keyword in this.rightData) {
+        const item = this.rightData[keyword]
+        const params = Object.assign({}, this.dataForm, { key: item.key })
+        this.getEchartOption(params, 'right', keyword)
       }
     },
     getEchartOption(params, group, keyword) {
@@ -90,11 +108,13 @@ export default {
                 legend: { show: false },
                 showTooltip: false
               }).getChart()
-            this.$set(this[group + 'Data'][keyword], 'data', option)
+            this.$set(this[group + 'Data'][keyword], 'option', option)
           } else {
-            this.$set(this[group + 'Data'][keyword], 'data', data.option)
+            this.$set(this[group + 'Data'][keyword], 'option', data.option)
           }
           this.$set(this[group + 'Data'][keyword], 'status', 200)
+          this.$set(this[group + 'Data'][keyword], 'sampleNum', data.sampleNum)
+          this.$set(this[group + 'Data'][keyword], 'avgNum', data.avgNum)
           resolve(res)
         }).catch(res => {
           this.$set(this[group + 'Data'][keyword], 'status', 500)

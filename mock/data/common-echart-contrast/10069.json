@@ -1,0 +1,53 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": 0,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": null,
+      "xAxis": [
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "这家店有我想购买的型号（配置、颜色）",
+            "这家店的位置方便",
+            "这家店的店面、设施更整洁",
+            "这家店的价格最优惠",
+            "这家店的给我足够的关注",
+            "这家店的销售顾问更优秀",
+            "这家店提供的金融方案更有吸引力",
+            "朋友推荐"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "type": "bar",
+          "data": [
+            100,
+            80,
+            40,
+            10,
+            20,
+            40,
+            10,
+            20
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

@@ -5,13 +5,13 @@
       <iw-search @change="changeSearchForm" />
       <a-card title="查询结果">
         <div class="iw-card-container">
-          <iw-card v-for="(item, keyword) in accessoryData" :key="item.key" :title="item.title" body-style="height: auto;">
+          <iw-card v-for="(item, keyword) in accessoryData" :key="item.key" :title="item.title+'['+(item.sampleNum||0)+']'" body-style="height: auto;">
             <div class="iw-card-container">
-              <template v-if="item.data&&pieKeys.includes(keyword)">
-                <iw-chart :options="item.data" style="height: 180px;" />
+              <template v-if="item.option&&pieKeys.includes(keyword)">
+                <iw-chart :options="item.option" style="height: 180px;" />
               </template>
-              <template v-else-if="item.data">
-                <iw-simple-box :data="item.data" :show-number="false" :label-width="100" is-percent style="height: 180px;" />
+              <template v-else-if="item.option">
+                <iw-simple-box :data="item.option" :show-number="false" :label-width="100" is-percent style="min-height: 180px;" />
               </template>
               <iw-empty v-else :status="item.status" style="height: 180px;" />
             </div>
@@ -46,17 +46,17 @@ export default {
     return {
       dataForm: {},
       accessoryData: {
-        proportion: { key: 10014, title: '购买比例', status: 0, data: {}},
-        content: { key: 10018, title: '购买精品内容', status: 0, data: {}},
-        outer: { key: 10019, title: '外观附件', status: 0, data: {}},
-        inner: { key: 10020, title: '内饰附件', status: 0, data: {}},
-        electric: { key: 10021, title: '电子附件', status: 0, data: {}},
-        waste: { key: 10022, title: '易耗附件', status: 0, data: {}},
-        power: { key: 10023, title: '动力底盘附件', status: 0, data: {}},
-        sun: { key: 10012, title: '太阳膜价格', status: 0, data: {}},
-        footstep: { key: 10015, title: '蹬车踏板价格', status: 0, data: {}},
-        luggage: { key: 10016, title: '行李箱价格', status: 0, data: {}},
-        record: { key: 10017, title: '行车记录仪价格', status: 0, data: {}}
+        proportion: { key: 10014, title: '购买比例', status: 0, option: {}},
+        content: { key: 10018, title: '购买精品内容', status: 0, option: {}},
+        outer: { key: 10019, title: '外观附件', status: 0, option: {}},
+        inner: { key: 10020, title: '内饰附件', status: 0, option: {}},
+        electric: { key: 10021, title: '电子附件', status: 0, option: {}},
+        waste: { key: 10022, title: '易耗附件', status: 0, option: {}},
+        power: { key: 10023, title: '动力底盘附件', status: 0, option: {}},
+        sun: { key: 10012, title: '太阳膜价格', status: 0, option: {}},
+        footstep: { key: 10015, title: '蹬车踏板价格', status: 0, option: {}},
+        luggage: { key: 10016, title: '行李箱垫价格', status: 0, option: {}},
+        record: { key: 10017, title: '行车记录仪价格', status: 0, option: {}}
       },
       pieKeys: ['proportion']
     }
@@ -81,7 +81,7 @@ export default {
       return new Promise((resolve, reject) => {
         getEchartOption(params).then(res => {
           const data = res.data || {}
-          this.$set(this[group + 'Data'][keyword], 'data',
+          this.$set(this[group + 'Data'][keyword], 'option',
             (this.pieKeys.includes(keyword))
               ? new Chart('pie', data.option, {
                 customColor: ['#467BF9', '#21D1D9'],
@@ -97,6 +97,7 @@ export default {
           )
           console.log(this[group + 'Data'][keyword])
           this.$set(this[group + 'Data'][keyword], 'status', 200)
+          this.$set(this[group + 'Data'][keyword], 'sampleNum', data.sampleNum)
           resolve(res)
         }).catch(res => {
           this.$set(this[group + 'Data'][keyword], 'status', 500)
