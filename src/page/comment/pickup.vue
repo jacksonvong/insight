@@ -1,6 +1,6 @@
 <template>
   <div class="comment-pickup">
-    <iw-banner title="试乘试驾评价"/>
+    <iw-banner title="交车评价"/>
     <div class="main-content">
       <iw-search
         @change="changeSearchForm"
@@ -70,9 +70,6 @@ export default {
         c: { key: 10090, title: '交车过程销售人员的行为', status: 0, option: {}}
       }
     }
-  },
-  created() {
-    this.getData()
   },
   methods: {
     toThousand() {

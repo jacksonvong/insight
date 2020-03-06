@@ -1,6 +1,6 @@
 <template>
   <div class="comment-deal">
-    <iw-banner title="试乘试驾评价"/>
+    <iw-banner title="交易评价"/>
     <div class="main-content">
       <iw-search
         @change="changeSearchForm"
@@ -95,9 +95,6 @@ export default {
         }
       }
     }
-  },
-  created() {
-    this.getData()
   },
   methods: {
     toThousand() {

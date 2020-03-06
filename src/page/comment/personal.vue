@@ -1,6 +1,6 @@
 <template>
   <div class="comment-summary">
-    <iw-banner title="评价总体"/>
+    <iw-banner title="人员评价"/>
     <div class="main-content">
       <iw-search
         @change="changeSearchForm"
@@ -73,9 +73,6 @@ export default {
       },
       that: this
     }
-  },
-  created() {
-    this.getData()
   },
   methods: {
     toThousand() {

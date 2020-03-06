@@ -109,9 +109,6 @@ export default {
       pieKeys: ['payType', 'loan', 'repay', 'rateCalc', 'buy', 'situation']
     }
   },
-  created() {
-    this.getData()
-  },
   methods: {
     toThousand() {
       return toThousand(...arguments)

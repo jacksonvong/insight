@@ -1,6 +1,6 @@
 <template>
   <div class="comment-facility">
-    <iw-banner title="评价总体"/>
+    <iw-banner title="设施评价"/>
     <div class="main-content">
       <iw-search
         @change="changeSearchForm"
@@ -56,9 +56,6 @@ export default {
         b: { key: 10078, title: '不满意的原因', status: 0, data: {}}
       }
     }
-  },
-  created() {
-    this.getData()
   },
   methods: {
     toThousand() {

@@ -93,7 +93,7 @@
             <iw-select
               v-model="dataForm.segment"
               :data="searchFormData.segment"
-              :placeholder="$t('search.segment')"
+              :placeholder="$t('search.level')"
               multiple
               show-check-all
               style="width: 120px;"
@@ -131,7 +131,7 @@
               :default-value="[]"
               :data="searchFormData.subModel"
               :show-letter="showLetter"
-              :filters="[{key: 1, value: $t('search.subModel')}, {key: 2, value: $t('search.brand')}]"
+              :filters="[{key: 1, value: $t('search.segment')}, {key: 2, value: $t('search.brand')}]"
               :selected-filter="selectedFilter"
               :multiple="multiple.submodel"
               :title="$t('search.subModel')"
@@ -401,7 +401,7 @@ export default {
       }
     },
     async getData() {
-      this.getTimeRange()
+      await this.getTimeRange()
       this.getBrand()
       this.getCityLevel()
       this.getModule()
@@ -413,10 +413,9 @@ export default {
       const subModel = this.getSubModel()
       if (this.multiple.submodel === false) {
         await subModel
-        console.log(this.subModelData)
         this.handleSubModelChange([this.subModelData[0][0]['children'][0]['children'][0]['key']])
-        this.handleFormChange()
       }
+      this.handleFormChange()
     },
     getTimeRange() {
       return getTimeRange()

@@ -58,9 +58,6 @@ export default {
       }
     }
   },
-  created() {
-    this.getData()
-  },
   methods: {
     toThousand() {
       return toThousand(...arguments)

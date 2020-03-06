@@ -62,9 +62,6 @@ export default {
       pieKeys: ['proportion']
     }
   },
-  created() {
-    this.getData()
-  },
   methods: {
     toThousand() {
       return toThousand(...arguments)
