@@ -1,0 +1,72 @@
+{
+  "questUID": "string",
+  "data": {
+    "id": 10026,
+    "name": null,
+    "totalSampleSize": 0,
+    "avgNum": null,
+    "answerList": [
+      {
+        "id": 1,
+        "name": "前脸造型",
+        "value": null,
+        "sampleSize": null,
+        "key": null
+      },
+      {
+        "id": 2,
+        "name": "尾部设计",
+        "value": null,
+        "sampleSize": null,
+        "key": null
+      },
+      {
+        "id": 3,
+        "name": "侧面设计",
+        "value": null,
+        "sampleSize": null,
+        "key": null
+      },
+      {
+        "id": 4,
+        "name": "轮毂大小和造型",
+        "value": null,
+        "sampleSize": null,
+        "key": null
+      },
+      {
+        "id": 5,
+        "name": "车身整体流线",
+        "value": null,
+        "sampleSize": null,
+        "key": null
+      },
+      {
+        "id": 6,
+        "name": "外观工艺（漆面、接缝等）",
+        "value": null,
+        "sampleSize": null,
+        "key": null
+      },
+      {
+        "id": 7,
+        "name": "车身尺寸大小",
+        "value": null,
+        "sampleSize": null,
+        "key": null
+      },
+      {
+        "id": 8,
+        "name": "厢体类型（SUV/轿车/MPV/跨界设计等）",
+        "value": null,
+        "sampleSize": null,
+        "key": null
+      }
+    ]
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

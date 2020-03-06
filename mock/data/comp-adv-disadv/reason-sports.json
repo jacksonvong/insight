@@ -1,0 +1,149 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": null,
+    "avgNum": null,
+    "option": {
+      "title": null,
+      "legend": null,
+      "xAxis": [
+        {
+          "type": "value",
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "type": "category",
+          "show": true,
+          "data": [
+            "外观",
+            "空间",
+            "内饰",
+            "舒适性",
+            "动力性",
+            "操控性",
+            "安全性、智能辅助驾驶",
+            "配置、智能网联",
+            "品质、口碑",
+            "续航、充电、电池性能",
+            "品牌",
+            "购车价格、政策福利",
+            "使用成本、残值率",
+            "服务"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "type": "bar",
+          "data": [
+            {
+              "id": 1,
+              "name": "外观",
+              "value": null,
+              "sampleSize": null,
+              "key": "10026"
+            },
+            {
+              "id": 2,
+              "name": "空间",
+              "value": null,
+              "sampleSize": null,
+              "key": "10027"
+            },
+            {
+              "id": 3,
+              "name": "内饰",
+              "value": null,
+              "sampleSize": null,
+              "key": "10028"
+            },
+            {
+              "id": 4,
+              "name": "舒适性",
+              "value": null,
+              "sampleSize": null,
+              "key": "10029"
+            },
+            {
+              "id": 5,
+              "name": "动力性",
+              "value": null,
+              "sampleSize": null,
+              "key": "10030"
+            },
+            {
+              "id": 6,
+              "name": "操控性",
+              "value": null,
+              "sampleSize": null,
+              "key": "10031"
+            },
+            {
+              "id": 7,
+              "name": "安全性、智能辅助驾驶",
+              "value": null,
+              "sampleSize": null,
+              "key": "10032"
+            },
+            {
+              "id": 8,
+              "name": "配置、智能网联",
+              "value": null,
+              "sampleSize": null,
+              "key": "10033"
+            },
+            {
+              "id": 9,
+              "name": "品质、口碑",
+              "value": null,
+              "sampleSize": null,
+              "key": "10034"
+            },
+            {
+              "id": 10,
+              "name": "续航、充电、电池性能",
+              "value": null,
+              "sampleSize": null,
+              "key": "10035"
+            },
+            {
+              "id": 11,
+              "name": "品牌",
+              "value": null,
+              "sampleSize": null,
+              "key": "10036"
+            },
+            {
+              "id": 12,
+              "name": "购车价格、政策福利",
+              "value": null,
+              "sampleSize": null,
+              "key": "10037"
+            },
+            {
+              "id": 13,
+              "name": "使用成本、残值率",
+              "value": null,
+              "sampleSize": null,
+              "key": "10038"
+            },
+            {
+              "id": 14,
+              "name": "服务",
+              "value": null,
+              "sampleSize": null,
+              "key": "10039"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

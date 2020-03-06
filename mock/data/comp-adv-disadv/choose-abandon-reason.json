@@ -1,0 +1,105 @@
+{
+  "questUID": "string",
+  "data": {
+    "sampleNum": null,
+    "avgNum": null,
+    "option": {
+      "title": {
+        "text": "选择因和放弃因分析"
+      },
+      "legend": null,
+      "xAxis": [
+        {
+          "show": true
+        }
+      ],
+      "yAxis": [
+        {
+          "show": true
+        }
+      ],
+      "series": [
+        {
+          "type": "scatter",
+          "data": [
+            [
+              null,
+              null,
+              "外观"
+            ],
+            [
+              null,
+              null,
+              "空间"
+            ],
+            [
+              null,
+              null,
+              "内饰"
+            ],
+            [
+              null,
+              null,
+              "舒适性"
+            ],
+            [
+              null,
+              null,
+              "动力性"
+            ],
+            [
+              null,
+              null,
+              "操控性"
+            ],
+            [
+              null,
+              null,
+              "安全性、智能辅助驾驶"
+            ],
+            [
+              null,
+              null,
+              "配置、智能网联"
+            ],
+            [
+              null,
+              null,
+              "品质、口碑"
+            ],
+            [
+              null,
+              null,
+              "续航、充电、电池性能"
+            ],
+            [
+              null,
+              null,
+              "品牌"
+            ],
+            [
+              null,
+              null,
+              "购车价格、政策福利"
+            ],
+            [
+              null,
+              null,
+              "使用成本、残值率"
+            ],
+            [
+              null,
+              null,
+              "服务"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}
