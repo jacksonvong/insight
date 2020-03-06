@@ -78,9 +78,6 @@ export default {
       pieKeys: []
     }
   },
-  created() {
-    this.getData()
-  },
   methods: {
     changeDataForm(form) {
       this.dataForm = Object.assign({}, this.dataForm, form)

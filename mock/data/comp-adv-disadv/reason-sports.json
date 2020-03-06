@@ -41,28 +41,28 @@
             {
               "id": 1,
               "name": "外观",
-              "value": null,
+              "value": 0.3,
               "sampleSize": null,
               "key": "10026"
             },
             {
               "id": 2,
               "name": "空间",
-              "value": null,
+              "value": 0.23,
               "sampleSize": null,
               "key": "10027"
             },
             {
               "id": 3,
               "name": "内饰",
-              "value": null,
+              "value": 0.15,
               "sampleSize": null,
               "key": "10028"
             },
             {
               "id": 4,
               "name": "舒适性",
-              "value": null,
+              "value": 0.21,
               "sampleSize": null,
               "key": "10029"
             },
@@ -76,7 +76,7 @@
             {
               "id": 6,
               "name": "操控性",
-              "value": null,
+              "value": 0.09,
               "sampleSize": null,
               "key": "10031"
             },
@@ -90,14 +90,14 @@
             {
               "id": 8,
               "name": "配置、智能网联",
-              "value": null,
+              "value": 0.05,
               "sampleSize": null,
               "key": "10033"
             },
             {
               "id": 9,
               "name": "品质、口碑",
-              "value": null,
+              "value": 0.05,
               "sampleSize": null,
               "key": "10034"
             },

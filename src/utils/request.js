@@ -117,7 +117,7 @@ function conf(res) {
 }
 function redirect(hash) {
   if (parent === window) {
-    this.$router.push(hash || '/404')
+    // this.$router.push(hash || '/404')
   } else {
     parent.location.href = '/dashboard' + '/#' + (hash || '/404') + '?product=' + window.location.hash.replace('#', '')
   }

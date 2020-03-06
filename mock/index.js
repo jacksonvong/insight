@@ -53,6 +53,9 @@ const proxy = {
   'POST /api/consumer-insight/comp-compare/get-contact-order': fromJSONFile('comp-compare/get-contact-order'),
   'POST /api/consumer-insight/comp-compare/get-comp-top15': fromJSONFile('comp-compare/get-comp-top15/10001'),
   'POST /api/consumer-insight/comp-compare/get-comp-cross': fromJSONFile('comp-compare/get-comp-cross'),
+  'POST /api/consumer-insight/comp-adv-disadv/reason-sports': fromJSONFile('comp-adv-disadv/reason-sports'),
+  'POST /api/consumer-insight/comp-adv-disadv/reason-fine-item': fromJSONFile('comp-adv-disadv/reason-fine-item'),
+  'POST /api/consumer-insight/comp-adv-disadv/choose-abandon-reason': fromJSONFile('comp-adv-disadv/choose-abandon-reason'),
   'POST /api/consumer-insight/compete/get-select-reason': fromJSONFile('compete/get-select-reason'),
   'POST /api/consumer-insight/compete/get-bubble': fromJSONFile('compete/get-bubble2'),
 

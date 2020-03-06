@@ -45,5 +45,17 @@ export default {
     city: 'City',
     sampleNum: 'Sample Number',
     sampleNumTotal: 'Sample Number Total'
+  },
+  compete: {
+    tab: {
+      selectOrGiveUp: 'Reason to choose and quit',
+      inFlowAnaly: 'In-flow rival analysis',
+      outFlowAnaly: 'Out-flow rival analysis'
+    },
+    title: {
+      reasonToChoose: 'Reason to choose',
+      reasonToQuit: 'Reason to quit',
+      reasonToChooseAndQuitAnalysis: 'Reason to choose and quit analysis'
+    }
   }
 }

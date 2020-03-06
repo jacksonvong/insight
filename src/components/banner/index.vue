@@ -30,6 +30,7 @@ export default {
   },
   mounted() {
     const menus = arr2table(menusFormatter(this.$store.getters.menus))
+    console.log(menus)
     this.menu = menus.find(item => item.url === this.$route.path)
   },
   methods: {

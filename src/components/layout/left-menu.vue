@@ -38,11 +38,6 @@ var BiRouterLink = {
     }
   },
   mounted() {
-    const activeMenus = JQuery('.ant-menu-sub a[class*="router-link-exact-active"]')
-    if (!activeMenus.length) {
-      const url = JQuery('.ant-menu-sub a:first').attr('href') || ''
-      this.$router.push({ path: url.replace('#', '') })
-    }
   },
   methods: {
     activeUrl(item) {
@@ -117,6 +112,13 @@ export default {
     this.menuList = this.options
     for (const i in this.options.menuTreeNodes) {
       this.openKeys.push(this.options.menuTreeNodes[i].menuId)
+    }
+  },
+  updated() {
+    const activeMenus = JQuery('.ant-menu-sub a[class*="router-link-exact-active"]')
+    if (!activeMenus.length) {
+      const url = JQuery('.ant-menu-sub a:first').attr('href') || ''
+      this.$router.push({ path: url.replace('#', '') }).catch(e => {})
     }
   },
   methods: {

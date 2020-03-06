@@ -50,3 +50,33 @@ export function getCompCross(params) {
   })
 }
 
+export function getReasonSports(params) {
+  return request({
+    url: '/consumer-insight/comp-adv-disadv/reason-sports',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+
+export function getReasonItem(params) {
+  return request({
+    url: '/consumer-insight/comp-adv-disadv/reason-fine-item',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+
+export function getChooseAbandonReason(params) {
+  return request({
+    url: '/consumer-insight/comp-adv-disadv/choose-abandon-reason',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+

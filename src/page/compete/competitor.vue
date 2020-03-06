@@ -78,7 +78,7 @@ export default {
         car: { key: 10041, title: '到点', status: 0, option: {}},
         video: { key: 10042, title: '最终对比', status: 0, option: {}}
       },
-      finanlData: { key: 10042, title: '最终对比[对象]的车型', status: 0, option: {}},
+      finanlData: { key: '10042-top15', title: '最终对比[对象]的车型', status: 0, option: {}},
       crossData: { key: 10042, title: '选择原因和放弃原因分析', status: 0, option: {}},
       pieKeys: []
     }

@@ -176,6 +176,8 @@ $font-family: 'PingFangHK-Semibold';
     @include clearfix();
     width: calc(100% - 320px);
     float: left;
+    overflow: hidden;
+    height: 64px;
   }
   dt {
     @include clearfix();

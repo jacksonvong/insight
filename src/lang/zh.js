@@ -45,5 +45,17 @@ export default {
     city: '城市',
     sampleNum: '现有样本量',
     sampleNumTotal: '样本量合计'
+  },
+  compete: {
+    tab: {
+      selectOrGiveUp: '选择和放弃原因',
+      inFlowAnaly: '流入对手分析',
+      outFlowAnaly: '流出对手分析'
+    },
+    title: {
+      reasonToChoose: '选择原因',
+      reasonToQuit: '放弃原因',
+      reasonToChooseAndQuitAnalysis: '选择原因和放弃原因分析'
+    }
   }
 }

@@ -11,29 +11,29 @@
         @change="changeDataForm"
       />
       <a-card v-if="tabKey==1" title="查询结果">
-        <div class="iw-card-container iw-row">
-          <div class="iw-card-container iw-col12">
-            <iw-card title="选择原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
-              <iw-table-box :data="selectReasonData" />
+        <a-row :gutter="20" class="iw-card-container">
+          <a-col :span="12" class="iw-card-container">
+            <iw-card :title="leftData.title" style="width: 100%; height: 100%;" body-style="height: 400px;">
+              <iw-table-box :data="leftData.option" :active-key="leftData.activeKey" is-percent @click="item=>getReasonItem(item, 'left')" />
             </iw-card>
-          </div>
-          <div class="iw-card-container iw-col12">
-            <iw-card title="放弃原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
-              <iw-table-box :data="selectReasonData" />
+          </a-col>
+          <a-col :span="12" class="iw-card-container">
+            <iw-card :title="rightData.title" style="width: 100%; height: 100%;" body-style="height: 400px;">
+              <iw-table-box :data="rightData.option" :active-key="rightData.activeKey" is-percent @click="item=>getReasonItem(item, 'right')" />
             </iw-card>
-          </div>
-        </div>
-        <div class="iw-card-container iw-row">
-          <iw-card title="选择原因和放弃原因分析" style="width: 100%; height: 100%;" body-style="height: 540px;">
-            <div v-if="chartVb.series" style="height: 100%; position: relative;">
-              <iw-chart :options="chartVb" chart-id="chart-b" style="height: 510px;" />
+          </a-col>
+        </a-row>
+        <a-row class="iw-card-container">
+          <iw-card :title="bottomData.title" style="width: 100%; height: 100%;" body-style="height: 540px;">
+            <div v-if="bottomData.option.series" style="height: 100%; position: relative;">
+              <iw-chart :options="bottomData.option" chart-id="chart-b" style="height: 510px;" />
               <span class="chart-title-tips left-top">劣势点</span>
               <span class="chart-title-tips right-top"> 争议点</span>
               <span class="chart-title-tips left-bottom">低关注</span>
               <span class="chart-title-tips right-bottom">优势点</span>
             </div>
           </iw-card>
-        </div>
+        </a-row>
       </a-card>
       <a-card v-if="tabKey==2" title="查询结果">
         <div class="iw-card-container">
@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import { Card, Tooltip } from 'ant-design-vue'
+import { Card, Tooltip, Row, Col } from 'ant-design-vue'
 import IwBanner from '@/components/banner/index'
 import IwSearch from '@/page/components/search'
 import IwCard from '@/page/components/card'
@@ -109,13 +109,15 @@ import IwTableBox from '@/page/components/simple-table-box'
 import Top10Box from '@/page/components/top10-box'
 import IwChart from '@/components/charts'
 import { Chart } from '@/utils/echarts'
-import { getSelectReason, getBubble } from '@/api/compete'
+import { getReasonSports, getReasonItem, getChooseAbandonReason } from '@/api/compete'
 import { getTop10 } from '@/api/old-car'
 
 export default {
-  name: 'Info',
+  name: 'GoodAndBad',
   components: {
     ACard: Card,
+    ARow: Row,
+    ACol: Col,
     ATooltip: Tooltip,
     IwBanner: IwBanner,
     IwSearch: IwSearch,
@@ -128,19 +130,19 @@ export default {
   data() {
     return {
       tabList: [
-        { key: '1', tab: '选择和放弃原因' },
-        { key: '2', tab: '流入对手分析' },
-        { key: '3', tab: '流出对手分析' }
+        { key: '1', tab: this.$t('compete.tab.selectOrGiveUp') },
+        { key: '2', tab: this.$t('compete.tab.inFlowAnaly') },
+        { key: '3', tab: this.$t('compete.tab.outFlowAnaly') }
       ],
       tabKey: '1',
       selectReasonData: {},
       chartVb: {},
+      top10Data: [],
 
-      top10Data: []
+      leftData: { key: '10024', title: this.$t('compete.title.reasonToChoose'), status: 0, activeKey: '', option: {}},
+      rightData: { key: '10043', title: this.$t('compete.title.reasonToQuit'), status: 0, activeKey: '', option: {}},
+      bottomData: { key: '10024-10043', title: this.$t('compete.title.reasonToChooseAndQuitAnalysis'), status: 0, option: {}}
     }
-  },
-  created() {
-    this.getData()
   },
   methods: {
     changeTab(key) {
@@ -155,31 +157,47 @@ export default {
     },
     // API
     getData() {
-      this.getSelectReason()
-      this.getBubble()
+      this.getReasonSports(Object.assign({}, this.dataForm, { key: this.leftData.key }), 'left')
+      this.getReasonSports(Object.assign({}, this.dataForm, { key: this.rightData.key }), 'right')
+      this.getChooseAbandonReason(Object.assign({}, this.dataForm, { key: this.bottomData.key }), 'bottom')
     },
-    getSelectReason(params) {
-      return getSelectReason(params).then(res => {
-        const data = res.data || {}
-        this.selectReasonData = data
+    getReasonSports(params, group) {
+      params.subModelId = params.subModelIds[0]
+      return new Promise((resolve, reject) => {
+        getReasonSports(params).then(res => {
+          const data = res.data || {}
+          this.$set(this[group + 'Data'], 'option', data.option)
+          this.$set(this[group + 'Data'], 'avgNum', data.avgNum)
+          this.$set(this[group + 'Data'], 'sampleNum', data.sampleNum)
+          this.$set(this[group + 'Data'], 'status', 200)
+          resolve(res)
+        }).catch(res => {
+          this.$set(this[group + 'Data'], 'status', 500)
+          reject(res)
+        })
       })
     },
-    getBubble() {
+    getReasonItem(item, group) {
+      const params = Object.assign({}, this.dataForm, {
+        subModelId: this.dataForm.subModelIds[0],
+        key: item.key
+      })
+      return getReasonItem(params).then(res => {
+        const data = res.data || {}
+        this.$set(item, 'data', data.answerList)
+        this.$set(this[group + 'Data'], 'activeKey', item.key)
+      })
+    },
+    getChooseAbandonReason(params, group) {
+      params.subModelId = params.subModelIds[0]
       return new Promise((resolve, reject) => {
-        getBubble({
-          areaId: -1,
-          compSubModelId: [123, 884, 837, 902, 459],
-          dataSourceId: 5,
-          dimensionId: 0,
-          showType: 1,
-          subModelId: 123,
-          ym: 201910
-        })
-          .then(response => {
-            const data = response.data || {}
+        getChooseAbandonReason(params)
+          .then(res => {
+            const data = res.data || {}
             const xAxisMax = 0.7
             const yAxisMax = 0.5
-            this.chartVb = new Chart('scatter', data, {
+            console.log(data.option)
+            const option = new Chart('scatter', data.option, {
               customColor: ['#467BF9'],
               backgroundColor: 'transparent',
               tooltipFields: [
@@ -224,9 +242,15 @@ export default {
                 ]
               }
             }).getScatterChart()
-            resolve(response)
-          }).catch(response => {
-            reject(response)
+            this.$set(this[group + 'Data'], 'option', option)
+            this.$set(this[group + 'Data'], 'avgNum', data.avgNum)
+            this.$set(this[group + 'Data'], 'sampleNum', data.sampleNum)
+            this.$set(this[group + 'Data'], 'status', 200)
+            console.log(option)
+            resolve(res)
+          }).catch(res => {
+            this.$set(this[group + 'Data'], 'status', 500)
+            reject(res)
           })
       })
     },

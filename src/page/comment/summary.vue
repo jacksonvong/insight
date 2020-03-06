@@ -1,6 +1,6 @@
 <template>
   <div class="comment-summary">
-    <iw-banner/>
+    <iw-banner title="评价总体"/>
     <div class="main-content">
       <iw-search
         @comparison="changeContrastForm"

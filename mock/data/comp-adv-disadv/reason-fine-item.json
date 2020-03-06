@@ -9,14 +9,14 @@
       {
         "id": 1,
         "name": "前脸造型",
-        "value": null,
+        "value": 0.5,
         "sampleSize": null,
         "key": null
       },
       {
         "id": 2,
         "name": "尾部设计",
-        "value": null,
+        "value": 0.35,
         "sampleSize": null,
         "key": null
       },

@@ -206,7 +206,7 @@ export class Chart {
       },
       legend: {
         show: true,
-        data: _this.option.legend.data,
+        data: _.get(_this.option.legend, 'data', []),
         bottom: 10,
         left: 'center'
       },
