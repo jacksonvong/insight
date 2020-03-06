@@ -381,6 +381,38 @@ export default [
             'funcs': null
           }
         ]
+      },
+      {
+        'menuId': 131,
+        'pid': null,
+        'title': '条件查询',
+        'node': '0',
+        'code': null,
+        'icon': 'icon-che',
+        'params': '0',
+        'target': '_self',
+        'introText': null,
+        'introUrl': null,
+        'introImage': null,
+        'isMenu': 1,
+        'funcs': [
+          {
+            'menuId': 1311,
+            'pid': null,
+            'title': '高级查询',
+            'node': '0',
+            'code': null,
+            'icon': 'icon-che',
+            'url': '/insight/analy/advance',
+            'params': '0',
+            'target': '_self',
+            'introText': null,
+            'introUrl': null,
+            'introImage': null,
+            'isMenu': 1,
+            'funcs': null
+          }
+        ]
       }
     ]
   }

@@ -145,7 +145,7 @@ export default {
 .leftmenu .ant-menu-inline{border: 0;}
 .leftmenu .ant-menu-submenu-title{background: #EAF3FC;margin: 0!important;color: #2E5AA6;}
 .leftmenu .ant-menu-item{margin: 0!important;}
-.leftmenu .ant-menu-item a{color: #181C28; display: block; padding: 0 16px 0 28px;}
+.leftmenu .ant-menu-item a{color: #181C28; display: block; padding: 0 16px 0 28px;width: 200px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
 .leftmenu .ant-menu-item a.router-link-exact-active{background: #F4F4F6;}
 .leftmenu .ant-menu-item:hover{background: #F4F4F6;}
 .leftmenu .ant-menu-item-selected{color: #181C28;}

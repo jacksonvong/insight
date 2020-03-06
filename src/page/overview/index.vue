@@ -359,7 +359,7 @@ export default {
     },
     // API
     getData() {
-      this.getPurchaseData()
+      // this.getPurchaseData()
       this.getAllFunctions()
     },
     getPurchaseData() {

@@ -106,6 +106,10 @@ export default {
     // 添加方案
     handleFormChange(data) {
       const thisPlain = { ...data }
+      if (!thisPlain.startYm || !thisPlain.endYm) {
+        this.$message.warning('起始时间或结束时间有误！')
+        return false
+      }
       this.composeList.push(thisPlain)
     },
     // 删除某个组合

@@ -77,12 +77,12 @@ import { Card, Checkbox, Button, Icon, Modal } from 'ant-design-vue'
 import $api from '@/api/senior'
 import { Table } from 'element-ui'
 
-const oldData = [
-  { moduleName: '用户特征', moduleName: 11, columnName: '用户背景', columnName: 1101, aspectName: '性别', aspectId: 1101001 },
-  { moduleName: '用户特征', moduleName: 11, columnName: '用户背景', columnName: 1101, aspectName: '年龄', aspectId: 1101002 },
-  { moduleName: '用户特征', moduleName: 11, columnName: '需求偏好', columnName: 1102, aspectName: '操控性', aspectId: 1102001 },
-  { moduleName: '竞争对比', moduleName: 12, columnName: '价格', columnName: 1201, aspectName: '性价比', aspectId: 1201001 }
-]
+// const oldData = [
+//   { moduleName: '用户特征', moduleName: 11, columnName: '用户背景', columnName: 1101, aspectName: '性别', aspectId: 1101001 },
+//   { moduleName: '用户特征', moduleName: 11, columnName: '用户背景', columnName: 1101, aspectName: '年龄', aspectId: 1101002 },
+//   { moduleName: '用户特征', moduleName: 11, columnName: '需求偏好', columnName: 1102, aspectName: '操控性', aspectId: 1102001 },
+//   { moduleName: '竞争对比', moduleName: 12, columnName: '价格', columnName: 1201, aspectName: '性价比', aspectId: 1201001 }
+// ]
 export default {
   name: 'Part2',
   components: {
@@ -265,7 +265,7 @@ export default {
     },
     setTableData() {
       const _this = this
-      console.log(this.oldData)
+      // console.log(this.oldData)
       this.oldData = this.oldData.map((item, index) => {
         const len = this.oldData.length
         let firstLen = 0
@@ -313,7 +313,7 @@ export default {
         return item
       })
       this.tableData = this.oldData
-      console.log(this.tableData)
+      // console.log(this.tableData)
     },
     // 下一步
     handleNext() {
