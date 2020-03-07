@@ -1,16 +1,21 @@
 <template>
   <div class="iw-board">
     <a-card>
+      <dl>
+        <dt v-for="(itemList, index) in childPart1" :key="index">
+          组合 {{ index + 1 }} :
+          <span>时间:{{ itemList.startYm }} 至 {{ itemList.endYm }};</span>
+          <span>区域: </span>
+          <template v-for="(cityItem, index) in itemList.cityNames">
+            <i :key="index">{{ cityItem }}</i>
+          </template>
+        </dt>
+      </dl>
+    </a-card>
+    <a-card>
       <div class="btnbox btnbox--part3">
         <iw-button type="primary" @click="handleNext">返回筛选分析条件</iw-button>
         <iw-button>下载</iw-button>
-      </div>
-      <div class="select_listbox">
-        <dl>
-          <dt v-for="(itemList, index) in part1Data" :key="index">
-            {{ itemList.startYm }}
-          </dt>
-        </dl>
       </div>
       <div class="table-box--part">
         <ElTable v-if="tableData" :span-method="setSpanMethod" :data="tableData" :border="true" size="small">
@@ -25,7 +30,7 @@
                   <input v-model="tableData[scope.$index]['firstChecked']" class="ways-checkbox_input" type="checkbox" @change="firstChange(tableData[scope.$index]['firstChecked'], tableData[scope.$index]['moduleId'], scope.$index)">
                 </label> -->
                 {{ scope.row.moduleName }}
-                <a-icon type="close-circle" class="close-list" />
+                <a-icon type="close-circle" class="close-list" @click="deleteModule(scope.row.moduleName )" />
               </div>
             </template>
           </el-table-column>
@@ -109,15 +114,22 @@ export default {
     ElTable: Table
   },
   props: {
-    part1Data: {
+    partData1: {
       tips: '第一部分数据',
       type: Array,
       default() {
         return []
       }
     },
-    part2Data: {
+    partData2: {
       tips: '第二部分数据',
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    keyList: {
+      tips: '第二部分key数据',
       type: Array,
       default() {
         return []
@@ -130,16 +142,49 @@ export default {
       tableData: [],
       // 查询结果
       resultList: [],
-      columns: []
+      columns: [],
+      // 第三步相关数据
+      childPart1: [],
+      childPart2: [],
+      childKeyList: [],
+      partForm: {
+        conditionList: [],
+        keyList: []
+      }
     }
   },
   mounted() {
+    this.childPart1 = [...this.partData1]
+    this.childPart2 = [...this.partData2]
+    this.childKeyList = [...this.keyList]
+    console.log(this.partData1, this.partData2, this.childKeyList)
     this.setTableData()
   },
   methods: {
+    // 模块删除
+    deleteModule(moduleName) {
+      const newChildPart2 = []
+      const newKeyList = []
+      for (let i = 0; i < this.childPart2.length; i++) {
+        if (this.childPart2[i].moduleName !== moduleName) {
+          newChildPart2.push(this.childPart2[i])
+          newKeyList.push(this.childPart2[i].moduleName)
+        }
+      }
+      this.childPart2 = []
+      this.childPart2 = [...newChildPart2]
+      this.childKeyList = []
+      this.childKeyList = [...newKeyList]
+      console.log(this.childPart2, this.childKeyList)
+    },
     // 组合删除
     composeClick(i) {
-      alert(i)
+      if (this.childPart1.length <= 1) {
+        this.$message.warning('最少保留一个组合！')
+        return false
+      }
+      this.childPart1.splice(i, 1)
+      console.log(this.childPart1)
     },
     // 模块值改变
     firstChange(check, id, index) {

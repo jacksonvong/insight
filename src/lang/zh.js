@@ -34,7 +34,8 @@ export default {
     applyBuy: '申请购买',
     compare: '对比分析',
     download: '下载',
-    board: '看板'
+    board: '看板',
+    add: '添加组合'
   },
   overview: {
     own: '我已购买',

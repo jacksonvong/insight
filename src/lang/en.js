@@ -34,7 +34,8 @@ export default {
     applyBuy: 'Apply For Purchase',
     compare: 'Compare',
     download: 'Download',
-    board: 'Board'
+    board: 'Board',
+    add: 'Add Compose'
   },
   overview: {
     own: 'Purchased',

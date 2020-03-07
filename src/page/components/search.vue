@@ -147,7 +147,8 @@
         <div class="search-item">
           <span class="search-item_label"/>
           <span class="search-item_box">
-            <iw-button type="primary" @click="handleFormChange"> &nbsp;&nbsp;&nbsp;&nbsp;{{ $t('search.search') }}&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
+            <iw-button v-if="defaultPart == ''" type="primary" @click="handleFormChange"> &nbsp;&nbsp;&nbsp;&nbsp;{{ $t('search.search') }}&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
+            <iw-button v-else-if="defaultPart == 'advance'" tips="高级查询" type="primary" @click="handleFormChange"> &nbsp;&nbsp;&nbsp;&nbsp;{{ $t('search.add') }}&nbsp;&nbsp;&nbsp;&nbsp;</iw-button>
             <iw-button v-if="showApplyBuy" :disabled="postDisabled" @click="handleApplyBuy">{{ $t('search.applyBuy') }}</iw-button>
             <iw-button v-if="showContrast" @click="handleComparison">{{ $t('search.compare') }}</iw-button>
             <iw-button v-if="showDownload" @click="handleDownload">{{ $t('search.download') }}</iw-button>
@@ -226,6 +227,11 @@ export default {
     postDisabled: {
       type: Boolean,
       default: true
+    },
+    defaultPart: {
+      tips: '哪一部分,因为有不同默认按钮',
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -243,6 +249,7 @@ export default {
         regionIds: [],
         provinceIds: [],
         cityIds: [],
+        cityNames: [],
         cityLevel: undefined,
         regionTexts: undefined,
         fuelType: undefined,
@@ -339,6 +346,7 @@ export default {
         brandIds: dataForm.brand[0],
         brandNatiIds: dataForm.brandNati,
         cityIds: this.cityIds,
+        cityNames: this.cityNames,
         cityLevelIds: dataForm.cityLevel,
         endYm: dataForm.dataTime ? dataForm.dataTime[1] : '',
         fuelTypeIds: dataForm.fuelType,
@@ -371,6 +379,7 @@ export default {
       const regionIds = []
       const provinceIds = []
       const cityIds = []
+      const cityNames = []
       texts.forEach(item => {
         if (item.level === 0) {
           regionIds.push(item.key)
@@ -378,11 +387,13 @@ export default {
           provinceIds.push(item.key)
         } else {
           cityIds.push(item.key)
+          cityNames.push(item.value)
         }
       })
       this.regionIds = regionIds
       this.provinceIds = provinceIds
       this.cityIds = cityIds
+      this.cityNames = cityNames
     },
     handleManfBrandChange(value) {
       this.dataForm.brand = value

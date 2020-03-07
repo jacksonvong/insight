@@ -3,11 +3,15 @@
     <!-- 0--顶部筛选条件 -->
     <iw-banner :title="`高级查询分析`"/>
     <div class="main-content">
-      <div v-if="partNum == 1 || partNum == 3" class="part1">
+      <div v-if="partNum == 1" class="part1">
         <iw-search
           v-show="partNum == 1"
+          :show-apply-buy="false"
+          :show-contrast="false"
+          :show-download="false"
           :tab-list="tabList"
           :tab-key="tabKey"
+          default-part="advance"
           @change="handleFormChange"
         />
         <a-card>
@@ -15,8 +19,11 @@
             <dl>
               <dt v-for="(itemList, index) in composeList" :key="index">
                 组合 {{ index + 1 }} :
-                <span>时间  {{ itemList.startYm }} 至 {{ itemList.endYm }}</span>
-                <span>区域  {{ itemList.startYm }} 至 {{ itemList.endYm }}</span>
+                <span>时间:{{ itemList.startYm }} 至 {{ itemList.endYm }};</span>
+                <span>区域: </span>
+                <template v-for="(cityItem, index) in itemList.cityNames">
+                  <i :key="index">{{ cityItem }}</i>
+                </template>
                 <a-icon v-if="partNum == 1" type="close-circle" class="close-list" @click="deleteCompose(index)" />
               </dt>
             </dl>
@@ -27,8 +34,8 @@
           </div>
         </a-card>
       </div>
-      <Part2 v-show="partNum == 2" @handleNext="part2Next" @handleCancel="part2Cancel" />
-      <Part3 v-if="partNum == 3" :part1data="composeList" :part2data="part2Data" @handleNext="partNext(3)" />
+      <Part2 v-if="partNum == 2" @handleNext="part2Next" @handleCancel="part2Cancel" />
+      <Part3 v-if="partNum == 3" :part-data1="composeList" :part-data2="part2Data" :key-list="part2KeyList" @handleNext="partNext(3)" @deleteCompose="deleteCompose(index)" />
     </div>
   </div>
 </template>
@@ -96,6 +103,7 @@ export default {
         // { startYm: 201804, endYm: 201905, areaIds: [10, 12], areaList: [{ key: 10, value: '深圳' }, { key: 15, value: '广州' }] }
       ],
       part2Data: [],
+      part2KeyList: [],
       partNum: 1
     }
   },
@@ -110,12 +118,15 @@ export default {
         this.$message.warning('起始时间或结束时间有误！')
         return false
       }
+      if (!thisPlain.cityNames) {
+        this.$message.warning('城市不能为空！')
+        return false
+      }
       this.composeList.push(thisPlain)
     },
     // 删除某个组合
     deleteCompose(i) {
       this.composeList.splice(i, 1)
-      console.log(this.composeList)
     },
     // 取消查询结果
     part1Cancel() {
@@ -123,14 +134,29 @@ export default {
     },
     // 第二步下一步
     part2Next(data) {
-      this.part2Data = data
-      console.log(this.part2Data)
+      const part2Data = []
+      const part2KeyList = []
+      data.map((item, index) => {
+        if (item.thirdChecked) {
+          part2KeyList.push(item.aspectId)
+          part2Data.push(item)
+        }
+      })
+      if (part2KeyList.length <= 0) {
+        this.$message.warning('至少选择一个指标！')
+        return false
+      }
+      this.part2Data = []
+      this.part2KeyList = []
+      this.part2Data = part2Data
+      this.part2KeyList = part2KeyList
       this.partNext(2)
     },
     // 第二步取消
     part2Cancel() {
       this.partPre(2)
     },
+
     // 上一步
     partPre(i) {
       this.partNum -= 1

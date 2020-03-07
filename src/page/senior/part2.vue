@@ -313,11 +313,10 @@ export default {
         return item
       })
       this.tableData = this.oldData
-      // console.log(this.tableData)
     },
     // 下一步
     handleNext() {
-      this.$emit('handleNext', ...this.tableData)
+      this.$emit('handleNext', this.tableData)
     },
     // 上一步
     handleCancel() {
