@@ -73,7 +73,7 @@ function enter(res) {
         if (parent !== window) {
           parent.location.reload()
         } else {
-          location.reload()
+          location.hash = '/login'
         }
       })
     }

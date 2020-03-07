@@ -128,7 +128,9 @@
           <span class="search-item_box">
             <iw-submodel
               v-model="dataForm.subModel"
+              :texts="dataForm.subModelTexts"
               :default-value="[]"
+              :default-texts="[]"
               :data="searchFormData.subModel"
               :show-letter="showLetter"
               :filters="[{key: 1, value: $t('search.segment')}, {key: 2, value: $t('search.brand')}]"
@@ -257,7 +259,8 @@ export default {
         segment: undefined,
         brandNati: undefined,
         brand: [],
-        subModel: undefined
+        subModel: undefined,
+        subModelTexts: undefined
       },
       searchFormData: {
         timeRange: {},
@@ -358,6 +361,9 @@ export default {
         subModelIds: dataForm.subModel,
         vehicleTypeIds: dataForm.vehicleType
       }
+      if (this.multiple.submodel === false) {
+        form.subModelTexts = dataForm.subModelTexts
+      }
       this.$emit('change', form)
     },
     handleApplyBuy() {
@@ -400,6 +406,7 @@ export default {
     },
     handleSubModelChange(value, texts) {
       this.dataForm.subModel = value
+      this.dataForm.subModelTexts = texts
     },
     handleFilterChange(key) {
       this.selectedFilter = key
@@ -421,10 +428,11 @@ export default {
       this.getVehicleType()
       this.getSegment()
       this.getBrandNatis()
-      const subModel = this.getSubModel()
+      const promise = this.getSubModel()
       if (this.multiple.submodel === false) {
-        await subModel
-        this.handleSubModelChange([this.subModelData[0][0]['children'][0]['children'][0]['key']])
+        await promise
+        const subModel = this.subModelData[0][0]['children'][0]['children'][0]
+        this.handleSubModelChange([subModel['key']], [subModel])
       }
       this.handleFormChange()
     },

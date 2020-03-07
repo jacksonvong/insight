@@ -54,9 +54,13 @@ export default {
       outFlowAnaly: '流出对手分析'
     },
     title: {
+      majorCompetitors: '主要竞争对手(TOP10)',
       reasonToChoose: '选择原因',
       reasonToQuit: '放弃原因',
-      reasonToChooseAndQuitAnalysis: '选择原因和放弃原因分析'
+      reasonToChooseAndQuitAnalysis: '选择原因和放弃原因分析',
+      reasonToChooseObject: '购买[{object}]的原因',
+      reasonToQuitCompetitor: '放弃[{competitor}]的原因',
+      objectsCompetitiveAdvantageOverComp: '[{object}]相对于[{competitor}]的竞争优势'
     }
   }
 }
