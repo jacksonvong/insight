@@ -23,7 +23,7 @@ const OldCar = () => import('@/page/user-character/old-car/index.vue')
 
 const Info = () => import('@/page/compete/info.vue')
 const Competitor = () => import('@/page/compete/competitor.vue')
-const GoodAndBad = () => import('@/page/compete/goodandbad.vue')
+const GoodAndBad = () => import('@/page/compete/goodandbad/index.vue')
 
 const Summary = () => import('@/page/comment/summary.vue')
 const Personal = () => import('@/page/comment/personal.vue')

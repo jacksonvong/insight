@@ -73,6 +73,7 @@ export default {
     },
     maxValue() {
       const data = this.data.series instanceof Array ? this.data.series[0].data : this.data.series.data
+      if (!data || !data.length) return 0
       return Math.max(...data.map(item => {
         const value = item && item.hasOwnProperty('value') ? item.value : item
         return value
@@ -81,7 +82,10 @@ export default {
   },
   watch: {
     activeKey() {
+      if (!this.seriesData.length) return
       const activeObj = this.seriesData.find(item => item.key === this.activeKey)
+      console.log(activeObj)
+      if (!activeObj.data || !activeObj.data.length) return
       this.innerData = activeObj.data.map(item => {
         const value = item && item.hasOwnProperty('value') ? item.value : item
         const i = {

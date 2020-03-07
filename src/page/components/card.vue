@@ -1,5 +1,5 @@
 <template>
-  <div :class="['iw-card', {'iw-card-short': short}]">
+  <a-spin :spinning="loading" :class="['iw-card', {'iw-card-short': short}]">
     <div class="iw-card-title">
       <span class="iw-card-title--left">{{ title }}</span>
       <span class="iw-card-title--right">{{ extra }}</span>
@@ -7,16 +7,24 @@
     <div :class="['iw-card-content', {'iw-card-content-short': short}]" :style="bodyStyle">
       <slot />
     </div>
-  </div>
+  </a-spin>
 </template>
 
 <script>
+import { Spin } from 'ant-design-vue'
 export default {
   name: 'Card',
+  components: {
+    ASpin: Spin
+  },
   props: {
     title: {
       type: String,
       default: ''
+    },
+    loading: {
+      type: Boolean,
+      default: false
     },
     extra: {
       type: String,

@@ -1,0 +1,86 @@
+{
+  "questUID": "string",
+  "data": {
+    "id": 1,
+    "name": "主要竞争对手top10",
+    "totalSampleSize": 555,
+    "avgNum": 53,
+    "answerList": [
+      {
+        "id": 1,
+        "name": "君越",
+        "value": 0.3,
+        "sampleSize": null,
+        "key": "578"
+      },
+      {
+        "id": 2,
+        "name": "空间",
+        "value": 0.23,
+        "sampleSize": null,
+        "key": "10027"
+      },
+      {
+        "id": 3,
+        "name": "内饰",
+        "value": 0.15,
+        "sampleSize": null,
+        "key": "10028"
+      },
+      {
+        "id": 4,
+        "name": "舒适性",
+        "value": 0.21,
+        "sampleSize": null,
+        "key": "10029"
+      },
+      {
+        "id": 5,
+        "name": "动力性",
+        "value": null,
+        "sampleSize": null,
+        "key": "10030"
+      },
+      {
+        "id": 6,
+        "name": "操控性",
+        "value": 0.09,
+        "sampleSize": null,
+        "key": "10031"
+      },
+      {
+        "id": 7,
+        "name": "安全性、智能辅助驾驶",
+        "value": null,
+        "sampleSize": null,
+        "key": "10032"
+      },
+      {
+        "id": 8,
+        "name": "配置、智能网联",
+        "value": 0.05,
+        "sampleSize": null,
+        "key": "10033"
+      },
+      {
+        "id": 9,
+        "name": "品质、口碑",
+        "value": 0.05,
+        "sampleSize": null,
+        "key": "10034"
+      },
+      {
+        "id": 10,
+        "name": "续航、充电、电池性能",
+        "value": null,
+        "sampleSize": null,
+        "key": "10035"
+      }
+    ]
+  },
+  "status": {
+    "status": 0,
+    "msg2Client": "OK",
+    "msg2Dev": " successfully！"
+  }
+}

@@ -36,24 +36,24 @@
         </a-row>
       </a-card>
       <a-card v-if="tabKey==2" title="查询结果">
-        <div class="iw-card-container">
-          <div class="iw-card-container iw-col6">
-            <iw-card title="主要竞争对手(TOP10)" style="height: 100%;" body-style="height: 100%">
+        <a-row :gutter="20" class="iw-card-container">
+          <a-col :span="6" class="iw-card-container">
+            <iw-card title="主要竞争对手(TOP10)" style="width: 100%; height: 100%;">
               <iw-top10-box :data="top10Data"/>
             </iw-card>
-          </div>
-          <div class="iw-card-container iw-card-col9">
+          </a-col>
+          <a-col :span="9" class="iw-card-container">
             <iw-card title="购买对象的原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
               <iw-table-box :data="selectReasonData" />
             </iw-card>
-          </div>
-          <div class="iw-card-container iw-card-col9">
+          </a-col>
+          <a-col :span="9" class="iw-card-container">
             <iw-card title="放弃[卡罗拉]的原因" style="width: 100%; height: 100%;" body-style="height: 400px;">
               <iw-table-box :data="selectReasonData" />
             </iw-card>
-          </div>
-        </div>
-        <div class="iw-card-container">
+          </a-col>
+        </a-row>
+        <a-row class="iw-card-container">
           <iw-card title="选择原因和放弃原因分析" style="width: 100%; height: 100%;" body-style="height: 540px;">
             <div v-if="chartVb.series" style="height: 100%; position: relative;">
               <iw-chart :options="chartVb" chart-id="chart-b" style="height: 510px;" />
@@ -63,7 +63,7 @@
               <span class="chart-title-tips right-bottom">优势点</span>
             </div>
           </iw-card>
-        </div>
+        </a-row>
       </a-card>
       <a-card v-if="tabKey==3" title="查询结果">
         <div class="iw-card-container">
@@ -194,8 +194,8 @@ export default {
         getChooseAbandonReason(params)
           .then(res => {
             const data = res.data || {}
-            const xAxisMax = 0.7
-            const yAxisMax = 0.5
+            // const xAxisMax = 0.7
+            // const yAxisMax = 0.5
             console.log(data.option)
             const option = new Chart('scatter', data.option, {
               customColor: ['#467BF9'],
@@ -204,43 +204,44 @@ export default {
                 { key: '0', seriesName: '购买卡罗拉的原因' },
                 { key: '1', seriesName: '放弃对象的原因' },
                 { key: '2', name: true }
-              ],
-              markLine: {
-                silent: true,
-                symbol: 'none',
-                animation: false,
-                label: { show: false },
-                data: [
-                  {
-                    xAxis: xAxisMax / 2,
-                    lineStyle: {
-                      color: '#6FC2EF',
-                      type: 'solid'
-                    }
-                  },
-                  {
-                    xAxis: xAxisMax,
-                    lineStyle: {
-                      color: '#6FC2EF',
-                      type: 'solid'
-                    }
-                  },
-                  {
-                    yAxis: yAxisMax / 2,
-                    lineStyle: {
-                      color: '#6FC2EF',
-                      type: 'solid'
-                    }
-                  },
-                  {
-                    yAxis: yAxisMax,
-                    lineStyle: {
-                      color: '#6FC2EF',
-                      type: 'solid'
-                    }
-                  }
-                ]
-              }
+              ]
+              // markLine: {
+              //   show: false,
+              //   silent: true,
+              //   symbol: 'none',
+              //   animation: false,
+              //   label: { show: false },
+              //   data: [
+              //     {
+              //       xAxis: xAxisMax / 2,
+              //       lineStyle: {
+              //         color: '#6FC2EF',
+              //         type: 'solid'
+              //       }
+              //     },
+              //     {
+              //       xAxis: xAxisMax,
+              //       lineStyle: {
+              //         color: '#6FC2EF',
+              //         type: 'solid'
+              //       }
+              //     },
+              //     {
+              //       yAxis: yAxisMax / 2,
+              //       lineStyle: {
+              //         color: '#6FC2EF',
+              //         type: 'solid'
+              //       }
+              //     },
+              //     {
+              //       yAxis: yAxisMax,
+              //       lineStyle: {
+              //         color: '#6FC2EF',
+              //         type: 'solid'
+              //       }
+              //     }
+              //   ]
+              // }
             }).getScatterChart()
             this.$set(this[group + 'Data'], 'option', option)
             this.$set(this[group + 'Data'], 'avgNum', data.avgNum)

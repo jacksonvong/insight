@@ -1,6 +1,6 @@
 <template>
   <div class="top10-box">
-    <div :class="{ 'selected': currKey === -1 }" class="top10-item top10-all" @click="onChangeItem(-1,'all')">
+    <div v-if="showTotal" :class="{ 'selected': currKey === -1 }" class="top10-item top10-all" @click="onChangeItem(-1,'all')">
       <span>总体</span>
       <span class="top10-icon"><a-icon type="right"/></span>
     </div>
@@ -34,11 +34,27 @@ export default {
       default() {
         return []
       }
+    },
+    activeKey: {
+      type: [Number, String],
+      default: -1
+    },
+    showTotal: {
+      type: Boolean,
+      default() {
+        return true
+      }
     }
   },
   data() {
     return {
-      currKey: -1
+      currKey: this.activeKey
+    }
+  },
+  watch: {
+    activeKey() {
+      console.log(this.activeKey)
+      this.currKey = this.activeKey
     }
   },
   methods: {

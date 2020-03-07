@@ -53,9 +53,13 @@ export default {
       outFlowAnaly: 'Out-flow rival analysis'
     },
     title: {
+      majorCompetitors: 'Major competitors(TOP10)',
       reasonToChoose: 'Reason to choose',
       reasonToQuit: 'Reason to quit',
-      reasonToChooseAndQuitAnalysis: 'Reason to choose and quit analysis'
+      reasonToChooseAndQuitAnalysis: 'Reason to choose and quit analysis',
+      reasonToChooseObject: 'Reason to Choose [{object}]',
+      reasonToQuitCompetitor: 'Reason to quit [{competitor}]',
+      objectsCompetitiveAdvantageOverComp: '[{object}] competitive advantage over [{competitor}]'
     }
   }
 }

@@ -80,3 +80,13 @@ export function getChooseAbandonReason(params) {
   })
 }
 
+export function getCompTop10(params) {
+  return request({
+    url: '/consumer-insight/comp-adv-disadv/get-comp-top10',
+    method: 'post',
+    data: {
+      data: params
+    }
+  })
+}
+
